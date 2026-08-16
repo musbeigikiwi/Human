@@ -3,105 +3,228 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy & Physiology</title>
+  <title>Mustafa A&P Mastery Studio</title>
   <style>
     :root {
-      --bg-color: #f2f5f3;
-      --card-bg: #ffffff;
-      --text-main: #2d3748;
-      --text-muted: #718096;
-      --accent-green: #1b4d3e;
-      --accent-orange: #d96b43;
-      --border-color: #e2e8f0;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-teal: #14b8a6;
+      --accent-glow: #2dd4bf;
+      --accent-orange: #f97316;
     }
 
     * { box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-color);
+      background: var(--bg-gradient);
+      background-attachment: fixed;
       color: var(--text-main);
       margin: 0;
       padding: 40px 20px;
+      min-height: 100vh;
     }
 
-    .container { max-width: 850px; margin: 0 auto; }
+    .container { max-width: 900px; margin: 0 auto; }
 
     .header-card {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 30px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 32px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
     }
 
-    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .badge-tag { font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+
+    .badge-tag {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--accent-glow);
+      text-transform: uppercase;
+      font-weight: 800;
+      background: rgba(45, 212, 191, 0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(45, 212, 191, 0.2);
+    }
 
     .sound-btn {
-      background: #edf2f7;
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
+      padding: 10px 20px;
+      border-radius: 30px;
       cursor: pointer;
       font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
-    .sound-btn.playing { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+    .sound-btn.playing { background: var(--accent-teal); color: white; border-color: var(--accent-glow); }
 
-    h1 { font-size: 36px; margin: 5px 0 8px 0; font-family: Georgia, serif; color: #1a202c; }
-    .course-title { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
-
-    .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
-    .progress-bar-bg { background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden; }
-    .progress-bar-fill { background: var(--accent-green); height: 100%; width: 0%; transition: width 0.4s ease; }
-
-    .tab-navigation { display: flex; gap: 12px; margin-bottom: 24px; }
-    .tab-btn {
-      flex: 1; padding: 12px; font-weight: 700; border-radius: 10px;
-      border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-muted); cursor: pointer; text-align: center; text-decoration: none;
+    h1 {
+      font-size: 40px;
+      margin: 10px 0;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .tab-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
-    .tab-btn.nav-link-btn { background: #fdfbf7; border-color: #ebdcb9; color: var(--accent-orange); }
+
+    .course-title { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+    .course-title strong { color: var(--accent-glow); }
+
+    .mastery-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+    .progress-bar-bg { background: rgba(255, 255, 255, 0.1); height: 12px; border-radius: 6px; overflow: hidden; }
+    .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
+
+    .tab-navigation {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 640px) { .tab-navigation { grid-template-columns: 1fr 1fr; } }
+
+    .nav-card-btn {
+      padding: 16px 12px;
+      font-weight: 700;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .nav-card-btn:hover { background: rgba(255, 255, 255, 0.15); color: #ffffff; transform: translateY(-3px); }
+    .nav-card-btn.active { background: linear-gradient(135deg, var(--accent-teal), #0d9488); color: white; border-color: var(--accent-glow); }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
     .topic-card {
-      background: var(--card-bg); border-radius: 12px; padding: 20px;
-      border: 1px solid var(--border-color); cursor: pointer;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-    .topic-card:hover { border-color: var(--accent-green); }
-    .topic-tag { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
-    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 16px 0; color: #1a202c; }
-    .topic-stats { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
 
-    .quiz-card { background: var(--card-bg); border-radius: 16px; padding: 30px; border: 1px solid var(--border-color); margin-bottom: 24px; }
-    .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+    .topic-card:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent-glow); transform: translateY(-4px); }
+
+    .topic-tag { font-size: 11px; color: var(--accent-orange); text-transform: uppercase; font-weight: 800; }
+    .topic-name { font-size: 20px; font-weight: 700; margin: 8px 0 16px 0; color: #ffffff; }
+    .topic-stats { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 36px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 28px;
+    }
+
+    .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
 
     .option-btn {
-      width: 100%; text-align: left; padding: 16px; margin-top: 12px;
-      border: 1px solid var(--border-color); border-radius: 10px; background: white; cursor: pointer; font-size: 16px;
+      width: 100%;
+      text-align: left;
+      padding: 18px 20px;
+      margin-top: 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s ease;
     }
-    .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
-    .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
 
-    .nav-controls { display: flex; gap: 12px; margin-top: 24px; }
-    .action-stack { display: flex; flex-direction: column; gap: 12px; }
+    .option-btn.correct { background: rgba(16, 185, 129, 0.25) !important; border-color: #10b981 !important; color: #a7f3d0 !important; }
+    .option-btn.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: #ef4444 !important; color: #fecaca !important; }
+
+    .nav-controls { display: flex; gap: 14px; margin-top: 28px; }
 
     .btn {
-      padding: 14px 20px; border-radius: 10px; border: 1px solid var(--border-color);
-      background: white; color: var(--text-main); font-weight: 600; cursor: pointer; font-size: 15px; text-align: center;
+      padding: 16px 24px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: center;
     }
-    .btn-primary { background: var(--accent-green); color: white; border: none; }
 
-    .footer-text { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 32px; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-teal), #0d9488); color: white; border: none; }
+
+    /* Contact Footer Section */
+    .contact-footer {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+      margin-top: 40px;
+      text-align: center;
+      direction: rtl;
+    }
+
+    .contact-footer h3 {
+      margin: 0 0 8px 0;
+      color: #ffffff;
+      font-size: 18px;
+    }
+
+    .contact-footer p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -111,16 +234,17 @@
   </audio>
 
   <div class="container">
+    
     <div class="header-card">
       <div class="header-top">
-        <span class="badge-tag">MUSTAFA'S REVISION DECK</span>
+        <span class="badge-tag">🎓 WINTEC A&P REVISION</span>
         <button class="sound-btn" id="sound-btn" onclick="toggleAudio()">🎵 Interstellar: OFF</button>
       </div>
-      <h1>Mustafa MCQs</h1>
+      <h1>Mustafa Mastery Deck</h1>
       <div class="course-title">Course <strong>GEDU404B/2602</strong> — Applied Structure & Function of the Human Body</div>
 
       <div class="mastery-header">
-        <span>Overall MCQs mastery</span>
+        <span>Overall Question Progress</span>
         <span id="mastery-percent">0%</span>
       </div>
       <div class="progress-bar-bg">
@@ -129,10 +253,22 @@
     </div>
 
     <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('topics-tab', this)">Dashboard</button>
-      <button class="tab-btn" onclick="switchTab('quiz-tab', this)">📝 Practice Questions (MCQs)</button>
-      <a href="flashcards.html" class="tab-btn nav-link-btn">⚡ Flashcards</a>
-      <a href="notes.html" class="tab-btn nav-link-btn">📚 Short Notes</a>
+      <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
+        <span class="icon">🚀</span>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-card-btn" onclick="switchTab('quiz-tab', this)">
+        <span class="icon">📝</span>
+        <span>MCQs Quiz</span>
+      </button>
+      <a href="flashcards.html" class="nav-card-btn">
+        <span class="icon">⚡</span>
+        <span>Flashcards</span>
+      </a>
+      <a href="notes.html" class="nav-card-btn">
+        <span class="icon">📚</span>
+        <span>Short Notes</span>
+      </a>
     </div>
 
     <div id="topics-tab" class="tab-content active">
@@ -140,28 +276,28 @@
         <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
           <div class="topic-tag">CHAPTER 01</div>
           <div class="topic-name">Anatomy & Physiology</div>
-          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 1</span></div>
+          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
         </div>
         <div class="topic-card" onclick="loadChapter('chapter2_mcqs.json')">
           <div class="topic-tag">CHAPTER 02</div>
           <div class="topic-name">Chemistry</div>
-          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 2</span></div>
+          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
         </div>
         <div class="topic-card" onclick="loadChapter('chapter3_mcqs.json')">
           <div class="topic-tag">CHAPTER 03</div>
           <div class="topic-name">Cells & Microscopes</div>
-          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 3</span></div>
+          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
         </div>
         <div class="topic-card" onclick="loadChapter('chapter4_mcqs.json')">
           <div class="topic-tag">CHAPTER 04</div>
           <div class="topic-name">Cell Transport</div>
-          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 4</span></div>
+          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
         </div>
       </div>
 
-      <div class="action-stack">
-        <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">Start Chapter 1 Questions</button>
-        <button class="btn" onclick="resetProgress()" style="color: #ef4444;">Reset MCQ Progress</button>
+      <div class="action-stack" style="display:flex; flex-direction:column; gap:14px;">
+        <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">▶ Quick Start Chapter 1 Test</button>
+        <button class="btn" onclick="resetProgress()" style="color: #f87171; border-color: rgba(239, 68, 68, 0.3);">🔄 Reset MCQ Progress</button>
       </div>
     </div>
 
@@ -172,7 +308,7 @@
           <span>⏱️ <span id="timer-display">01:00</span></span>
         </div>
 
-        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px;">Select a chapter to start...</h2>
+        <h2 id="question-text" style="font-size: 22px; margin-bottom: 28px; line-height: 1.4; color: #ffffff;">Select a chapter from Dashboard to start...</h2>
 
         <div id="options-container"></div>
 
@@ -183,7 +319,15 @@
       </div>
     </div>
 
-    <div class="footer-text">Built for personal study • Ged U404B Revision</div>
+    <!-- Contact & Creator Section -->
+    <div class="contact-footer">
+      <h3>ارتباط با سازنده</h3>
+      <p>این وب‌سایت توسط <strong>Mustafa Beigi (مصطفی بیگی)</strong> برای یادگیری بهتر درس <strong>Human Anatomy and Physiology</strong> طراحی و ساخته شده است.</p>
+      <a href="https://wa.me/64273433480?text=سلام%20مصطفی%20جان،%20درباره%20وب‌سایت%20Anatomy%20سؤال%20داشتم" target="_blank" class="whatsapp-btn">
+        💬 ارسال پیام در واتساپ (0064273433480)
+      </a>
+    </div>
+
   </div>
 
   <script>
@@ -209,7 +353,7 @@
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => { if(!b.classList.contains('nav-link-btn')) b.classList.remove('active'); });
+      document.querySelectorAll('.nav-card-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       if (btn) btn.classList.add('active');
     }
@@ -228,7 +372,7 @@
         .then(data => {
           activeDeck = data;
           currentIndex = 0;
-          switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
+          switchTab('quiz-tab', document.querySelectorAll('.nav-card-btn')[1]);
           loadQuestion();
           updateMastery();
         });
