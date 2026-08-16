@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomy Flashcards — Active Recall Deck</title>
+  <style>
+    :root {
+      --bg-color: #f2f5f3;
+      --card-bg: #ffffff;
+      --text-main: #2d3748;
+      --text-muted: #718096;
+      --accent-green: #1b4d3e;
+      --accent-orange: #d96b43;
+      --border-color: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 650px; margin: 0 auto; }
+
+    .header-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    h1 { font-size: 28px; margin: 0 0 8px 0; font-family: Georgia, serif; color: #1a202c; }
+    .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; }
+
+    .chapter-select {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;
+    }
+
+    .chip-btn {
+      padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border-color);
+      background: white; color: var(--text-muted); font-weight: 600; font-size: 13px; cursor: pointer;
+    }
+
+    .chip-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+
+    .flashcard-container {
+      perspective: 1000px;
+      height: 320px;
+      margin-bottom: 24px;
+    }
+
+    .flashcard {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flashcard.flipped { transform: rotateY(180deg); }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .card-back { transform: rotateY(180deg); background: #fdfbf7; border-color: #ebdcb9; }
+
+    .card-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 12px; }
+    .card-text { font-size: 20px; font-weight: 600; color: var(--text-main); line-height: 1.4; }
+    .card-subtext { font-size: 14px; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+
+    .controls { display: flex; gap: 12px; }
+    .btn {
+      flex: 1; padding: 14px; border-radius: 10px; border: 1px solid var(--border-color);
+      background: white; font-weight: 700; cursor: pointer; font-size: 15px; text-align: center;
+    }
+
+    .btn-know { background: #d1fae5; color: #065f46; border-color: #10b981; }
+    .btn-review { background: #fee2e2; color: #991b1b; border-color: #ef4444; }
+
+    .progress-footer { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 16px; }
+    .nav-link { display: inline-block; margin-top: 20px; color: var(--accent-green); text-decoration: none; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-card">
+      <h1>⚡ Active Recall Flashcards</h1>
+      <div class="subtitle">Tap the card to reveal answer • Test your memory</div>
+      
+      <div class="chapter-select">
+        <button class="chip-btn active" onclick="loadDeck(1, this)">Ch 1: Anatomy</button>
+        <button class="chip-btn" onclick="loadDeck(2, this)">Ch 2: Chemistry</button>
+        <button class="chip-btn" onclick="loadDeck(3, this)">Ch 3: Cells</button>
+        <button class="chip-btn" onclick="loadDeck(4, this)">Ch 4: Transport</button>
+      </div>
+    </div>
+
+    <div class="flashcard-container">
+      <div class="flashcard" id="card" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-label" id="card-term-category">CHAPTER 1</div>
+          <div class="card-text" id="card-question">Loading card...</div>
+          <div class="card-subtext">Click to Flip 🔄</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-label">CORRECT ANSWER & CONCEPT</div>
+          <div class="card-text" id="card-answer">...</div>
+          <div class="card-subtext" id="card-dari">...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-review" onclick="markCard(false)">❌ Needs Review</button>
+      <button class="btn btn-know" onclick="markCard(true)">✅ Mastered</button>
+    </div>
+
+    <div class="progress-footer">
+      Card <span id="current-idx">1</span> of <span id="total-cards">0</span> • Mastered: <span id="mastered-count">0</span>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="index.html" class="nav-link">⬅ Back to Main Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    const decks = {
+      1: [
+        { q: "What is Anatomy vs Physiology?", a: "Anatomy = Study of Structure; Physiology = Study of Function.", dari: "آناتومی = ساختار؛ فیزیولوژی = عملکرد." },
+        { q: "Which tissue covers body surfaces and lines cavities?", a: "Epithelial Tissue.", dari: "بافت اپی‌تلیال سطوح را می‌پوشاند." },
+        { q: "Directional Term: Proximal vs Distal?", a: "Proximal = Closer to trunk/attachment; Distal = Farther from trunk/attachment.", dari: "Proximal نزدیک‌تر به تنه؛ Distal دورتر از تنه." },
+        { q: "What divides the body into Left and Right halves?", a: "Sagittal Plane (Midsagittal = Equal halves).", dari: "صفحه ساژیتال (Midsagittal = دو نیمه برابر چپ و راست)." },
+        { q: "Which structure separates Thoracic and Abdominopelvic cavities?", a: "The Diaphragm.", dari: "دیافراگم مرز بین حفره سینه و شکمی‌ـ‌لگنی است." }
+      ],
+      2: [
+        { q: "What subatomic particle has a positive charge?", a: "Proton (found in nucleus).", dari: "پروتون بار مثبت دارد و در هسته است." },
+        { q: "Define Cation vs Anion.", a: "Cation = Positively charged (loses e⁻); Anion = Negatively charged (gains e⁻).", dari: "کاتیون = مثبت (از دست دادن الکترون)؛ آنیون = منفی (گرفتن الکترون)." },
+        { q: "What is the normal blood pH range?", a: "7.35 – 7.45 (Slightly alkaline).", dari: "pH طبیعی خون ۷.۳۵ تا ۷.۴۵ (کمی قلیایی)." },
+        { q: "What is the primary cellular fuel used to make ATP?", a: "Glucose (Monosaccharide).", dari: "گلوکوز سوخت اصلی سلول برای تولید ATP است." },
+        { q: "What happens when a protein denatures?", a: "It loses its 3D shape and functional capacity due to heat or extreme pH.", dari: "تغییر شکل و از دست دادن عملکرد پروتئین بر اثر گرما یا اسید." }
+      ],
+      3: [
+        { q: "Which organelle is responsible for ATP energy production?", a: "Mitochondria.", dari: "میتوکندری مرکز تولید انرژی ATP است." },
+        { q: "What is the function of Lysosomes?", a: "Contains digestive enzymes to break down bacteria and cellular debris.", dari: "لیزوزوم دارای آنزیم‌های هاضمه برای تجزیه باکتری و فضولات است." },
+        { q: "Which blood cell lacks a nucleus at maturity?", a: "Erythrocyte (Red Blood Cell).", dari: "گلبول قرمز بالغ هسته ندارد." },
+        { q: "State the end result of Mitosis.", a: "2 genetically identical daughter cells, each with 46 chromosomes.", dari: "دو سلول دختر یکسان با ۴۶ کروموزوم." },
+        { q: "Safe microscope sequence: Which objective uses Coarse Focus?", a: "4x Scanning Objective ONLY.", dari: "پیچ فوکوس درشت فقط در عدسی ۴x استفاده می‌شود." }
+      ],
+      4: [
+        { q: "Does Passive Transport require ATP?", a: "No, it moves down concentration gradient (High → Low) without energy.", dari: "خیر، بدون مصرف ATP و از غلظت زیاد به کم است." },
+        { q: "How do Oxygen and Carbon Dioxide cross cell membranes?", a: "Simple Diffusion (directly through lipid bilayer).", dari: "انتشار ساده (مستقیم از دولایه چربی)." },
+        { q: "What is Osmosis?", a: "Passive net movement of water across a semi-permeable membrane towards higher solute.", dari: "حرکت غیرفعال آب به سمت ماده حل‌شده بیشتر." },
+        { q: "What happens to a cell in a Hypertonic solution?", a: "It loses water and shrinks (crenates).", dari: "آب از سلول خارج شده و سلول جمع می‌شود." },
+        { q: "Difference between Pinocytosis and Phagocytosis?", a: "Pinocytosis = Cellular Drinking (liquids); Phagocytosis = Cellular Eating (solids/bacteria).", dari: "پینوسیتوز = نوشیدن مایعات؛ فاگوسیتوز = بلع ذرات جامد." }
+      ]
+    };
+
+    let currentDeck = decks[1];
+    let currentIndex = 0;
+    let masteredCount = 0;
+
+    function loadDeck(chapterNum, btn) {
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      if(btn) btn.classList.add('active');
+      currentDeck = decks[chapterNum];
+      currentIndex = 0;
+      masteredCount = 0;
+      document.getElementById('card-term-category').innerText = "CHAPTER 0" + chapterNum;
+      showCard();
+    }
+
+    function showCard() {
+      const cardEl = document.getElementById('card');
+      cardEl.classList.remove('flipped');
+      setTimeout(() => {
+        const item = currentDeck[currentIndex];
+        document.getElementById('card-question').innerText = item.q;
+        document.getElementById('card-answer').innerText = item.a;
+        document.getElementById('card-dari').innerText = item.dari;
+        document.getElementById('current-idx').innerText = currentIndex + 1;
+        document.getElementById('total-cards').innerText = currentDeck.length;
+        document.getElementById('mastered-count').innerText = masteredCount;
+      }, 150);
+    }
+
+    function flipCard() {
+      document.getElementById('card').classList.toggle('flipped');
+    }
+
+    function markCard(know) {
+      if (know) masteredCount++;
+      if (currentIndex < currentDeck.length - 1) {
+        currentIndex++;
+        showCard();
+      } else {
+        alert(`Deck Finished! You mastered ${masteredCount} out of ${currentDeck.length} concepts.`);
+        currentIndex = 0;
+        masteredCount = 0;
+        showCard();
+      }
+    }
+
+    loadDeck(1, null);
+  </script>
+</body>
+</html>
