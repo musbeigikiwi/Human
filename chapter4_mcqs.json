@@ -1,0 +1,377 @@
+[
+  {
+    "question": "What is cell transport?",
+    "options": ["formation of tissues from organs", "division of one cell into two cells", "production of DNA in the nucleus", "movement of substances into and out of a cell"],
+    "correct": 3
+  },
+  {
+    "question": "A semi-permeable cell membrane:",
+    "options": ["blocks water in both directions", "allows every substance to cross freely", "allows some substances to cross but blocks others", "contains no proteins"],
+    "correct": 2
+  },
+  {
+    "question": "Passive transport requires:",
+    "options": ["movement from low to high concentration", "ATP in every case", "a vesicle in every case", "no cellular energy (ATP)"],
+    "correct": 3
+  },
+  {
+    "question": "Active transport requires:",
+    "options": ["no energy", "cellular energy (ATP)", "only a concentration equilibrium", "only oxygen molecules"],
+    "correct": 1
+  },
+  {
+    "question": "In passive transport, net movement is usually:",
+    "options": ["from low to high concentration", "from high to low concentration", "only from inside to outside", "unrelated to concentration"],
+    "correct": 1
+  },
+  {
+    "question": "An active transport pump can move a solute:",
+    "options": ["without a membrane protein", "only from high to low concentration", "from low to high concentration", "without energy"],
+    "correct": 2
+  },
+  {
+    "question": "What is the three-letter abbreviation for the cell's energy molecule?",
+    "options": ["RNA", "DNA", "ATP", "H2O"],
+    "correct": 2
+  },
+  {
+    "question": "Simple diffusion is the movement of molecules:",
+    "options": ["directly through the membrane from high to low concentration", "through a vesicle from low to high concentration", "through a pump using ATP", "only into the nucleus"],
+    "correct": 0
+  },
+  {
+    "question": "During diffusion, molecules show net movement from:",
+    "options": ["low to high concentration", "high to low concentration", "equal to higher concentration", "the nucleus to the membrane only"],
+    "correct": 1
+  },
+  {
+    "question": "Oxygen and carbon dioxide cross the cell membrane mainly by:",
+    "options": ["simple diffusion", "active pumping", "phagocytosis", "exocytosis"],
+    "correct": 0
+  },
+  {
+    "question": "Facilitated diffusion uses:",
+    "options": ["DNA molecules", "ATP-driven vesicles only", "lysosomes", "membrane channel or carrier proteins"],
+    "correct": 3
+  },
+  {
+    "question": "Facilitated diffusion is classified as passive because it:",
+    "options": ["digests bacteria", "always moves low to high", "forms vesicles", "does not require ATP"],
+    "correct": 3
+  },
+  {
+    "question": "Glucose usually crosses a cell membrane by:",
+    "options": ["facilitated diffusion through a carrier protein", "simple diffusion through the lipid core", "phagocytosis", "an ATP pump in this lesson"],
+    "correct": 0
+  },
+  {
+    "question": "Osmosis is the passive movement of:",
+    "options": ["bacteria into a lysosome", "proteins out of a cell", "water across a semi-permeable membrane", "potassium from low to high concentration"],
+    "correct": 2
+  },
+  {
+    "question": "In osmosis, water moves towards the side with:",
+    "options": ["higher solute concentration", "lower solute concentration", "exactly no solute", "more ATP"],
+    "correct": 0
+  },
+  {
+    "question": "An isotonic solution has a solute concentration that is:",
+    "options": ["higher than inside the cell", "the same as inside the cell", "lower than inside the cell", "always zero"],
+    "correct": 1
+  },
+  {
+    "question": "A hypertonic solution has:",
+    "options": ["more solute than the intracellular fluid", "less solute than the intracellular fluid", "the same solute as the intracellular fluid", "no water molecules"],
+    "correct": 0
+  },
+  {
+    "question": "A cell placed in a hypertonic solution will usually:",
+    "options": ["gain water and burst", "lose water and shrink", "remain unchanged", "begin mitosis"],
+    "correct": 1
+  },
+  {
+    "question": "A hypotonic solution has:",
+    "options": ["the same solute as the intracellular fluid", "more solute than the intracellular fluid", "less solute than the intracellular fluid", "no water"],
+    "correct": 2
+  },
+  {
+    "question": "A cell placed in a hypotonic solution will usually:",
+    "options": ["lose water and shrink", "gain water, swell, and may lyse", "show no net water movement", "export water by exocytosis"],
+    "correct": 1
+  },
+  {
+    "question": "Active transport pumps move substances:",
+    "options": ["only through the lipid bilayer", "down their gradient without ATP", "against their concentration gradient using ATP", "only by osmosis"],
+    "correct": 2
+  },
+  {
+    "question": "Endocytosis moves material:",
+    "options": ["into the cell in a membrane-bound vesicle", "out of the cell by membrane fusion", "directly through the phospholipid core", "from high to low without a membrane"],
+    "correct": 0
+  },
+  {
+    "question": "Pinocytosis is often called:",
+    "options": ["cellular breathing", "cellular eating", "cellular drinking", "cellular division"],
+    "correct": 2
+  },
+  {
+    "question": "Phagocytosis is used to take in:",
+    "options": ["large solid particles such as bacteria", "oxygen molecules", "carbon dioxide molecules", "potassium through a pump"],
+    "correct": 0
+  },
+  {
+    "question": "Exocytosis releases material when:",
+    "options": ["a vesicle fuses with the cell membrane", "water crosses by osmosis", "oxygen dissolves in the bilayer", "a lysosome enters the nucleus"],
+    "correct": 0
+  },
+  {
+    "question": "Which membrane features mainly determine what can cross and how?",
+    "options": ["ribosomes and centrioles", "the nucleus and chromosomes", "the phospholipid bilayer and membrane proteins", "lysosomes and mitochondria"],
+    "correct": 2
+  },
+  {
+    "question": "Why do phospholipid heads face intracellular and extracellular fluid?",
+    "options": ["They are carbohydrate chains.", "They are hydrophobic and avoid water.", "They contain ATP pumps.", "They are hydrophilic and interact with water."],
+    "correct": 3
+  },
+  {
+    "question": "Why are phospholipid tails directed towards the centre of the bilayer?",
+    "options": ["They are made of carbohydrates.", "They are hydrophilic and bind water.", "They digest glucose.", "They are hydrophobic and avoid water."],
+    "correct": 3
+  },
+  {
+    "question": "Which substance is most able to cross directly through the lipid bilayer?",
+    "options": ["glucose", "oxygen", "a bacterium", "a large protein"],
+    "correct": 1
+  },
+  {
+    "question": "Compared with nearby blood, an exercising muscle cell normally has an oxygen concentration that is:",
+    "options": ["lower", "higher", "always identical", "unrelated to metabolism"],
+    "correct": 0
+  },
+  {
+    "question": "The net diffusion of oxygen near an exercising muscle is from:",
+    "options": ["lysosome into nucleus", "muscle cell into blood", "blood into the muscle cell", "Golgi apparatus into blood"],
+    "correct": 2
+  },
+  {
+    "question": "Compared with nearby blood, an exercising muscle cell normally has a carbon dioxide concentration that is:",
+    "options": ["always zero", "lower", "higher", "always identical"],
+    "correct": 2
+  },
+  {
+    "question": "The net diffusion of carbon dioxide near an exercising muscle is from:",
+    "options": ["Golgi apparatus into a lysosome", "blood into muscle cell", "extracellular fluid into the nucleus", "muscle cell into blood"],
+    "correct": 3
+  },
+  {
+    "question": "What is the main difference between simple and facilitated diffusion?",
+    "options": ["Only simple diffusion is passive.", "Only facilitated diffusion moves high to low.", "Facilitated diffusion uses membrane proteins; simple diffusion crosses the bilayer directly.", "Simple diffusion uses ATP and facilitated diffusion does not."],
+    "correct": 2
+  },
+  {
+    "question": "A membrane protein that forms a tunnel is a:",
+    "options": ["lysosome", "channel protein", "phospholipid tail", "carbohydrate marker"],
+    "correct": 1
+  },
+  {
+    "question": "A carrier protein assists facilitated diffusion by:",
+    "options": ["forming a chromosome", "digesting the solute with lysosomal enzymes", "moving every solute low to high with ATP", "helping a specific solute cross the membrane down its gradient"],
+    "correct": 3
+  },
+  {
+    "question": "Why does glucose commonly move from blood into busy body cells?",
+    "options": ["Its concentration is always lower in blood.", "Its concentration is usually higher in blood and lower in cells.", "It dissolves directly in the lipid core.", "It is engulfed by phagocytosis."],
+    "correct": 1
+  },
+  {
+    "question": "At diffusion equilibrium:",
+    "options": ["all molecular movement stops", "molecules still move both ways but there is no net movement", "molecules move only low to high", "ATP is required to keep molecules still"],
+    "correct": 1
+  },
+  {
+    "question": "If a barrier is solid and impermeable to both water and salt:",
+    "options": ["neither water nor salt can cross", "only water crosses", "both water and salt cross", "only salt crosses"],
+    "correct": 0
+  },
+  {
+    "question": "If a membrane is fully permeable to both salt and water:",
+    "options": ["only salt moves", "only water moves", "both can move and concentrations tend to balance", "the concentrated side must rise by osmosis alone"],
+    "correct": 2
+  },
+  {
+    "question": "Across a membrane permeable to water but not salt:",
+    "options": ["salt crosses but water is trapped", "water can cross while salt remains trapped", "neither can move", "both must move by active transport"],
+    "correct": 1
+  },
+  {
+    "question": "A dilute salt solution and concentrated salt solution are separated by a membrane permeable only to water. Net water movement is:",
+    "options": ["zero from the start", "from concentrated to dilute solution", "from dilute to concentrated solution", "towards the side with less solute"],
+    "correct": 2
+  },
+  {
+    "question": "Why does salted cucumber lose water and shrink?",
+    "options": ["Water moves out towards the higher external solute concentration.", "Salt pumps water into the cells using ATP.", "Glucose leaves by exocytosis.", "The membrane becomes fully impermeable."],
+    "correct": 0
+  },
+  {
+    "question": "In an isotonic solution, water:",
+    "options": ["moves only into the cell", "does not move at all", "moves into and out of the cell at equal rates", "moves only out of the cell"],
+    "correct": 2
+  },
+  {
+    "question": "Compared with the cell, a hypertonic solution contains:",
+    "options": ["more water and more free oxygen only", "less solute and more water", "the same solute and water", "more solute and less water"],
+    "correct": 3
+  },
+  {
+    "question": "Compared with the cell, a hypotonic solution contains:",
+    "options": ["the same solute and water", "more solute and less water", "less solute and more water", "no water"],
+    "correct": 2
+  },
+  {
+    "question": "Why is 0.9% normal saline commonly used to replace body fluid?",
+    "options": ["It prevents all molecular movement.", "It is strongly hypertonic.", "It is pure water and strongly hypotonic.", "It is isotonic to body cells."],
+    "correct": 3
+  },
+  {
+    "question": "The lesson's potassium-pump example shows potassium moving:",
+    "options": ["directly through the lipid bilayer", "from many ions inside to fewer outside without energy", "from fewer ions outside to many ions inside using ATP", "into a lysosome by phagocytosis"],
+    "correct": 2
+  },
+  {
+    "question": "After a white blood cell engulfs a bacterium, which organelle helps break it down?",
+    "options": ["lysosome", "ribosome", "centriole", "nucleolus"],
+    "correct": 0
+  },
+  {
+    "question": "Which sequence correctly describes export of a protein?",
+    "options": ["rough ER → Golgi apparatus → vesicle → cell membrane → extracellular fluid", "lysosome → nucleus → phospholipid tail → cytosol", "smooth ER → centriole → chromosome → blood", "cell membrane → Golgi → rough ER → nucleus"],
+    "correct": 0
+  },
+  {
+    "question": "A small lipid-soluble molecule moves directly across the membrane from high to low concentration without ATP. This is:",
+    "options": ["facilitated diffusion", "simple diffusion", "active transport", "endocytosis"],
+    "correct": 1
+  },
+  {
+    "question": "A glucose molecule crosses through a carrier from high to low concentration without ATP. This is:",
+    "options": ["exocytosis", "simple diffusion", "an active pump", "facilitated diffusion"],
+    "correct": 3
+  },
+  {
+    "question": "A cell suddenly cannot make ATP. Which process could still continue down an existing concentration gradient?",
+    "options": ["exocytosis", "active transport pumping", "phagocytosis", "facilitated diffusion"],
+    "correct": 3
+  },
+  {
+    "question": "A solute has equal concentration on both sides of a channel. What is the expected net movement by facilitated diffusion?",
+    "options": ["rapid movement only into the cell", "no net movement", "movement low to high using ATP", "vesicle formation"],
+    "correct": 1
+  },
+  {
+    "question": "Even when ATP is abundant, oxygen normally enters an exercising muscle cell by:",
+    "options": ["simple diffusion down its concentration gradient", "an ATP-driven oxygen pump", "pinocytosis", "exocytosis"],
+    "correct": 0
+  },
+  {
+    "question": "A red blood cell is placed in concentrated salt solution and becomes wrinkled. The solution is:",
+    "options": ["hypertonic; water moved out", "hypotonic; water moved in", "isotonic; no net movement", "fully impermeable; salt moved in"],
+    "correct": 0
+  },
+  {
+    "question": "A red blood cell placed in pure water swells and bursts. The surrounding fluid is:",
+    "options": ["an active transport solution", "hypertonic; water moved out", "isotonic; water rates were equal", "hypotonic; water moved into the cell"],
+    "correct": 3
+  },
+  {
+    "question": "A solute cannot cross a membrane, but water can. A concentration difference will mainly produce:",
+    "options": ["osmosis", "simple diffusion of the solute", "exocytosis", "phagocytosis"],
+    "correct": 0
+  },
+  {
+    "question": "Which two statements describe the same osmotic direction?",
+    "options": ["water moves from low water to high water, and towards low solute", "water moves from high water to low water, and towards high solute", "water moves towards low solute, and from dilute to concentrated", "water moves only when ATP is supplied"],
+    "correct": 1
+  },
+  {
+    "question": "The term hypertonic is meaningful only when the solution is compared with:",
+    "options": ["the colour of the solution", "the ATP concentration in a lysosome", "the number of membrane proteins", "the solute concentration inside the cell"],
+    "correct": 3
+  },
+  {
+    "question": "Which statement about an isotonic cell is most accurate?",
+    "options": ["All water movement stops completely.", "Water crosses both ways, but there is no net movement or size change.", "Water moves only into the cell.", "The cell always lyses."],
+    "correct": 1
+  },
+  {
+    "question": "An unknown cell shrivels after being placed in a solution. Which conclusion is best?",
+    "options": ["The solution was hypertonic to the cell.", "The solution was hypotonic to the cell.", "The solution was isotonic to the cell.", "The cell gained water by osmosis."],
+    "correct": 0
+  },
+  {
+    "question": "An unknown animal cell lyses after being placed in a solution. Which conclusion is best?",
+    "options": ["The solution was isotonic to the cell.", "The solution was hypertonic to the cell.", "The solution was hypotonic to the cell.", "The cell lost water."],
+    "correct": 2
+  },
+  {
+    "question": "A cell's volume remains stable while water molecules continue crossing its membrane. The surrounding solution is most likely:",
+    "options": ["isotonic", "hypertonic", "hypotonic", "solid"],
+    "correct": 0
+  },
+  {
+    "question": "A membrane pump adds potassium to a cell even though potassium is already more concentrated inside. This directly demonstrates:",
+    "options": ["facilitated diffusion", "simple diffusion", "active transport against a concentration gradient", "osmosis"],
+    "correct": 2
+  },
+  {
+    "question": "A white blood cell surrounds a bacterium and forms an internal vesicle. Which process occurred?",
+    "options": ["phagocytosis, a type of endocytosis", "pinocytosis, a type of exocytosis", "simple diffusion", "osmosis"],
+    "correct": 0
+  },
+  {
+    "question": "A cell takes in extracellular fluid droplets within small vesicles. This process is:",
+    "options": ["phagocytosis", "pinocytosis", "simple diffusion", "exocytosis"],
+    "correct": 1
+  },
+  {
+    "question": "A hormone-containing vesicle moves to the cell surface, fuses, and releases its contents. This is:",
+    "options": ["osmosis", "endocytosis", "facilitated diffusion", "exocytosis"],
+    "correct": 3
+  },
+  {
+    "question": "Which organelle sequence prepares a secreted protein before exocytosis?",
+    "options": ["cell membrane → mitochondrion → Golgi", "lysosome → centriole → nucleus", "smooth ER → chromosome → ribosome", "rough ER → Golgi apparatus → secretory vesicle"],
+    "correct": 3
+  },
+  {
+    "question": "Which event most clearly distinguishes exocytosis from endocytosis?",
+    "options": ["The membrane folds inward around external material.", "A vesicle fuses with the membrane and releases contents outside.", "Water moves towards higher solute concentration.", "Glucose passes through a carrier."],
+    "correct": 1
+  },
+  {
+    "question": "Which set contains only passive transport processes?",
+    "options": ["phagocytosis, osmosis, active pump", "active pump, endocytosis, exocytosis", "simple diffusion, facilitated diffusion, osmosis", "exocytosis, simple diffusion, pinocytosis"],
+    "correct": 2
+  },
+  {
+    "question": "Which set contains only active transport processes?",
+    "options": ["osmosis, phagocytosis, simple diffusion", "simple diffusion, osmosis, facilitated diffusion", "oxygen diffusion, glucose diffusion, osmosis", "transport pumps, endocytosis, exocytosis"],
+    "correct": 3
+  },
+  {
+    "question": "In an exercising muscle, which paired movements are correct?",
+    "options": ["oxygen: cell → blood; carbon dioxide: blood → cell", "oxygen: blood → cell; carbon dioxide: cell → blood", "both gases: blood → cell", "both gases: cell → blood"],
+    "correct": 1
+  },
+  {
+    "question": "A dilute solution is on the left and a concentrated solution on the right. Salt cannot cross, but water can. What happens?",
+    "options": ["Water moves left; the left-side level rises.", "Water moves right; the right-side level rises.", "Salt moves left while water remains still.", "No substance moves because the membrane is semi-permeable."],
+    "correct": 1
+  },
+  {
+    "question": "Glucose is more concentrated outside a cell and crosses through a carrier without ATP. Which conclusion is correct?",
+    "options": ["It is endocytosis because glucose enters the cell.", "It is active transport because a protein is used.", "It is simple diffusion because no ATP is used.", "It is passive facilitated diffusion down a concentration gradient."],
+    "correct": 3
+  }
+]
