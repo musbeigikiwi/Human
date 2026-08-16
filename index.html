@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy & Physiology</title>
+  <title>Mustafa MCQs & 3D Anatomy Deck</title>
+  <!-- کتابخانه رسمی گوگل برای رندر ۳بعدی -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -37,7 +39,6 @@
       line-height: 40px;
       font-size: 15px;
       font-weight: 600;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     .ticker-move {
@@ -53,8 +54,8 @@
     }
 
     .container {
-      max-width: 900px;
-      margin: 30px auto 0 auto;
+      max-width: 950px;
+      margin: 20px auto 0 auto;
       padding: 0 20px;
     }
 
@@ -63,23 +64,7 @@
       border-radius: 20px;
       padding: 24px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      margin-bottom: 24px;
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .badge-tag {
-      font-size: 12px;
-      letter-spacing: 1px;
-      color: var(--accent-primary);
-      text-transform: uppercase;
-      font-weight: 700;
+      margin-bottom: 20px;
     }
 
     h1 {
@@ -91,29 +76,97 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .sound-toggle {
-      background: var(--border-color);
-      border: none;
-      color: white;
-      padding: 8px 14px;
+    .tab-navigation {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-primary);
+      color: #0f172a;
+      border-color: var(--accent-primary);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ================= فلش‌کارت‌های ۳بعدی ================= */
+    .flashcard-wrapper {
+      perspective: 1000px;
+      margin: 20px 0;
+    }
+
+    .flashcard {
+      width: 100%;
+      height: 250px;
+      background: transparent;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 13px;
     }
 
-    .progress-bar-bg {
-      background: var(--border-color);
-      height: 10px;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 15px;
-    }
-
-    .progress-bar-fill {
-      background: linear-gradient(90deg, #38bdf8, #22c55e);
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
       height: 100%;
-      width: 0%;
-      transition: width 0.4s ease;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .flashcard-front {
+      background: var(--card-bg);
+      color: var(--accent-primary);
+    }
+
+    .flashcard-back {
+      background: #0f172a;
+      color: var(--text-main);
+      transform: rotateY(180deg);
+      border-color: var(--accent-primary);
+    }
+
+    /* ================= مدل ۳بعدی آناتومی ================= */
+    model-viewer {
+      width: 100%;
+      height: 450px;
+      background-color: #0f172a;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
     }
 
     .quiz-card {
@@ -121,338 +174,198 @@
       border-radius: 20px;
       padding: 30px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      margin-bottom: 24px;
-    }
-
-    .quiz-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .timer-badge {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--accent-warning);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(245, 158, 11, 0.3);
     }
 
     .option-btn {
-      width: 100%;
-      text-align: left;
-      padding: 16px 20px;
-      margin-top: 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      background: #0f172a;
-      color: var(--text-main);
-      cursor: pointer;
-      font-size: 16px;
-      transition: all 0.2s ease;
+      width: 100%; text-align: left; padding: 16px; margin-top: 10px;
+      border: 1px solid var(--border-color); border-radius: 12px;
+      background: #0f172a; color: var(--text-main); cursor: pointer;
     }
+    .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
+    .option-btn.wrong { background-color: rgba(239, 68, 68, 0.2) !important; border-color: var(--accent-error) !important; color: #f87171 !important; }
 
-    .option-btn:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-2px);
-    }
-
-    .option-btn.correct {
-      background-color: rgba(34, 197, 94, 0.2) !important;
-      border-color: var(--accent-success) !important;
-      color: #4ade80 !important;
-    }
-
-    .option-btn.wrong {
-      background-color: rgba(239, 68, 68, 0.2) !important;
-      border-color: var(--accent-error) !important;
-      color: #f87171 !important;
-    }
-
-    .nav-controls {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .btn {
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      background: #0f172a;
-      color: var(--text-main);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 15px;
-    }
-
-    .btn:hover { background: var(--border-color); }
-
-    .btn-primary {
-      background: var(--accent-primary);
-      color: #0f172a;
-      border: none;
-      flex-grow: 1;
-      font-weight: 700;
-    }
-
-    .btn-primary:hover { background: #7dd3fc; }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 12px;
-      margin-top: 24px;
-    }
+    .btn { padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
+    .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
   </style>
 </head>
 <body onclick="initAudio()">
 
-  <!-- نوار متحرک انگیزشی -->
   <div class="ticker-wrap">
     <div class="ticker-move">
-      🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯 — LEARN, REVISE, AND SUCCEED! 💪
+      🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯
     </div>
   </div>
 
   <div class="container">
     <div class="header-card">
-      <div class="header-top">
-        <span class="badge-tag">REVISION DECK • GEDU404B/2602</span>
-        <button class="sound-toggle" id="sound-btn" onclick="toggleSound()">🔊 Sound: ON</button>
-      </div>
-      <h1>Mustafa MCQs</h1>
-      <div style="color:var(--text-muted); font-size:14px;">Applied Structure & Function of the Human Body</div>
-
-      <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:13px; font-weight:600;">
-        <span>Overall Mastery</span>
-        <span id="mastery-percent" style="color:var(--accent-primary);">0%</span>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="mastery-bar"></div>
-      </div>
+      <h1>Mustafa MCQs & 3D Anatomy</h1>
+      <div style="color:var(--text-muted); font-size:14px;">Interactive Flashcards, 3D Anatomy Models & Practice Quiz</div>
     </div>
 
-    <div class="quiz-card">
-      <div class="quiz-meta">
-        <span style="color: var(--accent-primary); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
-        <div class="timer-badge">
-          ⏱️ <span id="timer-display">01:00</span>
+    <!-- منوی تب‌ها -->
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz (سوالات)</button>
+      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards (فلش کارت)</button>
+      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy (مدل ۳بعدی)</button>
+    </div>
+
+    <!-- ================= ۱. بخش سوالات (QUIZ) ================= -->
+    <div id="quiz-tab" class="tab-content active">
+      <div class="quiz-card">
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+          <span style="color:var(--accent-primary); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
+          <span style="color:var(--accent-warning); font-weight:700;">⏱️ <span id="timer-display">01:00</span></span>
+        </div>
+        <h2 id="question-text" style="font-size:20px; margin-bottom:20px;">Loading...</h2>
+        <div id="options-container"></div>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
+          <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
         </div>
       </div>
+    </div>
 
-      <h2 id="question-text" style="font-size: 22px; line-height:1.4; margin-bottom: 24px;">Loading questions...</h2>
-
-      <div id="options-container"></div>
-
-      <div class="nav-controls">
-        <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
-        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next Question ➔</button>
+    <!-- ================= ۲. بخش فلش‌کارت مرور درس (FLASHCARDS) ================= -->
+    <div id="flashcards-tab" class="tab-content">
+      <div class="flashcard-wrapper">
+        <div class="flashcard" id="card-element" onclick="flipCard()">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <span style="font-size:12px; color:var(--text-muted); font-weight:700;">FLASHCARD (Click to Flip)</span>
+              <h2 id="fc-term" style="margin-top:15px;">Anatomy vs Physiology</h2>
+            </div>
+            <div class="flashcard-back">
+              <span style="font-size:12px; color:var(--accent-primary); font-weight:700;">DEFINITION / EXPLANATION</span>
+              <p id="fc-definition" style="font-size:18px; line-height:1.5; margin-top:15px;"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="btn" onclick="prevFlashcard()">← Previous Card</button>
+        <span style="color:var(--text-muted); font-size:14px;">Card <span id="fc-num">1</span> of <span id="fc-total">8</span></span>
+        <button class="btn btn-primary" onclick="nextFlashcard()">Next Card →</button>
       </div>
     </div>
 
-    <div class="action-grid">
-      <button class="btn" onclick="runFullDeck()">📚 Run Full Deck (All Topics)</button>
-      <button class="btn" onclick="filterMissed()">⚠️ Review Missed Only (<span id="missed-count">0</span>)</button>
-      <button class="btn" onclick="resetProgress()" style="color: var(--accent-error); border-color: rgba(239, 68, 68, 0.4);">🔄 Reset All Progress</button>
+    <!-- ================= ۳. بخش مدل ۳بعدی آناتومی (3D MODEL) ================= -->
+    <div id="3d-tab" class="tab-content">
+      <div class="quiz-card">
+        <h3 style="margin-top:0; color:var(--accent-primary);">Interactive Human Skeleton & Anatomy</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:15px;">مدل را با انگشت یا ماوس بچرخانید و زوم کنید تا استخوان‌ها و ساختار آناتومی را به‌صورت ۳بعدی ببینید.</p>
+        
+        <!-- مدل ۳بعدی تعاملی گوگل -->
+        <model-viewer 
+          src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
+          alt="3D Anatomy Model" 
+          auto-rotate 
+          camera-controls>
+        </model-viewer>
+      </div>
     </div>
+
   </div>
 
   <script>
-    let allQuestions = [];
-    let activeDeck = [];
-    let currentIndex = 0;
-    let userAnswers = {};
-    let missedQuestions = new Set();
-    
-    // تنظیم زمان روی ۶۰ ثانیه (۱ دقیقه)
-    let timer;
-    let timeLeft = 60; 
-    let soundEnabled = true;
-    
-    // فعال‌سازی موتور صوت وب
-    let audioCtx = null;
-
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
     }
 
-    function playSound(freq, type, duration) {
-      if (!soundEnabled || !audioCtx) return;
+    // دیتاهای فلش‌کارت درس ۱
+    const flashcardsData = [
+      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)." },
+      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)." },
+      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues." },
+      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism." },
+      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts." },
+      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts." },
+      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts." },
+      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities." }
+    ];
+
+    let fcIndex = 0;
+    function loadFlashcard() {
+      document.getElementById('card-element').classList.remove('flipped');
+      document.getElementById('fc-term').innerText = flashcardsData[fcIndex].term;
+      document.getElementById('fc-definition').innerText = flashcardsData[fcIndex].def;
+      document.getElementById('fc-num').innerText = fcIndex + 1;
+      document.getElementById('fc-total').innerText = flashcardsData.length;
+    }
+    function flipCard() { document.getElementById('card-element').classList.toggle('flipped'); }
+    function nextFlashcard() { if (fcIndex < flashcardsData.length - 1) { fcIndex++; loadFlashcard(); } }
+    function prevFlashcard() { if (fcIndex > 0) { fcIndex--; loadFlashcard(); } }
+    loadFlashcard();
+
+    // بخش سوالات
+    let allQuestions = [], activeDeck = [], currentIndex = 0, userAnswers = {}, timer, timeLeft = 60, audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playSound(freq, duration) {
+      if (!audioCtx) return;
       try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
+        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
         osc.stop(audioCtx.currentTime + duration);
       } catch(e) {}
     }
 
-    function playTick() { playSound(800, 'sine', 0.08); }
-    function playCorrect() { playSound(587.33, 'triangle', 0.3); } // نت Re
-    function playWrong() { playSound(150, 'sawtooth', 0.4); }
-
-    function toggleSound() {
-      soundEnabled = !soundEnabled;
-      document.getElementById('sound-btn').innerText = soundEnabled ? "🔊 Sound: ON" : "🔇 Sound: OFF";
-    }
-
     function startTimer() {
-      clearInterval(timer);
-      timeLeft = 60; // ۱ دقیقه برای هر سوال
-      updateTimerDisplay();
-
+      clearInterval(timer); timeLeft = 60;
       timer = setInterval(() => {
         timeLeft--;
-        updateTimerDisplay();
-        
-        // پخش صدای تیک‌تیک در تمام طول تایمر
-        playTick();
-
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          playWrong();
-          alert("Time's up for this question!");
-        }
+        const min = Math.floor(timeLeft / 60), sec = timeLeft % 60;
+        document.getElementById('timer-display').innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        playSound(800, 0.05);
+        if (timeLeft <= 0) { clearInterval(timer); alert("Time's up!"); }
       }, 1000);
     }
 
-    function updateTimerDisplay() {
-      const min = Math.floor(timeLeft / 60);
-      const sec = timeLeft % 60;
-      document.getElementById('timer-display').innerText = 
-        `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-    }
-
-    fetch('questions.json')
-      .then(res => res.json())
-      .then(data => {
-        allQuestions = data;
-        activeDeck = [...allQuestions];
-        loadQuestion();
-        updateMastery();
-      });
+    fetch('questions.json').then(res => res.json()).then(data => {
+      allQuestions = data; activeDeck = [...allQuestions]; loadQuestion();
+    });
 
     function loadQuestion() {
       if (activeDeck.length === 0) return;
-
       startTimer();
       const q = activeDeck[currentIndex];
-      const originalIndex = allQuestions.indexOf(q);
-
       document.getElementById('q-num').innerText = currentIndex + 1;
       document.getElementById('q-total').innerText = activeDeck.length;
       document.getElementById('question-text').innerText = q.question;
 
       const container = document.getElementById('options-container');
       container.innerHTML = '';
-
-      const isAnswered = userAnswers.hasOwnProperty(originalIndex);
-      const selectedOption = userAnswers[originalIndex];
+      const isAnswered = userAnswers.hasOwnProperty(currentIndex);
 
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = String.fromCharCode(65 + idx) + ". " + opt;
-
         if (isAnswered) {
           if (idx === q.correct) btn.classList.add('correct');
-          if (selectedOption === idx && idx !== q.correct) btn.classList.add('wrong');
+          if (userAnswers[currentIndex] === idx && idx !== q.correct) btn.classList.add('wrong');
         } else {
-          btn.onclick = () => selectAnswer(originalIndex, idx);
+          btn.onclick = () => {
+            clearInterval(timer);
+            userAnswers[currentIndex] = idx;
+            playSound(idx === q.correct ? 600 : 150, 0.3);
+            loadQuestion();
+          };
         }
         container.appendChild(btn);
       });
-
-      document.getElementById('prev-btn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
     }
 
-    function selectAnswer(originalIndex, selectedIdx) {
-      clearInterval(timer);
-      userAnswers[originalIndex] = selectedIdx;
-      const q = allQuestions[originalIndex];
-
-      if (selectedIdx === q.correct) {
-        playCorrect();
-        missedQuestions.delete(originalIndex);
-      } else {
-        playWrong();
-        missedQuestions.add(originalIndex);
-      }
-
-      document.getElementById('missed-count').innerText = missedQuestions.size;
-      loadQuestion();
-      updateMastery();
-    }
-
-    function nextQuestion() {
-      if (currentIndex < activeDeck.length - 1) {
-        currentIndex++;
-        loadQuestion();
-      }
-    }
-
-    function prevQuestion() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        loadQuestion();
-      }
-    }
-
-    function runFullDeck() {
-      activeDeck = [...allQuestions];
-      currentIndex = 0;
-      loadQuestion();
-    }
-
-    function filterMissed() {
-      if (missedQuestions.size === 0) {
-        alert("No missed questions yet!");
-        return;
-      }
-      activeDeck = allQuestions.filter((_, idx) => missedQuestions.has(idx));
-      currentIndex = 0;
-      loadQuestion();
-    }
-
-    function resetProgress() {
-      if (confirm("Reset all test progress?")) {
-        userAnswers = {};
-        missedQuestions.clear();
-        document.getElementById('missed-count').innerText = '0';
-        runFullDeck();
-        updateMastery();
-      }
-    }
-
-    function updateMastery() {
-      if (allQuestions.length === 0) return;
-      let correctCount = 0;
-      Object.keys(userAnswers).forEach(idx => {
-        if (userAnswers[idx] === allQuestions[idx].correct) correctCount++;
-      });
-
-      const percent = Math.round((correctCount / allQuestions.length) * 100);
-      document.getElementById('mastery-percent').innerText = percent + "%";
-      document.getElementById('mastery-bar').style.width = percent + "%";
-    }
+    function nextQuestion() { if (currentIndex < activeDeck.length - 1) { currentIndex++; loadQuestion(); } }
+    function prevQuestion() { if (currentIndex > 0) { currentIndex--; loadQuestion(); } }
   </script>
 </body>
 </html>
