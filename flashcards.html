@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A&P Interactive Flashcards Hub</title>
+  <title>Student Learning Hub & Dashboard</title>
   <style>
     :root {
-      --primary-dark: #0f172a;
-      --accent: #6366f1;
-      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --border-color: #334155;
       --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
     }
 
     * {
@@ -20,90 +23,179 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg-gradient);
+      background: var(--bg-dark);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    /* TOP NAVBAR */
+    navbar {
+      background: #1e293b;
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 30px 20px;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: 2.2rem;
+    .logo {
+      font-size: 1.3rem;
       font-weight: 800;
       background: linear-gradient(to right, #38bdf8, #818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
     }
 
-    p.subtitle {
-      color: #94a3b8;
-      font-size: 0.95rem;
+    .nav-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* DASHBOARD STYLES */
-    #dashboardView {
+    .nav-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* MAIN LAYOUT */
+    .container {
+      max-width: 1200px;
       width: 100%;
-      max-width: 800px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      margin: 0 auto;
+      padding: 30px 20px;
     }
 
-    .chapter-card {
-      background: #1e293b;
-      border: 1px solid #334155;
+    /* DASHBOARD VIEW */
+    #dashboardView {
+      display: block;
+    }
+
+    .grid-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .dash-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 20px;
       padding: 25px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
-    .chapter-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
-    }
-
-    .chapter-card h3 {
+    .dash-card h2 {
       font-size: 1.2rem;
       color: #38bdf8;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .chapter-card p {
-      font-size: 0.85rem;
-      color: #94a3b8;
+    /* CALENDAR WIDGET */
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 15px;
     }
 
-    .chapter-card .card-count {
-      background: rgba(99, 102, 241, 0.2);
-      color: #818cf8;
-      padding: 6px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      text-align: center;
+    }
+
+    .day-cell {
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .day-cell.active {
+      background: var(--accent);
+      color: white;
       font-weight: bold;
     }
 
-    /* FLASHCARD VIEW STYLES */
+    /* FLASHCARD MODULE SELECTOR */
+    .module-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .module-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .module-item:hover {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    /* TODO WIDGET */
+    .todo-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .todo-input input {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      color: white;
+    }
+
+    .todo-list {
+      list-style: none;
+    }
+
+    .todo-item {
+      padding: 10px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* FLASHCARD STUDY VIEW */
     #studyView {
       display: none;
       flex-direction: column;
       align-items: center;
-      width: 100%;
     }
 
     .top-bar {
@@ -111,13 +203,12 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
       margin-bottom: 25px;
       width: 100%;
       max-width: 650px;
     }
 
-    select, button {
+    select, .btn-action {
       padding: 12px 20px;
       font-size: 0.95rem;
       font-weight: 600;
@@ -125,33 +216,24 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      outline: none;
     }
 
     select {
       background: #1e293b;
       color: #f8fafc;
-      border: 1px solid #334155;
+      border: 1px solid var(--border-color);
       flex: 1;
-      min-width: 200px;
     }
 
-    .btn {
+    .btn-action {
       background: #1e293b;
       color: #f8fafc;
-      border: 1px solid #334155;
+      border: 1px solid var(--border-color);
     }
 
-    .btn:hover {
+    .btn-action:hover {
       background: var(--accent);
       border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
-    }
-
-    .btn-dashboard {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: #ffffff;
     }
 
     .card-container {
@@ -238,85 +320,132 @@
       border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 700;
-      color: #94a3b8;
-      border: 1px solid #334155;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>A&P Mastery Flashcards</h1>
-    <p class="subtitle" id="headerSubtitle">Select a module to start studying</p>
-  </header>
+  <!-- NAVBAR -->
+  <navbar>
+    <div class="logo">🎓 Student Learning Hub</div>
+    <button class="nav-btn" onclick="showDashboard()">🏠 Back To Dashboard</button>
+  </navbar>
 
-  <!-- DASHBOARD VIEW -->
-  <div id="dashboardView">
-    <div class="chapter-card" onclick="startStudy('all')">
-      <h3>All Chapters</h3>
-      <p>Full review of all Anatomy, Physiology, Chemistry & Cell Biology cards.</p>
-      <span class="card-count">450 Cards</span>
-    </div>
+  <div class="container">
 
-    <div class="chapter-card" onclick="startStudy('ch1')">
-      <h3>Chapter 1: Intro to A&P</h3>
-      <p>Body structure, function, levels of organization, and lab measurements.</p>
-      <span class="card-count">150 Cards</span>
-    </div>
-
-    <div class="chapter-card" onclick="startStudy('ch2')">
-      <h3>Chapter 2: Chemistry & Lab</h3>
-      <p>Atoms, chemical bonds, pH scale, organic compounds, and lab tests.</p>
-      <span class="card-count">150 Cards</span>
-    </div>
-
-    <div class="chapter-card" onclick="startStudy('ch3')">
-      <h3>Chapter 3: Cell Biology</h3>
-      <p>Organelles, membrane structure, cell division (mitosis), and pathology.</p>
-      <span class="card-count">150 Cards</span>
-    </div>
-
-    <div class="chapter-card" onclick="startStudy('ch4')">
-      <h3>Chapter 4: Cell Transport</h3>
-      <p>Passive/active transport, osmosis, tonicity, pumps, and vesicular transport.</p>
-      <span class="card-count">150 Cards</span>
-    </div>
-  </div>
-
-  <!-- STUDY VIEW -->
-  <div id="studyView">
-    <div class="top-bar">
-      <button class="btn btn-dashboard" onclick="showDashboard()">🏠 Back To Dashboard</button>
-      <select id="chapterSelect" onchange="changeChapter()">
-        <option value="all">All Chapters (450 Cards)</option>
-        <option value="ch1">Chapter 1: Intro to A&P</option>
-        <option value="ch2">Chapter 2: Chemistry & Lab</option>
-        <option value="ch3">Chapter 3: Cell Biology</option>
-        <option value="ch4">Chapter 4: Cell Transport</option>
-      </select>
-      <button class="btn" onclick="shuffleCards()">🎲 Shuffle</button>
-    </div>
-
-    <div class="card-container" onclick="flipCard()">
-      <div class="card" id="flashcard">
-        <div class="card-face card-front" id="cardFront">
-          <span class="card-badge">QUESTION</span>
-          <div class="card-text" id="questionText">Loading...</div>
-          <span class="card-hint">Click or press Space to reveal answer 🔄</span>
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboardView">
+      <div class="grid-dashboard">
+        
+        <!-- CALENDAR WIDGET -->
+        <div class="dash-card">
+          <h2>📅 Study Calendar</h2>
+          <div class="calendar-header">
+            <strong id="calendarMonth">August 2026</strong>
+          </div>
+          <div class="calendar-days">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <!-- Calendar generated dynamically -->
+          </div>
         </div>
-        <div class="card-face card-back">
-          <span class="card-badge" style="background: rgba(56, 189, 248, 0.15);">ANSWER</span>
-          <div class="card-text" id="answerText">Loading...</div>
-          <span class="card-hint">Click to flip back 🔄</span>
+
+        <!-- FLASHCARDS MODULES WIDGET -->
+        <div class="dash-card">
+          <h2>🗂️ Flashcard Modules</h2>
+          <div class="module-list">
+            <div class="module-item" onclick="startStudy('all')">
+              <div>
+                <strong>All Chapters Review</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Comprehensive set</p>
+              </div>
+              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">450 Cards</span>
+            </div>
+            <div class="module-item" onclick="startStudy('ch1')">
+              <div>
+                <strong>Chapter 1: Intro to A&P</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Body organization & lab</p>
+              </div>
+              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
+            </div>
+            <div class="module-item" onclick="startStudy('ch2')">
+              <div>
+                <strong>Chapter 2: Chemistry</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Atoms, pH & bonds</p>
+              </div>
+              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
+            </div>
+            <div class="module-item" onclick="startStudy('ch3')">
+              <div>
+                <strong>Chapter 3: Cell Biology</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Organelles & mitosis</p>
+              </div>
+              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
+            </div>
+            <div class="module-item" onclick="startStudy('ch4')">
+              <div>
+                <strong>Chapter 4: Cell Transport</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Osmosis & active transport</p>
+              </div>
+              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
+            </div>
+          </div>
         </div>
+
+        <!-- TO-DO LIST WIDGET -->
+        <div class="dash-card">
+          <h2>✅ Study Tasks</h2>
+          <div class="todo-input">
+            <input type="text" id="todoTask" placeholder="Add new task...">
+            <button class="nav-btn" onclick="addTodo()">Add</button>
+          </div>
+          <ul class="todo-list" id="todoList">
+            <li class="todo-item"><input type="checkbox"> Review Chapter 1 Flashcards</li>
+            <li class="todo-item"><input type="checkbox"> Complete Chemistry Practice Lab</li>
+          </ul>
+        </div>
+
       </div>
     </div>
 
-    <div class="bottom-nav">
-      <button class="btn" onclick="prevCard()">◀ Previous</button>
-      <div class="progress-pill" id="progressText">1 / 450</div>
-      <button class="btn" onclick="nextCard()">Next ▶</button>
+    <!-- FLASHCARD STUDY VIEW -->
+    <div id="studyView">
+      <div class="top-bar">
+        <select id="chapterSelect" onchange="changeChapter()">
+          <option value="all">All Chapters (450 Cards)</option>
+          <option value="ch1">Chapter 1: Intro to A&P</option>
+          <option value="ch2">Chapter 2: Chemistry & Lab</option>
+          <option value="ch3">Chapter 3: Cell Biology</option>
+          <option value="ch4">Chapter 4: Cell Transport</option>
+        </select>
+        <button class="btn-action" onclick="shuffleCards()">🎲 Shuffle</button>
+      </div>
+
+      <div class="card-container" onclick="flipCard()">
+        <div class="card" id="flashcard">
+          <div class="card-face card-front" id="cardFront">
+            <span class="card-badge">QUESTION</span>
+            <div class="card-text" id="questionText">Loading...</div>
+            <span class="card-hint">Click or press Space to reveal answer 🔄</span>
+          </div>
+          <div class="card-face card-back">
+            <span class="card-badge" style="background: rgba(56, 189, 248, 0.15);">ANSWER</span>
+            <div class="card-text" id="answerText">Loading...</div>
+            <span class="card-hint">Click to flip back 🔄</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="btn-action" onclick="prevCard()">◀ Previous</button>
+        <div class="progress-pill" id="progressText">1 / 450</div>
+        <button class="btn-action" onclick="nextCard()">Next ▶</button>
+      </div>
     </div>
+
   </div>
 
   <script>
@@ -325,8 +454,7 @@
       "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)",
       "linear-gradient(135deg, #0d9488 0%, #0284c7 100%)",
       "linear-gradient(135deg, #d97706 0%, #dc2626 100%)",
-      "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)",
-      "linear-gradient(135deg, #059669 0%, #0d9488 100%)"
+      "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)"
     ];
 
     const rawData = [
@@ -335,16 +463,10 @@
       { q: "What is physiology?", a: "The study of how the body and its parts function and work.", ch: "ch1" },
       { q: "What is the relationship between structure and function?", a: "Structure determines function.", ch: "ch1" },
       { q: "What is microscopic anatomy?", a: "The study of body structures that cannot be seen with the naked eye.", ch: "ch1" },
-      { q: "What is gross (macroscopic) anatomy?", a: "The study of large, easily visible body structures without using a microscope.", ch: "ch1" },
-      { q: "What is cytology?", a: "The scientific study of cells.", ch: "ch1" },
-      { q: "What is histology?", a: "The scientific study of tissues.", ch: "ch1" },
-      { q: "What is developmental anatomy?", a: "The study of structural changes that occur in an organism throughout its lifespan.", ch: "ch1" },
-
+      
       // Chapter 2
       { q: "What is the basic unit of all matter?", a: "An atom.", ch: "ch2" },
       { q: "What are the three subatomic particles in an atom?", a: "Protons, neutrons, and electrons.", ch: "ch2" },
-      { q: "Where are protons located in an atom?", a: "In the nucleus.", ch: "ch2" },
-      { q: "What is the electrical charge of a proton?", a: "Positive (+).", ch: "ch2" },
 
       // Chapter 3
       { q: "What are cells?", a: "The basic structural and functional units of all living organisms.", ch: "ch3" },
@@ -358,21 +480,20 @@
     let currentCards = [...rawData];
     let currentIndex = 0;
 
+    // View Switching
     function showDashboard() {
-      document.getElementById("dashboardView").style.display = "grid";
+      document.getElementById("dashboardView").style.display = "block";
       document.getElementById("studyView").style.display = "none";
-      document.getElementById("headerSubtitle").innerText = "Select a module to start studying";
     }
 
     function startStudy(chapterKey) {
       document.getElementById("dashboardView").style.display = "none";
       document.getElementById("studyView").style.display = "flex";
-      document.getElementById("headerSubtitle").innerText = "Press Space to flip | Use Arrow keys to navigate";
-      
       document.getElementById("chapterSelect").value = chapterKey;
       changeChapter();
     }
 
+    // Flashcard Render with dynamic gradient colors
     function renderCard() {
       const cardEl = document.getElementById("flashcard");
       const cardFront = document.getElementById("cardFront");
@@ -425,7 +546,30 @@
       renderCard();
     }
 
-    // Keyboard controls
+    // Dynamic Calendar Generation
+    function generateCalendar() {
+      const grid = document.getElementById("calendarGrid");
+      grid.innerHTML = "";
+      for (let i = 1; i <= 31; i++) {
+        const day = document.createElement("div");
+        day.className = "day-cell" + (i === 16 ? " active" : "");
+        day.innerText = i;
+        grid.appendChild(day);
+      }
+    }
+
+    // Simple To-Do Task System
+    function addTodo() {
+      const input = document.getElementById("todoTask");
+      if (!input.value.trim()) return;
+      const li = document.createElement("li");
+      li.className = "todo-item";
+      li.innerHTML = `<input type="checkbox"> ${input.value}`;
+      document.getElementById("todoList").appendChild(li);
+      input.value = "";
+    }
+
+    // Keyboard Shortcuts
     document.addEventListener('keydown', function(event) {
       if (document.getElementById("studyView").style.display === "flex") {
         if (event.code === 'ArrowRight') nextCard();
@@ -436,6 +580,8 @@
         }
       }
     });
+
+    generateCalendar();
   </script>
 </body>
 </html>
