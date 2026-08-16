@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy & Studio</title>
+  <title>Mustafa MCQs — Anatomy Revision Deck</title>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -26,7 +26,6 @@
       color: var(--text-main);
       margin: 0;
       padding-bottom: 40px;
-      touch-action: manipulation;
     }
 
     .ticker-wrap {
@@ -53,7 +52,7 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 20px auto 0 auto;
       padding: 0 20px;
     }
@@ -82,18 +81,36 @@
       -webkit-text-fill-color: transparent;
     }
 
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+      border: 1px solid var(--border-color);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     .tab-navigation {
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
-      flex-wrap: wrap;
     }
 
     .tab-btn {
       flex: 1;
-      min-width: 140px;
-      padding: 12px;
-      font-size: 14px;
+      padding: 14px;
+      font-size: 15px;
       font-weight: 700;
       border-radius: 12px;
       border: 1px solid var(--border-color);
@@ -112,134 +129,55 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Studio & Drawing Canvas */
-    .studio-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid var(--border-color);
-    }
-
-    .canvas-container {
-      position: relative;
-      width: 100%;
-      height: 600px;
-      background: #000;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-      touch-action: none;
-    }
-
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-      background: #0f172a;
-      padding: 12px;
-      border-radius: 12px;
-    }
-
-    .tool-btn {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-main);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .tool-btn.active {
-      background: var(--accent-primary);
-      color: #0f172a;
-    }
-
-    .text-input-box {
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: #0f172a;
-      color: var(--text-main);
-      font-size: 13px;
-      width: 180px;
-    }
-
-    /* Flashcards & Quiz */
+    /* Flashcards */
     .flashcard-wrapper { perspective: 1000px; margin: 20px 0; }
-    .flashcard { width: 100%; height: 250px; background: transparent; border-radius: 20px; cursor: pointer; }
+    .flashcard { width: 100%; height: 260px; background: transparent; border-radius: 20px; cursor: pointer; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
     .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
     .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; }
     .flashcard-front { background: var(--card-bg); color: var(--accent-primary); }
     .flashcard-back { background: #0f172a; color: var(--text-main); transform: rotateY(180deg); border-color: var(--accent-primary); }
 
+    /* Quiz */
     .quiz-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); }
-    .option-btn { width: 100%; text-align: left; padding: 16px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: #0f172a; color: var(--text-main); cursor: pointer; }
+    .option-btn { width: 100%; text-align: left; padding: 16px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: #0f172a; color: var(--text-main); cursor: pointer; font-size: 16px; transition: all 0.2s; }
+    .option-btn:hover { border-color: var(--accent-primary); }
     .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
     .option-btn.wrong { background-color: rgba(239, 68, 68, 0.2) !important; border-color: var(--accent-error) !important; color: #f87171 !important; }
 
-    .btn { padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
+    .btn { padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
     .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    .gallery-thumb {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 2px solid var(--border-color);
-    }
-    .gallery-thumb:hover { border-color: var(--accent-primary); }
   </style>
 </head>
 <body>
 
   <div class="ticker-wrap">
     <div class="ticker-move">
-      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! DRAW, TYPE & SAVE NOTES WITH APPLE PENCIL! ✏️ 🔥
+      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! GO FOR A++ MUSTAFA! 🔥
     </div>
   </div>
 
   <div class="container">
     <div class="header-card">
       <div class="header-top">
-        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S STUDY HUB</span>
+        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S REVISION HUB</span>
       </div>
-      <h1>Mustafa MCQs & Drawing Studio</h1>
-      <div style="color:var(--text-muted); font-size:14px; margin-bottom: 15px;">Apple Pencil Anatomy Studio, Interactive Type & Save Notes</div>
+      <h1>Mustafa MCQs & Flashcards</h1>
+      <div style="color:var(--text-muted); font-size:14px;">Applied Structure & Function of the Human Body</div>
       
-      <!-- Audio Player -->
-      <audio controls loop style="width: 100%; height: 40px; border-radius: 8px;">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
-      </audio>
+      <!-- Interstellar Video Player -->
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/UDVtMYqUAyw" title="Interstellar Main Theme - Hans Zimmer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
 
     <!-- Navigation Tabs -->
     <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz</button>
-      <button class="tab-btn" onclick="switchTab('draw-tab', this)">✏️ Anatomy Studio (Draw / Type / Save)</button>
+      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz (MCQs)</button>
       <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards</button>
     </div>
 
-    <!-- 1. Quiz Section -->
+    <!-- 1. Quiz Section (4-Choice MCQs) -->
     <div id="quiz-tab" class="tab-content active">
       <div class="quiz-card">
         <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
@@ -255,44 +193,7 @@
       </div>
     </div>
 
-    <!-- 2. Drawing, Typing & Save Studio -->
-    <div id="draw-tab" class="tab-content">
-      <div class="studio-card">
-        <h3 style="margin-top:0; color:var(--accent-primary);">Select Anatomy Textbook Page or Upload Custom Photo</h3>
-        
-        <!-- پیش‌فرض تصاویر کتاب آناتومی -->
-        <div class="gallery-grid">
-          <img src="https://i.ibb.co/3s3Gk92/IMG-5631.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Integumentary, Skeletal, Muscular">
-          <img src="https://i.ibb.co/6yFvyZ8/IMG-5632.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Nervous, Endocrine, Cardiovascular">
-          <img src="https://i.ibb.co/FkVN3V2/IMG-5633.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Lymphatic, Respiratory, Digestive">
-          <img src="https://i.ibb.co/v4b7B4R/IMG-5634.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Urinary, Male & Female Reproductive">
-        </div>
-
-        <div class="toolbar">
-          <label class="btn btn-primary" style="cursor:pointer;">
-            📷 Upload Photo
-            <input type="file" id="img-loader" accept="image/*" style="display:none;" onchange="uploadImage(event)">
-          </label>
-          
-          <button class="tool-btn active" id="pen-btn" onclick="setTool('pen')">✏️ Pen</button>
-          <button class="tool-btn" id="high-btn" onclick="setTool('highlighter')">🖍️ Highlighter</button>
-          <button class="tool-btn" id="text-btn" onclick="setTool('text')">🔤 Type Text</button>
-          
-          <input type="text" id="type-input" class="text-input-box" placeholder="Type note here...">
-          <input type="color" id="pen-color" value="#38bdf8" style="border:none; background:none; cursor:pointer; width:30px; height:30px;">
-          
-          <button class="btn btn-primary" onclick="saveCanvasImage()" style="background:var(--accent-success); color:#0f172a;">💾 Save Image</button>
-          <button class="tool-btn" onclick="clearCanvas()" style="color:var(--accent-error);">🗑️ Clear</button>
-        </div>
-
-        <div class="canvas-container" id="canvas-container">
-          <canvas id="paint-canvas"></canvas>
-        </div>
-        <p style="color:var(--text-muted); font-size:12px; margin-top:10px;">💡 Tap on any textbook page above, draw with <strong>Apple Pencil</strong>, type notes anywhere by clicking on the canvas, and click <strong>Save Image</strong> to export your notes.</p>
-      </div>
-    </div>
-
-    <!-- 3. Flashcards Section -->
+    <!-- 2. Flashcards Section -->
     <div id="flashcards-tab" class="tab-content">
       <div class="flashcard-wrapper">
         <div class="flashcard" id="card-element" onclick="flipCard()">
@@ -323,134 +224,18 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       btn.classList.add('active');
-      if(tabId === 'draw-tab') resizeCanvas();
-    }
-
-    // Canvas Drawing, Typing & Save Logic
-    const canvas = document.getElementById('paint-canvas');
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-    let currentTool = 'pen';
-    let uploadedImg = null;
-
-    function resizeCanvas() {
-      const container = document.getElementById('canvas-container');
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
-      redrawCanvas();
-    }
-
-    function loadPresetImage(url) {
-      uploadedImg = new Image();
-      uploadedImg.crossOrigin = "anonymous";
-      uploadedImg.onload = function() { redrawCanvas(); }
-      uploadedImg.src = url;
-    }
-
-    function uploadImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        uploadedImg = new Image();
-        uploadedImg.onload = function() { redrawCanvas(); }
-        uploadedImg.src = event.target.result;
-      }
-      reader.readAsDataURL(file);
-    }
-
-    function redrawCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (uploadedImg) {
-        const ratio = Math.min(canvas.width / uploadedImg.width, canvas.height / uploadedImg.height);
-        const nw = uploadedImg.width * ratio;
-        const nh = uploadedImg.height * ratio;
-        ctx.drawImage(uploadedImg, (canvas.width - nw) / 2, (canvas.height - nh) / 2, nw, nh);
-      }
-    }
-
-    function setTool(tool) {
-      currentTool = tool;
-      document.getElementById('pen-btn').classList.toggle('active', tool === 'pen');
-      document.getElementById('high-btn').classList.toggle('active', tool === 'highlighter');
-      document.getElementById('text-btn').classList.toggle('active', tool === 'text');
-    }
-
-    function handlePointerStart(e) {
-      const pos = getPos(e);
-      if (currentTool === 'text') {
-        const text = document.getElementById('type-input').value;
-        if (text) {
-          ctx.font = 'bold 20px sans-serif';
-          ctx.fillStyle = document.getElementById('pen-color').value;
-          ctx.fillText(text, pos.x, pos.y);
-        } else {
-          alert('Please enter text in the box first!');
-        }
-      } else {
-        isDrawing = true;
-        ctx.beginPath();
-        ctx.moveTo(pos.x, pos.y);
-      }
-    }
-
-    function draw(e) {
-      if (!isDrawing || currentTool === 'text') return;
-      const pos = getPos(e);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.strokeStyle = document.getElementById('pen-color').value;
-      
-      if (currentTool === 'pen') {
-        ctx.globalAlpha = 1.0;
-        ctx.lineWidth = 3;
-      } else if (currentTool === 'highlighter') {
-        ctx.globalAlpha = 0.3;
-        ctx.lineWidth = 18;
-      }
-
-      ctx.lineCap = 'round';
-      ctx.stroke();
-    }
-
-    function stopDrawing() { isDrawing = false; }
-
-    function getPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
-    }
-
-    canvas.addEventListener('mousedown', handlePointerStart);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDrawing);
-
-    canvas.addEventListener('touchstart', handlePointerStart, {passive: true});
-    canvas.addEventListener('touchmove', draw, {passive: true});
-    canvas.addEventListener('touchend', stopDrawing);
-
-    function clearCanvas() {
-      uploadedImg = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function saveCanvasImage() {
-      const link = document.createElement('a');
-      link.download = 'anatomy-notes.png';
-      link.href = canvas.toDataURL();
-      link.click();
     }
 
     // Flashcards Data
     const flashcardsData = [
-      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)[cite: 1, 2]." },
-      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)[cite: 1, 2]." },
-      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues[cite: 1, 2]." },
-      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism[cite: 1, 2]." },
-      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts[cite: 1, 2]." },
-      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts[cite: 1, 2]." },
-      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts[cite: 1, 2]." },
-      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities[cite: 1, 2]." }
+      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)[cite: 1]." },
+      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)[cite: 1]." },
+      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues[cite: 1]." },
+      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism[cite: 1]." },
+      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts[cite: 1]." },
+      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts[cite: 1]." },
+      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts[cite: 1]." },
+      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities[cite: 1]." }
     ];
 
     let fcIndex = 0;
