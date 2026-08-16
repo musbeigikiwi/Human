@@ -3,123 +3,376 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anatomy & Physiology Study Portal</title>
+<title>Mustafa Beigi Mastery Deck - Wintec A&P</title>
 <style>
+  :root {
+    --bg-main: #0b132b;
+    --card-bg: #1c2541;
+    --card-hover: #232e52;
+    --accent-green: #10b981;
+    --accent-blue: #38bdf8;
+    --accent-orange: #f97316;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+  }
+
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f172a;
-    color: #f8fafc;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
   }
-  h1 {
-    color: #38bdf8;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  p {
-    color: #94a3b8;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+
+  .container {
     width: 100%;
-    max-width: 900px;
+    max-width: 1100px;
   }
-  .card {
-    background-color: #1e293b;
-    border: 2px solid #334155;
-    border-radius: 12px;
+
+  /* Live Ticker */
+  .ticker-wrap {
+    width: 100%;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--accent-green);
+    border-radius: 8px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+  }
+  .ticker-tag {
+    background: var(--accent-orange);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin-right: 12px;
+  }
+
+  /* Header Card */
+  .header-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
     padding: 25px;
-    text-align: center;
-    text-decoration: none;
-    color: #f8fafc;
-    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+  }
+
+  .clock-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
   }
-  .card:hover {
-    border-color: #38bdf8;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+  .analog-clock {
+    width: 65px;
+    height: 65px;
+    border: 3px solid var(--accent-blue);
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
   }
-  .card.disabled {
-    opacity: 0.5;
-    pointer-events: none;
-    border-color: #334155;
+  .clock-label {
+    font-size: 0.75rem;
+    color: var(--accent-green);
+    font-weight: bold;
   }
-  .card h2 {
-    color: #38bdf8;
-    margin-top: 0;
-    font-size: 1.3rem;
+
+  .header-center {
+    text-align: center;
   }
-  .card p {
-    font-size: 0.9rem;
-    color: #cbd5e1;
-    margin-bottom: 20px;
-  }
-  .badge {
-    align-self: center;
-    background-color: #0284c7;
-    color: white;
-    padding: 6px 16px;
+  .badge-wintec {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent-green);
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
+    display: inline-block;
+    margin-bottom: 8px;
   }
-  .badge.pending {
-    background-color: #475569;
+  .main-title {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 800;
+  }
+  .sub-title {
+    color: var(--accent-green);
+    font-weight: bold;
+    margin: 4px 0;
+  }
+  .course-code {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    background: #0f172a;
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 15px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-green);
+    transition: width 0.3s ease;
+  }
+
+  /* Navigation Tabs */
+  .nav-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .tab-btn {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 18px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: var(--accent-green);
+    color: #0b132b;
+  }
+  .tab-btn:hover:not(.active) {
+    background: var(--card-hover);
+  }
+
+  /* Main Grid Cards */
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .chapter-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+  }
+  .chapter-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-3px);
+  }
+  .ch-tag {
+    color: var(--accent-orange);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .ch-title {
+    font-size: 1.3rem;
+    margin: 8px 0;
+  }
+  .ch-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+  .action-btn {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .nav-tabs { grid-template-columns: repeat(2, 1fr); }
+    .chapters-grid { grid-template-columns: 1fr; }
+    .header-card { flex-direction: column; gap: 15px; }
   }
 </style>
 </head>
 <body>
 
-<h1>Anatomy & Physiology Course Hub</h1>
-<p>Select a chapter to start studying interactive flashcards</p>
+<div class="container">
 
-<div class="grid">
-  <a href="Flashcards_Ch1.html" class="card">
-    <div>
-      <h2>Chapter 1</h2>
-      <p>Introduction to Anatomy & Physiology, Body Systems & Lab Concepts</p>
-    </div>
-    <span class="badge">200 Cards</span>
-  </a>
+  <!-- Live Ticker -->
+  <div class="ticker-wrap">
+    <span class="ticker-tag">LIVE NEWS</span>
+    <span>Success is the sum of small efforts repeated daily. Keep pushing forward Stream C! 💡 Understanding the human body is the first step toward excellence.</span>
+  </div>
 
-  <a href="Flashcards_Ch2.html" class="card disabled">
-    <div>
-      <h2>Chapter 2</h2>
-      <p>The Chemical Level of Organization</p>
+  <!-- Header Section -->
+  <div class="header-card">
+    <div class="clock-container">
+      <canvas id="clock1" width="60" height="60"></canvas>
+      <span class="clock-label">NZ TIME</span>
     </div>
-    <span class="badge pending">Coming Soon</span>
-  </a>
 
-  <a href="Flashcards_Ch3.html" class="card disabled">
-    <div>
-      <h2>Chapter 3</h2>
-      <p>The Cellular Level of Organization</p>
+    <div class="header-center">
+      <span class="badge-wintec">🧪 WINTEC A&P REVISION</span>
+      <h1 class="main-title">Mustafa Beigi Mastery Deck</h1>
+      <div class="sub-title">Stream C - Te-ara-Puteka</div>
+      <div class="course-code">Course GEDU404B/2602 — Applied Structure & Function of the Human Body</div>
+      
+      <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 15px; color: var(--text-secondary);">
+        <span>Overall Progress</span>
+        <span>0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+      </div>
     </div>
-    <span class="badge pending">Coming Soon</span>
-  </a>
 
-  <a href="Flashcards_Ch4.html" class="card disabled">
-    <div>
-      <h2>Chapter 4</h2>
-      <p>The Tissue Level of Organization</p>
+    <div class="clock-container">
+      <canvas id="clock2" width="60" height="60"></canvas>
+      <span class="clock-label">NZ TIME</span>
     </div>
-    <span class="badge pending">Coming Soon</span>
-  </a>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active">🚀 Dashboard</button>
+    <button class="tab-btn">📝 MCQs Quiz</button>
+    <button class="tab-btn" onclick="location.href='Flashcards_Ch1.html'">⚡ Flashcards</button>
+    <button class="tab-btn">📚 Short Notes</button>
+  </div>
+
+  <!-- Chapters Grid -->
+  <div class="chapters-grid">
+    
+    <div class="chapter-card">
+      <div>
+        <span class="ch-tag">Chapter 01</span>
+        <h3 class="ch-title">Anatomy & Physiology</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Introduction to Anatomy & Physiology, Body Systems & Lab Concepts</p>
+      </div>
+      <div class="ch-footer">
+        <span>200 Questions / Cards</span>
+        <a href="Flashcards_Ch1.html" class="action-btn">Tap to Start →</a>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div>
+        <span class="ch-tag">Chapter 02</span>
+        <h3 class="ch-title">Chemistry</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">The Chemical Level of Organization & Biochemistry</p>
+      </div>
+      <div class="ch-footer">
+        <span>Coming Soon</span>
+        <span class="action-btn" style="opacity: 0.5;">Tap to Start →</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div>
+        <span class="ch-tag">Chapter 03</span>
+        <h3 class="ch-title">Cells & Microscopes</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Cellular Structure, Organelles & Light Microscopy</p>
+      </div>
+      <div class="ch-footer">
+        <span>Coming Soon</span>
+        <span class="action-btn" style="opacity: 0.5;">Tap to Start →</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div>
+        <span class="ch-tag">Chapter 04</span>
+        <h3 class="ch-title">Cell Transport</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Diffusion, Osmosis, Active Transport & Plasma Membrane</p>
+      </div>
+      <div class="ch-footer">
+        <span>Coming Soon</span>
+        <span class="action-btn" style="opacity: 0.5;">Tap to Start →</span>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+
+<script>
+// Analog Clocks JS
+function drawClock(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const radius = canvas.height / 2;
+  ctx.translate(radius, radius);
+
+  setInterval(() => {
+    ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
+    
+    // Draw Face
+    ctx.beginPath();
+    ctx.arc(0, 0, radius - 2, 0, 2 * Math.PI);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Time calculations (NZ Time)
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // Hour hand
+    let hourPos = (hours % 12 + minutes / 60) * (Math.PI / 6);
+    drawHand(ctx, hourPos, radius * 0.5, 3, '#0b132b');
+
+    // Minute hand
+    let minutePos = (minutes + seconds / 60) * (Math.PI / 30);
+    drawHand(ctx, minutePos, radius * 0.7, 2, '#0b132b');
+
+    // Second hand
+    let secondPos = seconds * (Math.PI / 30);
+    drawHand(ctx, secondPos, radius * 0.85, 1, '#10b981');
+  }, 1000);
+}
+
+function drawHand(ctx, pos, length, width, color) {
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = color;
+  ctx.moveTo(0,0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.stroke();
+  ctx.rotate(-pos);
+}
+
+drawClock('clock1');
+drawClock('clock2');
+</script>
 
 </body>
 </html>
