@@ -14,7 +14,6 @@
       --accent-teal: #10b981;
       --accent-glow: #34d399;
       --accent-orange: #f97316;
-      --accent-red: #ef4444;
     }
 
     * { box-sizing: border-box; }
@@ -156,7 +155,7 @@
     .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
     .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
-    /* Navigation Hub */
+    /* Navigation Hub (5-Column Layout Fixed) */
     .tab-navigation {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -170,7 +169,7 @@
     }
 
     .nav-card-btn {
-      padding: 14px 10px;
+      padding: 14px 8px;
       font-weight: 700;
       border-radius: 16px;
       border: 1px solid var(--card-border);
@@ -260,7 +259,7 @@
 
     .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
-    /* High-Precision Grid Calendar Styles */
+    /* Calendar Grid */
     .calendar-container {
       background: var(--card-bg);
       border-radius: 20px;
@@ -270,7 +269,7 @@
     }
 
     .calendar-month-header {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--accent-glow);
       margin: 20px 0 12px 0;
@@ -284,7 +283,7 @@
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
+      gap: 6px;
       text-align: center;
     }
 
@@ -301,40 +300,34 @@
     .day-cell {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
-      min-height: 70px;
-      padding: 6px;
+      border-radius: 8px;
+      min-height: 65px;
+      padding: 4px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
-      font-size: 12px;
-      position: relative;
+      font-size: 11px;
     }
 
     .day-cell.empty { background: transparent; border: none; }
-
-    .day-number {
-      font-weight: 800;
-      color: #ffffff;
-      font-size: 13px;
-    }
+    .day-number { font-weight: 800; color: #ffffff; font-size: 12px; }
 
     .event-tag {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 3px 6px;
-      border-radius: 6px;
+      padding: 2px 4px;
+      border-radius: 4px;
       width: 100%;
       text-align: left;
       line-height: 1.2;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
-    .event-test { background: rgba(239, 68, 68, 0.85); color: #ffffff; border: 1px solid #f87171; box-shadow: 0 2px 8px rgba(239,68,68,0.4); }
-    .event-project { background: rgba(249, 115, 22, 0.8); color: #ffffff; }
-    .event-teams { background: rgba(37, 99, 235, 0.8); color: #ffffff; }
-    .event-general { background: rgba(16, 185, 129, 0.25); color: var(--accent-glow); border: 1px solid rgba(16, 185, 129, 0.4); }
+    .event-test { background: rgba(239, 68, 68, 0.9); color: #ffffff; border: 1px solid #f87171; }
+    .event-project { background: rgba(249, 115, 22, 0.85); color: #ffffff; }
+    .event-teams { background: rgba(37, 99, 235, 0.85); color: #ffffff; }
+    .event-general { background: rgba(16, 185, 129, 0.25); color: var(--accent-glow); }
 
     .contact-footer {
       background: var(--card-bg);
@@ -372,7 +365,7 @@
 
   <div class="container">
     
-    <!-- Smooth Live News Ticker -->
+    <!-- Live News Ticker -->
     <div class="news-ticker-container">
       <span class="news-badge">LIVE NEWS</span>
       <div class="ticker-wrapper">
@@ -434,7 +427,7 @@
       </div>
     </div>
 
-    <!-- Navigation Hub -->
+    <!-- Navigation Hub (Fixed 5 Buttons) -->
     <div class="tab-navigation">
       <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
         <span style="font-size: 16px;">🚀</span>
@@ -508,11 +501,11 @@
       </div>
     </div>
 
-    <!-- Organized Calendar Tab -->
+    <!-- Calendar Tab -->
     <div id="timetable-tab" class="tab-content">
       <div class="calendar-container">
         <h2 style="color:var(--accent-glow); margin-top:0;">📅 2026 Academic Assessment Calendar</h2>
-        <p style="color: var(--text-muted); font-size: 13.5px;">Wintec Semester 2 — <strong>Stream C (Te-ara-Puteka)</strong> Schedule</p>
+        <p style="color: var(--text-muted); font-size: 13.5px;">Wintec Semester 2 — <strong>Stream C (Te-ara-Puteka)</strong> Schedule[cite: 1]</p>
 
         <!-- AUGUST 2026 -->
         <div class="calendar-month-header">
@@ -527,7 +520,7 @@
           <div class="day-cell"><span class="day-number">2</span></div>
           <div class="day-cell"><span class="day-number">3</span><div class="event-tag event-project">Week 3 Start</div></div>
           <div class="day-cell"><span class="day-number">4</span></div><div class="day-cell"><span class="day-number">5</span></div><div class="day-cell"><span class="day-number">6</span></div><div class="day-cell"><span class="day-number">7</span></div>
-          <div class="day-cell"><span class="day-number">8</span><div class="event-tag event-project">Mini-Project 1 Due</div></div>
+          <div class="day-cell"><span class="day-number">8</span><div class="event-tag event-project">Mini-Project 1</div></div>
           <div class="day-cell"><span class="day-number">9</span></div>
           <div class="day-cell"><span class="day-number">10</span><div class="event-tag event-general">Week 4</div></div>
           <div class="day-cell"><span class="day-number">11</span></div><div class="day-cell"><span class="day-number">12</span></div><div class="day-cell"><span class="day-number">13</span></div><div class="day-cell"><span class="day-number">14</span></div><div class="day-cell"><span class="day-number">15</span></div><div class="day-cell"><span class="day-number">16</span></div>
@@ -537,7 +530,7 @@
           <div class="day-cell"><span class="day-number">22</span></div><div class="day-cell"><span class="day-number">23</span></div>
           <div class="day-cell"><span class="day-number">24</span><div class="event-tag event-project">Week 6</div></div>
           <div class="day-cell"><span class="day-number">25</span></div><div class="day-cell"><span class="day-number">26</span></div>
-          <div class="day-cell" style="background: rgba(239, 68, 68, 0.15); border-color: #f87171;">
+          <div class="day-cell" style="background: rgba(239, 68, 68, 0.2); border-color: #f87171;">
             <span class="day-number" style="color:#f87171;">27</span>
             <div class="event-tag event-test">🔥 Science Test 1 (Stream B & C)</div>
           </div>
@@ -555,7 +548,7 @@
           <div class="day-name">Sun</div><div class="day-name">Mon</div><div class="day-name">Tue</div><div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div>
           
           <div class="day-cell empty"></div><div class="day-cell empty"></div>
-          <div class="day-cell"><span class="day-number">1</span></div><div class="day-cell"><span class="day-number">2</span></div><div class="day-cell"><span class="day-number">3</span></div><div class="day-cell"><span class="day-number">4</span><div class="event-tag event-teams">TEAMS Presentation 1</div></div>
+          <div class="day-cell"><span class="day-number">1</span></div><div class="day-cell"><span class="day-number">2</span></div><div class="day-cell"><span class="day-number">3</span></div><div class="day-cell"><span class="day-number">4</span><div class="event-tag event-teams">TEAMS Pres 1</div></div>
           <div class="day-cell"><span class="day-number">5</span><div class="event-tag event-project">Writing Essay 1</div></div>
           <div class="day-cell"><span class="day-number">6</span></div>
           <div class="day-cell"><span class="day-number">7</span><div class="event-tag event-general">Week 8</div></div>
@@ -566,7 +559,7 @@
           <div class="day-cell"><span class="day-number">19</span></div><div class="day-cell"><span class="day-number">20</span></div>
           <div class="day-cell"><span class="day-number">21</span><div class="event-tag event-general">Week 10</div></div>
           <div class="day-cell"><span class="day-number">22</span></div><div class="day-cell"><span class="day-number">23</span></div>
-          <div class="day-cell" style="background: rgba(239, 68, 68, 0.15); border-color: #f87171;">
+          <div class="day-cell" style="background: rgba(239, 68, 68, 0.2); border-color: #f87171;">
             <span class="day-number" style="color:#f87171;">24</span>
             <div class="event-tag event-test">🔥 Science Test 2 (Stream B & C)</div>
           </div>
@@ -585,17 +578,17 @@
 
           <div class="day-cell"><span class="day-number">1</span></div>
           <div class="day-cell"><span class="day-number">2</span><div class="event-tag event-general">Week 14</div></div>
-          <div class="day-cell"><span class="day-number">3</span></div><div class="day-cell"><span class="day-number">4</span></div><div class="day-cell"><span class="day-number">5</span></div><div class="day-cell"><span class="day-number">6</span></div><div class="day-cell"><span class="day-number">7</span><div class="event-tag event-project">Writing Essay 2</div></div>
+          <div class="day-cell"><span class="day-number">3</span></div><div class="day-cell"><span class="day-number">4</span></div><div class="day-cell"><span class="day-number">5</span></div><div class="day-cell"><span class="day-number">6</span></div><div class="day-cell"><span class="day-number">7</span><div class="event-tag event-project">Essay 2</div></div>
           <div class="day-cell"><span class="day-number">8</span></div>
           <div class="day-cell"><span class="day-number">9</span><div class="event-tag event-general">Week 15</div></div>
           <div class="day-cell"><span class="day-number">10</span></div><div class="day-cell"><span class="day-number">11</span></div><div class="day-cell"><span class="day-number">12</span></div><div class="day-cell"><span class="day-number">13</span></div><div class="day-cell"><span class="day-number">14</span></div><div class="day-cell"><span class="day-number">15</span></div>
           <div class="day-cell"><span class="day-number">16</span><div class="event-tag event-general">Week 16</div></div>
           <div class="day-cell"><span class="day-number">17</span></div><div class="day-cell"><span class="day-number">18</span></div>
-          <div class="day-cell" style="background: rgba(239, 68, 68, 0.2); border-color: #f87171;">
+          <div class="day-cell" style="background: rgba(239, 68, 68, 0.25); border-color: #f87171;">
             <span class="day-number" style="color:#f87171;">19</span>
             <div class="event-tag event-test">🔥 Science Test 3 (Final)</div>
           </div>
-          <div class="day-cell"><span class="day-number">20</span><div class="event-tag event-teams">Hauora A.3 Due</div></div>
+          <div class="day-cell"><span class="day-number">20</span><div class="event-tag event-teams">Hauora A.3</div></div>
           <div class="day-cell"><span class="day-number">21</span></div><div class="day-cell"><span class="day-number">22</span></div>
         </div>
 
