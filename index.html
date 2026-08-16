@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anatomy Flashcards — Active Recall Deck</title>
+  <title>Mustafa MCQs — Anatomy & Physiology</title>
   <style>
     :root {
       --bg-color: #f2f5f3;
@@ -25,207 +25,291 @@
       padding: 40px 20px;
     }
 
-    .container { max-width: 650px; margin: 0 auto; }
+    .container { max-width: 850px; margin: 0 auto; }
 
     .header-card {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 24px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    h1 { font-size: 28px; margin: 0 0 8px 0; font-family: Georgia, serif; color: #1a202c; }
-    .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; }
-
-    .chapter-select {
-      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;
-    }
-
-    .chip-btn {
-      padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border-color);
-      background: white; color: var(--text-muted); font-weight: 600; font-size: 13px; cursor: pointer;
-    }
-
-    .chip-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
-
-    /* Flashcard Flip Mechanics */
-    .flashcard-container {
-      perspective: 1000px;
-      height: 320px;
-      margin-bottom: 24px;
-    }
-
-    .flashcard {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
-      cursor: pointer;
-    }
-
-    .flashcard.flipped { transform: rotateY(180deg); }
-
-    .card-face {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 16px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
       padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
     }
 
-    .card-back { transform: rotateY(180deg); background: #fdfbf7; border-color: #ebdcb9; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .badge-tag { font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
-    .card-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 12px; }
-    .card-text { font-size: 20px; font-weight: 600; color: var(--text-main); line-height: 1.4; }
-    .card-subtext { font-size: 14px; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+    .sound-btn {
+      background: #edf2f7;
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
 
-    .controls { display: flex; gap: 12px; }
+    .sound-btn.playing { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+
+    h1 { font-size: 36px; margin: 5px 0 8px 0; font-family: Georgia, serif; color: #1a202c; }
+    .course-title { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+    .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+    .progress-bar-bg { background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden; }
+    .progress-bar-fill { background: var(--accent-green); height: 100%; width: 0%; transition: width 0.4s ease; }
+
+    .tab-navigation { display: flex; gap: 12px; margin-bottom: 24px; }
+    .tab-btn {
+      flex: 1; padding: 12px; font-weight: 700; border-radius: 10px;
+      border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-muted); cursor: pointer; text-align: center; text-decoration: none;
+    }
+    .tab-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+    .tab-btn.nav-link-btn { background: #fdfbf7; border-color: #ebdcb9; color: var(--accent-orange); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
+
+    .topic-card {
+      background: var(--card-bg); border-radius: 12px; padding: 20px;
+      border: 1px solid var(--border-color); cursor: pointer;
+    }
+    .topic-card:hover { border-color: var(--accent-green); }
+    .topic-tag { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 16px 0; color: #1a202c; }
+    .topic-stats { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
+
+    .quiz-card { background: var(--card-bg); border-radius: 16px; padding: 30px; border: 1px solid var(--border-color); margin-bottom: 24px; }
+    .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+    .option-btn {
+      width: 100%; text-align: left; padding: 16px; margin-top: 12px;
+      border: 1px solid var(--border-color); border-radius: 10px; background: white; cursor: pointer; font-size: 16px;
+    }
+    .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+    .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+    .nav-controls { display: flex; gap: 12px; margin-top: 24px; }
+    .action-stack { display: flex; flex-direction: column; gap: 12px; }
+
     .btn {
-      flex: 1; padding: 14px; border-radius: 10px; border: 1px solid var(--border-color);
-      background: white; font-weight: 700; cursor: pointer; font-size: 15px; text-align: center;
+      padding: 14px 20px; border-radius: 10px; border: 1px solid var(--border-color);
+      background: white; color: var(--text-main); font-weight: 600; cursor: pointer; font-size: 15px; text-align: center;
     }
+    .btn-primary { background: var(--accent-green); color: white; border: none; }
 
-    .btn-know { background: #d1fae5; color: #065f46; border-color: #10b981; }
-    .btn-review { background: #fee2e2; color: #991b1b; border-color: #ef4444; }
-
-    .progress-footer { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 16px; }
-    .nav-link { display: inline-block; margin-top: 20px; color: var(--accent-green); text-decoration: none; font-weight: 700; }
+    .footer-text { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 32px; }
   </style>
 </head>
 <body>
 
+  <audio id="bg-audio" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <div class="header-card">
-      <h1>⚡ Active Recall Flashcards</h1>
-      <div class="subtitle">Tap the card to reveal answer • Test your memory</div>
-      
-      <div class="chapter-select">
-        <button class="chip-btn active" onclick="loadDeck(1, this)">Ch 1: Anatomy</button>
-        <button class="chip-btn" onclick="loadDeck(2, this)">Ch 2: Chemistry</button>
-        <button class="chip-btn" onclick="loadDeck(3, this)">Ch 3: Cells</button>
-        <button class="chip-btn" onclick="loadDeck(4, this)">Ch 4: Transport</button>
+      <div class="header-top">
+        <span class="badge-tag">MUSTAFA'S REVISION DECK</span>
+        <button class="sound-btn" id="sound-btn" onclick="toggleAudio()">🎵 Interstellar: OFF</button>
+      </div>
+      <h1>Mustafa MCQs</h1>
+      <div class="course-title">Course <strong>GEDU404B/2602</strong> — Applied Structure & Function of the Human Body</div>
+
+      <div class="mastery-header">
+        <span>Overall MCQs mastery</span>
+        <span id="mastery-percent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="mastery-bar"></div>
       </div>
     </div>
 
-    <div class="flashcard-container">
-      <div class="flashcard" id="card" onclick="flipCard()">
-        <div class="card-face card-front">
-          <div class="card-label" id="card-term-category">CHAPTER 1</div>
-          <div class="card-text" id="card-question">Loading card...</div>
-          <div class="card-subtext">Click to Flip 🔄</div>
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="switchTab('topics-tab', this)">Dashboard</button>
+      <button class="tab-btn" onclick="switchTab('quiz-tab', this)">📝 Practice Questions (MCQs)</button>
+      <a href="flashcards.html" class="tab-btn nav-link-btn">⚡ Flashcards</a>
+      <a href="notes.html" class="tab-btn nav-link-btn">📚 Short Notes</a>
+    </div>
+
+    <div id="topics-tab" class="tab-content active">
+      <div class="topics-grid">
+        <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
+          <div class="topic-tag">CHAPTER 01</div>
+          <div class="topic-name">Anatomy & Physiology</div>
+          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 1</span></div>
         </div>
-        <div class="card-face card-back">
-          <div class="card-label">CORRECT ANSWER & CONCEPT</div>
-          <div class="card-text" id="card-answer">...</div>
-          <div class="card-subtext" id="card-dari">...</div>
+        <div class="topic-card" onclick="loadChapter('chapter2_mcqs.json')">
+          <div class="topic-tag">CHAPTER 02</div>
+          <div class="topic-name">Chemistry</div>
+          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 2</span></div>
+        </div>
+        <div class="topic-card" onclick="loadChapter('chapter3_mcqs.json')">
+          <div class="topic-tag">CHAPTER 03</div>
+          <div class="topic-name">Cells & Microscopes</div>
+          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 3</span></div>
+        </div>
+        <div class="topic-card" onclick="loadChapter('chapter4_mcqs.json')">
+          <div class="topic-tag">CHAPTER 04</div>
+          <div class="topic-name">Cell Transport</div>
+          <div class="topic-stats"><span>75 MCQs</span><span>Chapter 4</span></div>
+        </div>
+      </div>
+
+      <div class="action-stack">
+        <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">Start Chapter 1 Questions</button>
+        <button class="btn" onclick="resetProgress()" style="color: #ef4444;">Reset MCQ Progress</button>
+      </div>
+    </div>
+
+    <div id="quiz-tab" class="tab-content">
+      <div class="quiz-card">
+        <div class="quiz-meta">
+          <span style="color: var(--accent-orange); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
+          <span>⏱️ <span id="timer-display">01:00</span></span>
+        </div>
+
+        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px;">Select a chapter to start...</h2>
+
+        <div id="options-container"></div>
+
+        <div class="nav-controls">
+          <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
+          <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
         </div>
       </div>
     </div>
 
-    <div class="controls">
-      <button class="btn btn-review" onclick="markCard(false)">❌ Needs Review</button>
-      <button class="btn btn-know" onclick="markCard(true)">✅ Mastered</button>
-    </div>
-
-    <div class="progress-footer">
-      Card <span id="current-idx">1</span> of <span id="total-cards">0</span> • Mastered: <span id="mastered-count">0</span>
-    </div>
-
-    <div style="text-align: center;">
-      <a href="index.html" class="nav-link">⬅ Back to Main Dashboard</a>
-    </div>
+    <div class="footer-text">Built for personal study • Ged U404B Revision</div>
   </div>
 
   <script>
-    const decks = {
-      1: [
-        { q: "What is Anatomy vs Physiology?", a: "Anatomy = Study of Structure; Physiology = Study of Function.", dari: "آناتومی = ساختار؛ فیزیولوژی = عملکرد." },
-        { q: "Which tissue covers body surfaces and lines cavities?", a: "Epithelial Tissue.", dari: "بافت اپی‌تلیال سطوح را می‌پوشاند." },
-        { q: "Directional Term: Proximal vs Distal?", a: "Proximal = Closer to trunk/attachment; Distal = Farther from trunk/attachment.", dari: "Proximal نزدیک‌تر به تنه؛ Distal دورتر از تنه." },
-        { q: "What divides the body into Left and Right halves?", a: "Sagittal Plane (Midsagittal = Equal halves).", dari: "صفحه ساژیتال (Midsagittal = دو نیمه برابر چپ و راست)." },
-        { q: "Which structure separates Thoracic and Abdominopelvic cavities?", a: "The Diaphragm.", dari: "دیافراگم مرز بین حفره سینه و شکمی‌ـ‌لگنی است." }
-      ],
-      2: [
-        { q: "What subatomic particle has a positive charge?", a: "Proton (found in nucleus).", dari: "پروتون بار مثبت دارد و در هسته است." },
-        { q: "Define Cation vs Anion.", a: "Cation = Positively charged (loses e⁻); Anion = Negatively charged (gains e⁻).", dari: "کاتیون = مثبت (از دست دادن الکترون)؛ آنیون = منفی (گرفتن الکترون)." },
-        { q: "What is the normal blood pH range?", a: "7.35 – 7.45 (Slightly alkaline).", dari: "pH طبیعی خون ۷.۳۵ تا ۷.۴۵ (کمی قلیایی)." },
-        { q: "What is the primary cellular fuel used to make ATP?", a: "Glucose (Monosaccharide).", dari: "گلوکوز سوخت اصلی سلول برای تولید ATP است." },
-        { q: "What happens when a protein denatures?", a: "It loses its 3D shape and functional capacity due to heat or extreme pH.", dari: "تغییر شکل و از دست دادن عملکرد پروتئین بر اثر گرما یا اسید." }
-      ],
-      3: [
-        { q: "Which organelle is responsible for ATP energy production?", a: "Mitochondria.", dari: "میتوکندری مرکز تولید انرژی ATP است." },
-        { q: "What is the function of Lysosomes?", a: "Contains digestive enzymes to break down bacteria and cellular debris.", dari: "لیزوزوم دارای آنزیم‌های هاضمه برای تجزیه باکتری و فضولات است." },
-        { q: "Which blood cell lacks a nucleus at maturity?", a: "Erythrocyte (Red Blood Cell).", dari: "گلبول قرمز بالغ هسته ندارد." },
-        { q: "State the end result of Mitosis.", a: "2 genetically identical daughter cells, each with 46 chromosomes.", dari: "دو سلول دختر یکسان با ۴۶ کروموزوم." },
-        { q: "Safe microscope sequence: Which objective uses Coarse Focus?", a: "4x Scanning Objective ONLY.", dari: "پیچ فوکوس درشت فقط در عدسی ۴x استفاده می‌شود." }
-      ],
-      4: [
-        { q: "Does Passive Transport require ATP?", a: "No, it moves down concentration gradient (High → Low) without energy.", dari: "خیر، بدون مصرف ATP و از غلظت زیاد به کم است." },
-        { q: "How do Oxygen and Carbon Dioxide cross cell membranes?", a: "Simple Diffusion (directly through lipid bilayer).", dari: "انتشار ساده (مستقیم از دولایه چربی)." },
-        { q: "What is Osmosis?", a: "Passive net movement of water across a semi-permeable membrane towards higher solute.", dari: "حرکت غیرفعال آب به سمت ماده حل‌شده بیشتر." },
-        { q: "What happens to a cell in a Hypertonic solution?", a: "It loses water and shrinks (crenates).", dari: "آب از سلول خارج شده و سلول جمع می‌شود." },
-        { q: "Difference between Pinocytosis and Phagocytosis?", a: "Pinocytosis = Cellular Drinking (liquids); Phagocytosis = Cellular Eating (solids/bacteria).", dari: "پینوسیتوز = نوشیدن مایعات؛ فاگوسیتوز = بلع ذرات جامد." }
-      ]
-    };
+    const audio = document.getElementById('bg-audio');
+    let audioPlaying = false;
 
-    let currentDeck = decks[1];
-    let currentIndex = 0;
-    let masteredCount = 0;
-
-    function loadDeck(chapterNum, btn) {
-      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
-      if(btn) btn.classList.add('active');
-      currentDeck = decks[chapterNum];
-      currentIndex = 0;
-      masteredCount = 0;
-      document.getElementById('card-term-category').innerText = "CHAPTER 0" + chapterNum;
-      showCard();
-    }
-
-    function showCard() {
-      const cardEl = document.getElementById('card');
-      cardEl.classList.remove('flipped');
-      setTimeout(() => {
-        const item = currentDeck[currentIndex];
-        document.getElementById('card-question').innerText = item.q;
-        document.getElementById('card-answer').innerText = item.a;
-        document.getElementById('card-dari').innerText = item.dari;
-        document.getElementById('current-idx').innerText = currentIndex + 1;
-        document.getElementById('total-cards').innerText = currentDeck.length;
-        document.getElementById('mastered-count').innerText = masteredCount;
-      }, 150);
-    }
-
-    function flipCard() {
-      document.getElementById('card').classList.toggle('flipped');
-    }
-
-    function markCard(know) {
-      if (know) masteredCount++;
-      if (currentIndex < currentDeck.length - 1) {
-        currentIndex++;
-        showCard();
+    function toggleAudio() {
+      const btn = document.getElementById('sound-btn');
+      if (audioPlaying) {
+        audio.pause();
+        audioPlaying = false;
+        btn.innerText = "🎵 Interstellar: OFF";
+        btn.classList.remove('playing');
       } else {
-        alert(`Deck Finished! You mastered ${masteredCount} out of ${currentDeck.length} concepts.`);
-        currentIndex = 0;
-        masteredCount = 0;
-        showCard();
+        audio.volume = 0.5;
+        audio.play().then(() => {
+          audioPlaying = true;
+          btn.innerText = "🔊 Interstellar: ON";
+          btn.classList.add('playing');
+        }).catch(() => alert("Tap anywhere first, then turn audio ON."));
       }
     }
 
-    loadDeck(1, null);
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => { if(!b.classList.contains('nav-link-btn')) b.classList.remove('active'); });
+      document.getElementById(tabId).classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
+
+    let activeDeck = [];
+    let currentIndex = 0;
+    let currentChapterFile = '';
+    let userAnswers = JSON.parse(localStorage.getItem('mustafa_user_answers') || '{}');
+    let timer;
+    let timeLeft = 60;
+
+    function loadChapter(fileName) {
+      currentChapterFile = fileName;
+      fetch(fileName)
+        .then(res => res.json())
+        .then(data => {
+          activeDeck = data;
+          currentIndex = 0;
+          switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
+          loadQuestion();
+          updateMastery();
+        });
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timeLeft = 60;
+      timer = setInterval(() => {
+        timeLeft--;
+        const min = Math.floor(timeLeft / 60);
+        const sec = timeLeft % 60;
+        document.getElementById('timer-display').innerText = 
+          `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        if (timeLeft <= 0) clearInterval(timer);
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      if (activeDeck.length === 0) return;
+      startTimer();
+      const q = activeDeck[currentIndex];
+      const qKey = currentChapterFile + "_" + currentIndex;
+
+      document.getElementById('q-num').innerText = currentIndex + 1;
+      document.getElementById('q-total').innerText = activeDeck.length;
+      document.getElementById('question-text').innerText = q.question;
+
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+      const isAnswered = userAnswers.hasOwnProperty(qKey);
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = String.fromCharCode(65 + idx) + ". " + opt;
+
+        if (isAnswered) {
+          if (idx === q.correct) btn.classList.add('correct');
+          if (userAnswers[qKey] === idx && idx !== q.correct) btn.classList.add('wrong');
+        } else {
+          btn.onclick = () => selectAnswer(qKey, idx);
+        }
+        container.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(qKey, selectedIdx) {
+      clearInterval(timer);
+      userAnswers[qKey] = selectedIdx;
+      localStorage.setItem('mustafa_user_answers', JSON.stringify(userAnswers));
+      loadQuestion();
+      updateMastery();
+    }
+
+    function updateMastery() {
+      const answeredKeys = Object.keys(userAnswers);
+      const totalQuestions = 300; 
+      const percent = Math.round((answeredKeys.length / totalQuestions) * 100);
+      document.getElementById('mastery-percent').innerText = percent + "%";
+      document.getElementById('mastery-bar').style.width = percent + "%";
+    }
+
+    function nextQuestion() {
+      if (currentIndex < activeDeck.length - 1) { currentIndex++; loadQuestion(); }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) { currentIndex--; loadQuestion(); }
+    }
+
+    function resetProgress() {
+      if (confirm("Reset MCQ progress?")) {
+        userAnswers = {};
+        localStorage.removeItem('mustafa_user_answers');
+        updateMastery();
+        location.reload();
+      }
+    }
+
+    loadChapter('chapter1_mcqs.json');
   </script>
 </body>
 </html>
