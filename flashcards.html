@@ -1,66 +1,120 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فلش کارت‌های آناتومی، فیزیولوژی و زیست سلولی</title>
+  <title>A&P Interactive Flashcards Hub</title>
   <style>
     :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --bg: #f8f9fa;
-      --card-bg: #ffffff;
-      --text: #333333;
+      --primary-dark: #0f172a;
+      --accent: #6366f1;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --text-main: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 20px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
     }
 
     h1 {
-      color: var(--primary);
-      margin-bottom: 10px;
-      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
     }
 
-    .controls-top {
-      margin-bottom: 20px;
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    .top-bar {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 650px;
     }
 
     select, button {
-      padding: 10px 16px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: var(--card-bg);
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
     }
 
-    button:hover {
-      background-color: var(--secondary);
-      color: white;
-      border-color: var(--secondary);
+    select {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    select:hover {
+      border-color: var(--accent);
+    }
+
+    .btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-dashboard {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-dashboard:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
     }
 
     .card-container {
       width: 100%;
       max-width: 650px;
-      height: 350px;
-      perspective: 1000px;
-      margin-bottom: 20px;
+      height: 380px;
+      perspective: 1200px;
+      margin-bottom: 25px;
     }
 
     .card {
@@ -68,105 +122,134 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .card.flipped {
       transform: rotateY(180deg);
     }
 
-    .card-front, .card-back {
+    .card-face {
       position: absolute;
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
-      border-radius: 16px;
-      padding: 30px;
-      box-sizing: border-box;
+      border-radius: 24px;
+      padding: 40px 30px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       text-align: center;
-      background-color: var(--card-bg);
+      transition: background 0.5s ease;
     }
 
     .card-front {
-      border: 2px solid #e0e0e0;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .card-back {
       transform: rotateY(180deg);
-      background-color: #eef7fe;
-      border: 2px solid var(--secondary);
+      background: #0f172a !important;
+      color: #38bdf8;
+      border: 2px solid #38bdf8;
     }
 
-    .card-label {
-      font-size: 14px;
-      font-weight: bold;
-      color: var(--secondary);
+    .card-badge {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 15px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
     }
 
     .card-text {
-      font-size: 20px;
+      font-size: 1.35rem;
+      font-weight: 600;
       line-height: 1.5;
-      direction: ltr;
-      unicode-bidi: embed;
+      margin: auto 0;
     }
 
-    .nav-controls {
+    .card-hint {
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+
+    .bottom-nav {
       display: flex;
-      gap: 15px;
+      gap: 20px;
       align-items: center;
     }
 
-    .progress {
-      font-size: 16px;
-      font-weight: bold;
-      color: var(--primary);
+    .progress-pill {
+      background: #1e293b;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #94a3b8;
+      border: 1px solid #334155;
     }
   </style>
 </head>
 <body>
 
-  <h1>فلش کارت‌های آموزشی (A&P)</h1>
+  <header>
+    <h1>A&P Mastery Flashcards</h1>
+    <p class="subtitle">Press Space to flip | Use Arrow keys to navigate</p>
+  </header>
 
-  <div class="controls-top">
+  <div class="top-bar">
+    <button class="btn btn-dashboard" onclick="resetToDashboard()">🏠 Back To Dashboard</button>
     <select id="chapterSelect" onchange="changeChapter()">
-      <option value="all">همه کارت‌ها (۴۵۰ فلش کارت)</option>
-      <option value="ch1">فصل ۱: مقدمه‌ای بر آناتومی و فیزیولوژی (۱ تا ۱۵۰)</option>
-      <option value="ch2">فصل ۲: شیمی پایه و آزمایشگاه شیمی (۱۵۱ تا ۳۰۰)</option>
-      <option value="ch3">فصل ۳: سلول‌ها و آزمایشگاه (۳۰۱ تا ۴۵۰)</option>
-      <option value="ch4">فصل ۴: انتقال سلولی (۴۵۱ تا ۶۰۰ / بخش ۴)</option>
+      <option value="all">All Chapters (450 Cards)</option>
+      <option value="ch1">Chapter 1: Intro to A&P (Cards 1–150)</option>
+      <option value="ch2">Chapter 2: Chemistry & Lab (Cards 151–300)</option>
+      <option value="ch3">Chapter 3: Cell Biology (Cards 301–450)</option>
+      <option value="ch4">Chapter 4: Cell Transport (Cards 451–600)</option>
     </select>
-    <button onclick="shuffleCards()">🎲 تصادفی</button>
+    <button class="btn" onclick="shuffleCards()">🎲 Shuffle</button>
   </div>
 
   <div class="card-container" onclick="flipCard()">
     <div class="card" id="flashcard">
-      <div class="card-front">
-        <div class="card-label">Question / سوال</div>
-        <div class="card-text" id="questionText">در حال بارگذاری...</div>
+      <div class="card-face card-front" id="cardFront">
+        <span class="card-badge">QUESTION</span>
+        <div class="card-text" id="questionText">Loading...</div>
+        <span class="card-hint">Click or press Space to reveal answer 🔄</span>
       </div>
-      <div class="card-back">
-        <div class="card-label">Answer / پاسخ</div>
-        <div class="card-text" id="answerText">در حال بارگذاری...</div>
+      <div class="card-face card-back">
+        <span class="card-badge" style="background: rgba(56, 189, 248, 0.15);">ANSWER</span>
+        <div class="card-text" id="answerText">Loading...</div>
+        <span class="card-hint">Click to flip back 🔄</span>
       </div>
     </div>
   </div>
 
-  <div class="nav-controls">
-    <button onclick="prevCard()">قبلی</button>
-    <span class="progress" id="progressText">1 / 450</span>
-    <button onclick="nextCard()">بعدی</button>
+  <div class="bottom-nav">
+    <button class="btn" onclick="prevCard()">◀ Previous</button>
+    <div class="progress-pill" id="progressText">1 / 450</div>
+    <button class="btn" onclick="nextCard()">Next ▶</button>
   </div>
 
   <script>
+    // Colorful background gradients for vibrant visual feedback
+    const cardGradients = [
+      "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+      "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)",
+      "linear-gradient(135deg, #0d9488 0%, #0284c7 100%)",
+      "linear-gradient(135deg, #d97706 0%, #dc2626 100%)",
+      "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)",
+      "linear-gradient(135deg, #059669 0%, #0d9488 100%)"
+    ];
+
     const rawData = [
       // Chapter 1
       { q: "What is anatomy?", a: "The study of the structure, shape, and position of the body and its parts.", ch: "ch1" },
@@ -234,91 +317,6 @@
       { q: "What organs make up the Digestive System?", a: "Mouth, esophagus, stomach, small intestine, large intestine, liver, and pancreas.", ch: "ch1" },
       { q: "What is the overall function of the Urinary System?", a: "Eliminates nitrogen-containing wastes; regulates water, electrolyte, and acid-base balance.", ch: "ch1" },
       { q: "What organs make up the Urinary System?", a: "Kidneys, ureters, urinary bladder, and urethra.", ch: "ch1" },
-      { q: "What is the overall function of the Reproductive System?", a: "Production of offspring and sex hormones.", ch: "ch1" },
-      { q: "What are the main organs of the female reproductive system?", a: "Ovaries, uterine (fallopian) tubes, uterus, and vagina.", ch: "ch1" },
-      { q: "What are the main organs of the male reproductive system?", a: "Testes, scrotum, prostate gland, and penis.", ch: "ch1" },
-      { q: "Do organ systems work in isolation?", a: "No, organ systems work together to maintain life.", ch: "ch1" },
-      { q: "Give an example of an organ belonging to more than one system.", a: "The mouth belongs to both the digestive and respiratory systems.", ch: "ch1" },
-      { q: "How do the digestive and cardiovascular systems work together?", a: "Digestive breaks food into nutrients; cardiovascular transports nutrients to cells.", ch: "ch1" },
-      { q: "How do the respiratory and cardiovascular systems work together?", a: "Respiratory takes in oxygen; cardiovascular transports oxygen to body cells.", ch: "ch1" },
-      { q: "Which 3 systems are primary excretory systems for wastes?", a: "Respiratory (CO2), Urinary (nitrogenous waste/water), and Digestive (indigestible solid waste).", ch: "ch1" },
-      { q: "Which system regulates water and electrolyte balance?", a: "The Urinary System.", ch: "ch1" },
-      { q: "Which two organ systems act as the main control systems of the body?", a: "The Nervous System (fast-acting) and Endocrine System (slow-acting).", ch: "ch1" },
-      { q: "What is the anatomical position?", a: "The standard reference posture used to describe body structures accurately.", ch: "ch1" },
-      { q: "What are the 5 main features of the anatomical position?", a: "Standing upright, facing forward, arms at sides, palms facing forward, feet flat facing forward.", ch: "ch1" },
-      { q: "Why is the anatomical position important?", a: "It prevents confusion when describing positions regardless of patient posture.", ch: "ch1" },
-      { q: "What does 'Superior (cranial)' mean?", a: "Toward the head end or upper part of a structure; above.", ch: "ch1" },
-      { q: "What does 'Inferior (caudal)' mean?", a: "Away from the head end or toward the lower part of a structure; below.", ch: "ch1" },
-      { q: "What does 'Anterior (ventral)' mean?", a: "Toward or at the front of the body; in front of.", ch: "ch1" },
-      { q: "What does 'Posterior (dorsal)' mean?", a: "Toward or at the backside of the body; behind.", ch: "ch1" },
-      { q: "What does 'Medial' mean?", a: "Toward or at the midline of the body; on the inner side.", ch: "ch1" },
-      { q: "What does 'Lateral' mean?", a: "Away from the midline of the body; on the outer side.", ch: "ch1" },
-      { q: "What does 'Proximal' mean?", a: "Closer to the origin of the body part or point of attachment of a limb.", ch: "ch1" },
-      { q: "What does 'Distal' mean?", a: "Farther from the origin of a body part or point of attachment of a limb.", ch: "ch1" },
-      { q: "What does 'Superficial (external)' mean?", a: "Toward or at the body surface.", ch: "ch1" },
-      { q: "What does 'Deep (internal)' mean?", a: "Away from the body surface; more internal.", ch: "ch1" },
-      { q: "Complete the sentence: The nose is _____ to the eyes.", a: "Medial.", ch: "ch1" },
-      { q: "Complete the sentence: The elbow is _____ to the wrist.", a: "Proximal.", ch: "ch1" },
-      { q: "Complete: The sternum (breastbone) is _____ to the heart.", a: "Anterior (and superficial).", ch: "ch1" },
-      { q: "Complete: The spine is _____ to the sternum.", a: "Posterior.", ch: "ch1" },
-      { q: "Complete: The stomach is _____ to the lungs.", a: "Inferior.", ch: "ch1" },
-      { q: "Complete: The head is _____ to the chest.", a: "Superior.", ch: "ch1" },
-      { q: "Complete: The skin is _____ to the skeletal muscles.", a: "Superficial.", ch: "ch1" },
-      { q: "Complete: Bones are _____ to muscles.", a: "Deep.", ch: "ch1" },
-      { q: "Complete: The fingers are _____ to the wrist.", a: "Distal.", ch: "ch1" },
-      { q: "Complete: The shoulder is _____ to the elbow.", a: "Proximal.", ch: "ch1" },
-      { q: "Complete: The ears are _____ to the eyes.", a: "Lateral.", ch: "ch1" },
-      { q: "Complete: Ankles are _____ to thighs.", a: "Distal.", ch: "ch1" },
-      { q: "Complete: Your patella (kneecap) is _____ to your tibia.", a: "Proximal.", ch: "ch1" },
-      { q: "Complete: Metacarpals (hand bones) are _____ to the radius.", a: "Distal.", ch: "ch1" },
-      { q: "Complete: Carpals (wrist) are _____ to phalanges (finger bones).", a: "Proximal.", ch: "ch1" },
-      { q: "Complete: Femur is _____ to foot phalanges.", a: "Proximal.", ch: "ch1" },
-      { q: "In medical images, left and right refer to whose left and right?", a: "The patient's left and right.", ch: "ch1" },
-      { q: "What is a body plane?", a: "An imaginary flat line or surface along which the body is cut.", ch: "ch1" },
-      { q: "What is a sagittal plane?", a: "A plane dividing the body lengthwise into left and right parts.", ch: "ch1" },
-      { q: "What is a midsagittal (median) plane?", a: "A sagittal plane running directly through the midline, dividing into equal left/right halves.", ch: "ch1" },
-      { q: "What is a frontal (coronal) plane?", a: "A plane dividing the body into anterior (front) and posterior (back) parts.", ch: "ch1" },
-      { q: "What is a transverse (horizontal) plane?", a: "A plane dividing the body horizontally into superior (upper) and inferior (lower) parts.", ch: "ch1" },
-      { q: "A cross-section is another name for a section along which plane?", a: "Transverse plane.", ch: "ch1" },
-      { q: "Which plane allows viewing both kidneys simultaneously in one view?", a: "Frontal plane or Transverse plane.", ch: "ch1" },
-      { q: "A section dividing the brain into top and bottom halves is along which plane?", a: "Transverse plane.", ch: "ch1" },
-      { q: "A section separating the face from the back of the head is along which plane?", a: "Frontal (coronal) plane.", ch: "ch1" },
-      { q: "A section dividing the heart into right and left halves is along which plane?", a: "Sagittal plane.", ch: "ch1" },
-      { q: "What are the two major closed body cavities?", a: "Dorsal body cavity and Ventral body cavity.", ch: "ch1" },
-      { q: "What two sub-cavities form the Dorsal Body Cavity?", a: "Cranial cavity and Spinal (vertebral) cavity.", ch: "ch1" },
-      { q: "What organ is protected in the cranial cavity?", a: "Brain.", ch: "ch1" },
-      { q: "What structure is protected in the spinal cavity?", a: "Spinal cord.", ch: "ch1" },
-      { q: "What two sub-cavities form the Ventral Body Cavity?", a: "Thoracic cavity and Abdominopelvic cavity.", ch: "ch1" },
-      { q: "What muscle separates the thoracic cavity from the abdominopelvic cavity?", a: "The Diaphragm.", ch: "ch1" },
-      { q: "What organs are contained inside the thoracic cavity?", a: "Heart, lungs, trachea, and esophagus.", ch: "ch1" },
-      { q: "What organs are located in the abdominal cavity?", a: "Stomach, liver, intestines, gallbladder, kidneys, and pancreas.", ch: "ch1" },
-      { q: "What organs are located in the pelvic cavity?", a: "Reproductive organs, urinary bladder, and rectum.", ch: "ch1" },
-      { q: "Which body cavity contains the ovaries?", a: "Pelvic cavity.", ch: "ch1" },
-      { q: "Into how many quadrants is the abdominopelvic cavity subdivided?", a: "4 quadrants.", ch: "ch1" },
-      { q: "Name the 4 abdominopelvic quadrants.", a: "Right Upper Quadrant (RUQ), Left Upper Quadrant (LUQ), Right Lower Quadrant (RLQ), Left Lower Quadrant (LLQ).", ch: "ch1" },
-      { q: "Pain from appendicitis usually presents in which quadrant?", a: "Right Lower Quadrant (RLQ).", ch: "ch1" },
-      { q: "What major organ occupies most of the Right Upper Quadrant (RUQ)?", a: "Liver.", ch: "ch1" },
-      { q: "What major organ is located in the Left Upper Quadrant (LUQ)?", a: "Stomach.", ch: "ch1" },
-      { q: "What metric system of units is used in New Zealand healthcare?", a: "Standard International (SI) metric system.", ch: "ch1" },
-      { q: "What are the SI units for weight, volume, length, and time?", a: "Weight = Kilogram (kg), Volume = Litre (L), Length = Metre (m), Time = Second (s).", ch: "ch1" },
-      { q: "What is the correct lowercase abbreviation for millilitres?", a: "mL or ml.", ch: "ch1" },
-      { q: "How many grams are in 1 kilogram?", a: "1000 g.", ch: "ch1" },
-      { q: "How many milligrams are in 1 gram?", a: "1000 mg.", ch: "ch1" },
-      { q: "What does 1 cubic centimetre (1 cc) equal in millilitres?", a: "1 mL.", ch: "ch1" },
-      { q: "What unit do electronic lab scales measure in?", a: "Grams (g).", ch: "ch1" },
-      { q: "What does 'tare' (zero) mean when using electronic scales?", a: "Resetting scale reading to 0 after placing an empty container on it.", ch: "ch1" },
-      { q: "How much does 1 mL of pure water weigh?", a: "1 gram (g).", ch: "ch1" },
-      { q: "What is a solute?", a: "The solid substance dissolved in a liquid.", ch: "ch1" },
-      { q: "What is a solvent?", a: "The liquid portion of a solution that dissolves the solute (e.g., water).", ch: "ch1" },
-      { q: "What is a solution?", a: "A liquid mixture formed when a solute dissolves in a solvent.", ch: "ch1" },
-      { q: "What are the lines on a syringe barrel called?", a: "Graduations.", ch: "ch1" },
-      { q: "At which exact point on the plunger seal do you read syringe volume?", a: "The TOP edge of the rubber plunger seal (closest to the needle tip).", ch: "ch1" },
-      { q: "Should you read syringe volume from the middle ring, bottom ring, or top cone tip?", a: "No, ONLY read the top rubber ring edge.", ch: "ch1" },
-      { q: "How do you find the value of small unlabelled graduation lines on a syringe?", a: "Divide difference between 2 numbered lines by number of small spaces between them.", ch: "ch1" },
-      { q: "On a 5 mL syringe with 5 spaces between 3 mL and 4 mL, what does each small line equal?", a: "0.2 mL (1 mL / 5).", ch: "ch1" },
-      { q: "On a 1 mL syringe with 5 spaces between 2.0 mL and 2.5 mL, what does each line equal?", a: "0.1 mL (0.5 mL / 5).", ch: "ch1" },
-      { q: "How can you check if your graduation calculation is correct?", a: "Count up line-by-line from one numbered mark to see if you land on the next numbered mark correctly.", ch: "ch1" },
-      { q: "What memory shortcut gives graduation values for standard 5, 3, 1 mL syringes?", a: "5 mL syringe → 0.2 mL; 3 mL syringe → 0.1 mL; 1 mL syringe → 0.01 mL.", ch: "ch1" },
 
       // Chapter 2
       { q: "What is the basic unit of all matter?", a: "An atom.", ch: "ch2" },
@@ -351,126 +349,6 @@
       { q: "Why do atoms form chemical bonds with each other?", a: "To fill or empty their outer valence shell and achieve stability.", ch: "ch2" },
       { q: "What is a molecule?", a: "A particle formed when two or more atoms are chemically bonded together.", ch: "ch2" },
       { q: "Which subatomic particles are directly involved in forming chemical bonds?", a: "Electrons.", ch: "ch2" },
-      { q: "What happens to electrons during ionic bonding?", a: "Electrons are completely transferred from one atom to another.", ch: "ch2" },
-      { q: "What happens to electrons during covalent bonding?", a: "Electrons are shared between atoms.", ch: "ch2" },
-      { q: "What is an ion?", a: "An atom that has gained or lost one or more electrons and carries a charge.", ch: "ch2" },
-      { q: "What is a cation?", a: "A positively charged ion formed when an atom loses electrons.", ch: "ch2" },
-      { q: "What is an anion?", a: "A negatively charged ion formed when an atom gains electrons.", ch: "ch2" },
-      { q: "What charge does a Sodium ion (Na+) have and why?", a: "Positive (+1), because it lost 1 electron.", ch: "ch2" },
-      { q: "What charge does a Chloride ion (Cl-) have and why?", a: "Negative (-1), because it gained 1 electron.", ch: "ch2" },
-      { q: "What type of bond holds Sodium Chloride (NaCl) together?", a: "An ionic bond.", ch: "ch2" },
-      { q: "Another term for clinical ions dissolved in body fluids is what?", a: "Electrolytes.", ch: "ch2" },
-      { q: "Which metallic ion in haemoglobin binds directly to oxygen?", a: "Iron (Fe2+).", ch: "ch2" },
-      { q: "What chemical formula represents water?", a: "H2O.", ch: "ch2" },
-      { q: "What type of chemical bond joins hydrogen and oxygen atoms within a water molecule?", a: "Covalent bond.", ch: "ch2" },
-      { q: "Approximately what percentage of human body tissue is made of water?", a: "60% to 80%.", ch: "ch2" },
-      { q: "Why is water called the 'universal solvent'?", a: "Because it dissolves a wide variety of biological solutes required for chemical reactions.", ch: "ch2" },
-      { q: "How does water help maintain body temperature stability?", a: "It has a high heat capacity, absorbing and releasing large amounts of heat before changing temperature.", ch: "ch2" },
-      { q: "Give an example of water providing a cushioning function in the body.", a: "Cerebrospinal fluid protecting the brain or amniotic fluid protecting a fetus.", ch: "ch2" },
-      { q: "What is a solute?", a: "A substance dissolved in a liquid solvent.", ch: "ch2" },
-      { q: "What is a solution?", a: "A mixture composed of a solvent and dissolved solutes.", ch: "ch2" },
-      { q: "What is a salt?", a: "An ionic compound that dissociates into cations and anions when dissolved in water.", ch: "ch2" },
-      { q: "What is an acid?", a: "A substance that releases hydrogen ions (H+) in solution.", ch: "ch2" },
-      { q: "What is a base (alkali)?", a: "A substance that releases hydroxide ions (OH-) or accepts hydrogen ions (H+).", ch: "ch2" },
-      { q: "What chemical equation describes the formation of water from acid and base ions?", a: "H+ + OH- → H2O.", ch: "ch2" },
-      { q: "What does the pH scale measure?", a: "The concentration of free hydrogen ions (H+) in a solution.", ch: "ch2" },
-      { q: "What is the numerical range of the pH scale?", a: "0 to 14.", ch: "ch2" },
-      { q: "What pH value indicates a neutral solution?", a: "7.00.", ch: "ch2" },
-      { q: "What range of pH values represents an acidic solution?", a: "Less than 7.00 (0 to 6.99).", ch: "ch2" },
-      { q: "What range of pH values represents a basic / alkaline solution?", a: "Greater than 7.00 (7.01 to 14).", ch: "ch2" },
-      { q: "Does a lower pH value mean more or fewer hydrogen ions (H+)?", a: "More hydrogen ions (H+).", ch: "ch2" },
-      { q: "What is the normal physiological pH range of human blood?", a: "7.35 to 7.45.", ch: "ch2" },
-      { q: "Is human blood overall acidic, neutral, or slightly basic?", a: "Slightly basic / alkaline.", ch: "ch2" },
-      { q: "What name is given to chemical systems that resist changes in body fluid pH?", a: "Buffers.", ch: "ch2" },
-      { q: "Which two major organ systems regulate acid-base balance in the human body?", a: "The kidneys and the lungs.", ch: "ch2" },
-      { q: "What stomach acid aids digestion and what is its approximate pH?", a: "Hydrochloric acid (HCl), pH ~2.", ch: "ch2" },
-      { q: "What defines an organic compound?", a: "A chemical compound that contains Carbon as part of its basic structure.", ch: "ch2" },
-      { q: "What are the three major types of organic macromolecules in the body?", a: "Carbohydrates, Lipids, and Proteins.", ch: "ch2" },
-      { q: "What elements make up carbohydrates?", a: "Carbon, Hydrogen, and Oxygen.", ch: "ch2" },
-      { q: "What is the primary function of carbohydrates in body cells?", a: "Providing the main source of cellular energy (fuel).", ch: "ch2" },
-      { q: "What is a monosaccharide?", a: "A simple single-ring sugar molecule.", ch: "ch2" },
-      { q: "What is known as the 'universal cellular fuel'?", a: "Glucose.", ch: "ch2" },
-      { q: "Name three common monosaccharides.", a: "Glucose, Fructose, and Galactose.", ch: "ch2" },
-      { q: "What is a disaccharide?", a: "A double sugar made of two monosaccharides joined together.", ch: "ch2" },
-      { q: "Name three common disaccharides.", a: "Sucrose, Maltose, and Lactose.", ch: "ch2" },
-      { q: "Which monosaccharides form sucrose (table sugar)?", a: "Glucose + Fructose.", ch: "ch2" },
-      { q: "Which monosaccharides form lactose (milk sugar)?", a: "Glucose + Galactose.", ch: "ch2" },
-      { q: "What is a polysaccharide?", a: "A complex carbohydrate composed of long chains of linked glucose units.", ch: "ch2" },
-      { q: "In what form do plants store glucose?", a: "Starch.", ch: "ch2" },
-      { q: "In what form do humans store excess glucose?", a: "Glycogen.", ch: "ch2" },
-      { q: "Where is glycogen stored in the human body?", a: "In skeletal muscle cells and the liver.", ch: "ch2" },
-      { q: "What elements make up lipids?", a: "Carbon, Hydrogen, and Oxygen.", ch: "ch2" },
-      { q: "Are lipids soluble or insoluble in water?", a: "Insoluble.", ch: "ch2" },
-      { q: "What are the primary building blocks of neutral lipids (fats)?", a: "Fatty acids and glycerol.", ch: "ch2" },
-      { q: "State three essential biological roles of lipids.", a: "Storing long-term energy, insulating/protecting organs, and forming cell membranes.", ch: "ch2" },
-      { q: "What type of lipid forms the essential foundation of cell membranes?", a: "Phospholipids.", ch: "ch2" },
-      { q: "What are the monomer building blocks of proteins?", a: "Amino acids.", ch: "ch2" },
-      { q: "How many different standard amino acids form body proteins?", a: "20 amino acids.", ch: "ch2" },
-      { q: "What four core elements are found in all amino acids?", a: "Carbon, Hydrogen, Oxygen, and Nitrogen.", ch: "ch2" },
-      { q: "What determines the specific 3D shape and function of a protein?", a: "The specific sequence and folding of its amino acid chain.", ch: "ch2" },
-      { q: "Give two examples of structural proteins in the body.", a: "Collagen (in bone/cartilage) and Keratin (in hair/skin/nails).", ch: "ch2" },
-      { q: "Give three examples of functional proteins in the body.", a: "Enzymes, Hormones, and Antibodies.", ch: "ch2" },
-      { q: "What is the primary role of an enzyme?", a: "To act as a biological catalyst that speeds up chemical reactions.", ch: "ch2" },
-      { q: "What is the primary role of antibodies?", a: "To bind to foreign substances and protect the body from infection.", ch: "ch2" },
-      { q: "What happens when a protein is denatured by heat or extreme acid?", a: "It unfolds and loses its unique 3D shape, destroying its biological function.", ch: "ch2" },
-      { q: "In the chemistry lab, what happened to egg white (albumin) when mixed with acid or heated?", a: "It coagulated (formed solid opaque white clumps).", ch: "ch2" },
-      { q: "What happened to milk when acid was added during lab testing?", a: "It curdled, separating into solid curds and clear liquid.", ch: "ch2" },
-      { q: "Why is high fever dangerous to body proteins like haemoglobin?", a: "High temperatures denature haemoglobin, altering its shape and preventing oxygen transport.", ch: "ch2" },
-      { q: "What is a neutralisation reaction?", a: "A chemical reaction between an acid and a base producing water and salt.", ch: "ch2" },
-      { q: "In the lab neutralisation demonstration, what color change occurred when HCl neutralised NaOH?", a: "Changed from purple (pH ~13-14) to green (pH 7).", ch: "ch2" },
-      { q: "How do antacids relieve indigestion or gastric reflux?", a: "They contain alkaline (basic) substances that neutralise excess stomach hydrochloric acid.", ch: "ch2" },
-      { q: "Name an advantage of measuring pH using a digital pH meter.", a: "Highly precise and objective numerical reading to two decimal places.", ch: "ch2" },
-      { q: "Name a limitation of using Universal Indicator solution for pH.", a: "It provides only an estimated pH based on subjective visual color matching.", ch: "ch2" },
-      { q: "Why couldn't washing powder solution be tested with a laboratory pH meter probe?", a: "It can coat or damage the delicate glass bulb of the pH meter probe.", ch: "ch2" },
-      { q: "What was the most acidic solution tested in the chemistry lab?", a: "Stomach fluid / HCl.", ch: "ch2" },
-      { q: "What was the most basic/alkaline solution tested in the chemistry lab?", a: "Washing powder solution.", ch: "ch2" },
-      { q: "What type of carbohydrate is rice primarily composed of?", a: "Starch (a complex polysaccharide).", ch: "ch2" },
-      { q: "What type of carbohydrate is dessert jelly primarily composed of?", a: "Simple disaccharides / sugars (sucrose).", ch: "ch2" },
-      { q: "What term describes fat solid at room temperature versus liquid at room temperature?", a: "Fats (solid) vs Oils (liquid).", ch: "ch2" },
-      { q: "Name four fat-soluble vitamins absorbed with the aid of dietary lipids.", a: "Vitamins A, D, E, and K.", ch: "ch2" },
-      { q: "What are trace elements?", a: "Elements required by the human body in extremely small quantities.", ch: "ch2" },
-      { q: "What is the atomic symbol for Iron?", a: "Fe.", ch: "ch2" },
-      { q: "What is the atomic symbol for Potassium?", a: "K.", ch: "ch2" },
-      { q: "What is the atomic symbol for Magnesium?", a: "Mg.", ch: "ch2" },
-      { q: "What is the atomic symbol for Phosphorus?", a: "P.", ch: "ch2" },
-      { q: "What is the atomic symbol for Sulfur?", a: "S.", ch: "ch2" },
-      { q: "What is the atomic symbol for Iodine?", a: "I.", ch: "ch2" },
-      { q: "What is the charge of an electron?", a: "-1.", ch: "ch2" },
-      { q: "What is the mass contribution of electrons relative to protons/neutrons?", a: "Extremely small; mass is concentrated in the nucleus.", ch: "ch2" },
-      { q: "What holds electrons in their orbitals around the nucleus?", a: "The electrostatic attraction between negative electrons and positive protons.", ch: "ch2" },
-      { q: "How many total electrons fill the first two completed shells of an atom?", a: "10 electrons (2 in 1st + 8 in 2nd).", ch: "ch2" },
-      { q: "Is an atom with 8 valence electrons reactive or stable?", a: "Stable (unreactive).", ch: "ch2" },
-      { q: "What type of bond is formed when two oxygen atoms share two pairs of electrons?", a: "A double covalent bond (O2).", ch: "ch2" },
-      { q: "In H2O, how many single covalent bonds are formed?", a: "Two single covalent bonds.", ch: "ch2" },
-      { q: "What happens to a neutral atom if it loses 2 electrons?", a: "It becomes a cation with a +2 net charge (Ca2+).", ch: "ch2" },
-      { q: "What happens to a neutral atom if it gains 1 electron?", a: "It becomes an anion with a -1 net charge.", ch: "ch2" },
-      { q: "What is the primary cation in extracellular fluid?", a: "Sodium (Na+).", ch: "ch2" },
-      { q: "What is the primary cation inside intracellular fluid?", a: "Potassium (K+).", ch: "ch2" },
-      { q: "Why are oral rehydration drinks recommended during severe sweating or diarrhea?", a: "To rapidly replace vital lost body water and electrolytes (Na+, K+, Cl-).", ch: "ch2" },
-      { q: "What is the term for a compound containing only carbon and hydrogen?", a: "Hydrocarbon.", ch: "ch2" },
-      { q: "What is the prefix 'mono-' meaning?", a: "One.", ch: "ch2" },
-      { q: "What is the prefix 'di-' meaning?", a: "Two.", ch: "ch2" },
-      { q: "What is the prefix 'poly-' meaning?", a: "Many.", ch: "ch2" },
-      { q: "What structural polysaccharide forms plant cell walls that humans cannot digest?", a: "Cellulose (dietary fibre).", ch: "ch2" },
-      { q: "What chemical process breaks down polysaccharides into monosaccharides in digestion?", a: "Hydrolysis / digestive enzymatic breakdown.", ch: "ch2" },
-      { q: "What is the empirical ratio of Carbon to Hydrogen to Oxygen in glucose (C6H12O6)?", a: "1 : 2 : 1.", ch: "ch2" },
-      { q: "What type of lipid contains three fatty acid chains bound to a glycerol backbone?", a: "Triglyceride (neutral fat).", ch: "ch2" },
-      { q: "What property of phospholipids allows them to form self-assembling cell membranes?", a: "Amphipathic nature (hydrophilic head + hydrophobic tail).", ch: "ch2" },
-      { q: "What is a steroid lipid example vital for membrane flexibility and hormone synthesis?", a: "Cholesterol.", ch: "ch2" },
-      { q: "What bond connects adjacent amino acids in a protein chain?", a: "Peptide bond.", ch: "ch2" },
-      { q: "How many amino acids exist in a large protein containing 30,000 units?", a: "30,000 amino acids linked in sequence.", ch: "ch2" },
-      { q: "Why does denatured protein fail to function as an enzyme?", a: "Its active site shape is destroyed, preventing substrate binding.", ch: "ch2" },
-      { q: "What color does Universal Indicator turn in a strong acid (pH 1-2)?", a: "Red.", ch: "ch2" },
-      { q: "What color does Universal Indicator turn in a weak acid (pH 4-5)?", a: "Pink / Orange.", ch: "ch2" },
-      { q: "What color does Universal Indicator turn in a neutral solution (pH 7)?", a: "Green.", ch: "ch2" },
-      { q: "What color does Universal Indicator turn in a strong base (pH 12-14)?", a: "Purple / Dark Blue.", ch: "ch2" },
-      { q: "If solution A has pH 3 and solution B has pH 5, which is more acidic and by how much?", a: "Solution A is 100 times more acidic (logarithmic scale).", ch: "ch2" },
-      { q: "What is blood acidosis?", a: "A pathological condition where blood pH drops below 7.35.", ch: "ch2" },
-      { q: "What is blood alkalosis?", a: "A pathological condition where blood pH rises above 7.45.", ch: "ch2" },
-      { q: "Which gas dissolved in blood forms carbonic acid and lowers blood pH?", a: "Carbon dioxide (CO2).", ch: "ch2" },
-      { q: "What is the main structural protein providing high tensile strength to body skin and bones?", a: "Collagen.", ch: "ch2" },
-      { q: "What is the primary function of pancreatic enzymes released into the gut?", a: "To hydrolyse and break down food macromolecules into absorbable monomers.", ch: "ch2" },
-      { q: "Why are chemical bonds essential to human survival?", a: "They store chemical potential energy and hold all molecules and cell structures together.", ch: "ch2" },
 
       // Chapter 3
       { q: "What are cells?", a: "The basic structural and functional units of all living organisms.", ch: "ch3" },
@@ -479,302 +357,16 @@
       { q: "Approximately how many specialized cell types are in the human body?", a: "About 250 different cell types.", ch: "ch3" },
       { q: "What general physiological principle links cell shape to cell role?", a: "Structure determines function.", ch: "ch3" },
       { q: "What are the three primary generalized parts of a human cell?", a: "Cell membrane, Cytoplasm, and Nucleus.", ch: "ch3" },
-      { q: "What is the Maori name for the cell membrane?", a: "Kiriuhi pūtau.", ch: "ch3" },
-      { q: "What is the Maori name for the nucleus?", a: "Karihi.", ch: "ch3" },
-      { q: "What is the Maori name for the cytoplasm?", a: "Waitepe.", ch: "ch3" },
       { q: "What is the location of the cell membrane?", a: "Surrounds the outermost boundary of the cell.", ch: "ch3" },
       { q: "List four main functions of the cell membrane.", a: "Physical barrier, cell communication, cell recognition, and selective permeability.", ch: "ch3" },
-      { q: "What does 'selectively permeable' mean?", a: "Allows certain substances to cross while preventing others.", ch: "ch3" },
-      { q: "What fluid is located inside the cell?", a: "Intracellular fluid (cytosol).", ch: "ch3" },
-      { q: "What fluid is located outside the cell?", a: "Extracellular fluid.", ch: "ch3" },
-      { q: "What structural model describes the plasma membrane?", a: "Phospholipid bilayer.", ch: "ch3" },
-      { q: "What are the two main parts of a single phospholipid molecule?", a: "A hydrophilic head and two hydrophobic tails.", ch: "ch3" },
-      { q: "What does 'hydrophilic' mean?", a: "Water-loving.", ch: "ch3" },
-      { q: "What does 'hydrophobic' mean?", a: "Water-fearing.", ch: "ch3" },
-      { q: "Which part of the phospholipid bilayer faces the watery intracellular and extracellular fluids?", a: "The hydrophilic phosphate heads.", ch: "ch3" },
-      { q: "Which part of the phospholipid bilayer forms the inner hydrophobic core of the membrane?", a: "The fatty acid hydrophobic tails.", ch: "ch3" },
-      { q: "What types of substances can pass directly through the lipid core of the membrane?", a: "Lipid-soluble, small non-polar substances (e.g., oxygen, carbon dioxide, fats, alcohol).", ch: "ch3" },
-      { q: "What is the approximate thickness of a human cell membrane?", a: "Approximately 10 nanometres (nm).", ch: "ch3" },
-      { q: "What is the physical consistency of the cell membrane compared to?", a: "Olive oil.", ch: "ch3" },
-      { q: "What is the role of cholesterol in the cell membrane?", a: "Stabilises membrane structure and maintains appropriate flexibility/fluidity.", ch: "ch3" },
-      { q: "List three functions of membrane proteins.", a: "Transport channels/carriers, hormone/neurotransmitter receptors, and cell adhesion/enzymes.", ch: "ch3" },
-      { q: "Where are carbohydrate chains located on the cell membrane?", a: "Exclusively on the extracellular outer surface ('sugar-coated').", ch: "ch3" },
-      { q: "What are two functions of membrane surface carbohydrates (glycoproteins/glycolipids)?", a: "Cell recognition (self vs foreign) and cell adhesion.", ch: "ch3" },
-      { q: "What are the three structural components of the cytoplasm?", a: "Cytosol, Organelles, and Inclusions.", ch: "ch3" },
-      { q: "What is cytosol?", a: "The viscous, water-based fluid in which organelles are suspended.", ch: "ch3" },
-      { q: "What percentage of cytosol is composed of water?", a: "Approximately 70% to 80% water.", ch: "ch3" },
-      { q: "What are organelles?", a: "Specialized internal cellular structures ('metabolic machinery') that perform specific jobs.", ch: "ch3" },
-      { q: "What are cellular inclusions?", a: "Stored chemical substances, nutrients, or pigments inside the cytoplasm (e.g., glycogen, fat droplets, melanin).", ch: "ch3" },
-      { q: "What is the largest organelle in a human cell?", a: "The Nucleus.", ch: "ch3" },
-      { q: "What is the function of the nucleus?", a: "Controls cell activities, stores genetic DNA, and directs protein synthesis.", ch: "ch3" },
-      { q: "What double membrane structure surrounds the nucleus?", a: "The nuclear membrane (nuclear envelope).", ch: "ch3" },
-      { q: "What allows passage of materials between the nucleus and cytoplasm?", a: "Nuclear pores.", ch: "ch3" },
-      { q: "In the factory cell analogy, what role does the nucleus play?", a: "The boss / Control centre.", ch: "ch3" },
-      { q: "What is the function of ribosomes?", a: "Sites of protein synthesis.", ch: "ch3" },
-      { q: "Where can ribosomes be found inside the cell?", a: "Floating free in the cytosol or attached to the Rough Endoplasmic Reticulum.", ch: "ch3" },
-      { q: "What distinguishes Rough ER from Smooth ER structurally?", a: "Rough ER is studded with ribosomes on its outer membrane; Smooth ER lacks ribosomes.", ch: "ch3" },
-      { q: "What is the main function of the Rough Endoplasmic Reticulum?", a: "Synthesises proteins and transports them to the Golgi apparatus.", ch: "ch3" },
-      { q: "List three main functions of the Smooth Endoplasmic Reticulum.", a: "Synthesises lipids/steroids, detoxifies drugs/chemicals, and stores calcium ions.", ch: "ch3" },
-      { q: "Why do liver cells contain an exceptionally large amount of Smooth ER?", a: "Because the liver actively detoxifies drugs, alcohol, and toxins and processes lipids.", ch: "ch3" },
-      { q: "What is the structure of the Golgi apparatus?", a: "A stack of flattened membranous sacs with terminal vesicles.", ch: "ch3" },
-      { q: "What is the function of the Golgi apparatus?", a: "Modifies, packages, sorts, and ships proteins received from Rough ER.", ch: "ch3" },
-      { q: "In the factory cell analogy, what is the Golgi apparatus?", a: "The finishing/packaging department and courier.", ch: "ch3" },
-      { q: "Give two examples of proteins packaged by Golgi for export outside the cell.", a: "Insulin (hormone) and digestive enzymes.", ch: "ch3" },
-      { q: "What are lysosomes?", a: "Membranous vesicles containing powerful digestive enzymes.", ch: "ch3" },
-      { q: "What does the prefix 'lys-' mean?", a: "Breakdown / Dissolve.", ch: "ch3" },
-      { q: "What is the function of lysosomes?", a: "Digest ingested bacteria, break down worn-out organelles, and recycle cellular waste.", ch: "ch3" },
-      { q: "In the factory cell analogy, what are lysosomes?", a: "The maintenance / cleanup crew.", ch: "ch3" },
-      { q: "Which specialized white blood cells contain abundant lysosomes to destroy bacteria?", a: "Phagocytes / Macrophages.", ch: "ch3" },
-      { q: "Where are the digestive enzymes inside lysosomes manufactured?", a: "On ribosomes of the Rough Endoplasmic Reticulum.", ch: "ch3" },
-      { q: "What genetic storage disease results from a missing lysosomal enzyme, causing lipid accumulation in the brain?", a: "Tay-Sachs disease.", ch: "ch3" },
-      { q: "What is the function of mitochondria?", a: "Synthesise ATP energy currency through cellular respiration ('powerhouse').", ch: "ch3" },
-      { q: "Describe the structural appearance of a mitochondrion.", a: "Sausage-shaped with a smooth outer membrane and folded inner membrane (cristae).", ch: "ch3" },
-      { q: "What does ATP stand for?", a: "Adenosine Triphosphate.", ch: "ch3" },
-      { q: "Why do skeletal muscle cells contain significantly more mitochondria than fat cells?", a: "Muscle cells require massive ATP energy supplies for mechanical contraction and movement.", ch: "ch3" },
-      { q: "What is the function of centrioles?", a: "Organise spindle fibers during mitosis to separate chromosomes.", ch: "ch3" },
-      { q: "What cell division structure is formed by centrioles?", a: "The mitotic spindle.", ch: "ch3" },
-      { q: "Why are neurons and cardiac muscle cells unable to divide by mitosis?", a: "They lack centrioles.", ch: "ch3" },
-      { q: "Trace the complete cellular pathway of a protein destined for secretion.", a: "DNA → Ribosome → Rough ER → Golgi Apparatus → Transport Vesicle → Cell Membrane → Exocytosis.", ch: "ch3" },
-      { q: "What specialized features characterize Erythrocytes (Red Blood Cells)?", a: "Biconcave disc shape, no nucleus (anucleate), filled with haemoglobin, highly flexible.", ch: "ch3" },
-      { q: "Why do mature Red Blood Cells lack a nucleus?", a: "To provide maximum space for oxygen-binding haemoglobin molecules.", ch: "ch3" },
-      { q: "What structural features characterize Adipocytes (Fat Cells)?", a: "Large spherical shape dominated by a giant lipid droplet, pushing cytoplasm and nucleus to the outer edge.", ch: "ch3" },
-      { q: "What structural features characterize Skeletal Muscle Cells?", a: "Long cylindrical fibers, striations (stripes), and multiple nuclei per cell.", ch: "ch3" },
-      { q: "What structural features characterize Neurons?", a: "A central cell body with long cytoplasmic extensions (dendrites and a long axon).", ch: "ch3" },
-      { q: "Why are macrophages shaped with pseudopods ('false feet')?", a: "To crawl actively through tissues to reach sites of infection.", ch: "ch3" },
-      { q: "What is the longest cell type in the human body?", a: "Neurons (can extend over 1 metre long).", ch: "ch3" },
-      { q: "What stain was used in the lab to visualize cheek epithelial cells under a light microscope?", a: "Methylene blue.", ch: "ch3" },
-      { q: "What three microscope objective lenses were used in the cells lab?", a: "4x (scanning), 10x (low power), and 40x (high power).", ch: "ch3" },
-      { q: "What is the standard magnification of a microscope eyepiece (ocular lens)?", a: "10x.", ch: "ch3" },
-      { q: "How do you calculate total magnification of a microscope?", a: "Eyepiece magnification × Objective lens magnification.", ch: "ch3" },
-      { q: "What is the total magnification when using a 10x eyepiece and a 40x objective lens?", a: "400x total magnification.", ch: "ch3" },
-      { q: "What is the total magnification when using a 10x eyepiece and a 4x objective lens?", a: "40x total magnification.", ch: "ch3" },
-      { q: "Why should you ONLY use the coarse focus knob with the 4x objective lens?", a: "High-power lenses sit close to the slide; coarse movement can smash the lens into the slide, damaging both.", ch: "ch3" },
-      { q: "Why should regular facial tissues never be used to clean microscope lenses?", a: "Regular tissues contain abrasive fibers that scratch delicate glass optical lenses.", ch: "ch3" },
-      { q: "What is mitosis?", a: "Nuclear division resulting in two genetically identical daughter cells.", ch: "ch3" },
-      { q: "Give three main reasons why body cells undergo mitosis.", a: "Body growth, repair of damaged tissues, and replacement of old/dead cells.", ch: "ch3" },
-      { q: "How many chromosomes are contained in a normal human body (somatic) cell nucleus?", a: "46 chromosomes (23 pairs).", ch: "ch3" },
-      { q: "What vital nuclear event must happen during interphase before mitosis can begin?", a: "All DNA and chromosomes must be completely and accurately duplicated.", ch: "ch3" },
-      { q: "What are the four main phases of mitosis in sequential order?", a: "Prophase, Metaphase, Anaphase, Telophase (PMAT).", ch: "ch3" },
-      { q: "What process divides the cytoplasm after nuclear division is complete?", a: "Cytokinesis.", ch: "ch3" },
-      { q: "How many chromosomes does each new daughter cell contain following mitosis?", a: "Exactly 46 identical chromosomes.", ch: "ch3" },
-      { q: "Do nerve cells continue to divide by mitosis in adults?", a: "No.", ch: "ch3" },
-      { q: "Do cardiac muscle cells continue to divide by mitosis in adults?", a: "No.", ch: "ch3" },
-      { q: "Do skin epidermal cells continue to divide throughout life?", a: "Yes, continuously from the deepest layer.", ch: "ch3" },
-      { q: "Approximately how often are red blood cells replaced in the body?", a: "Over 2 million red blood cells are replaced every second.", ch: "ch3" },
-      { q: "What is an abnormal, uncontrolled proliferation of dividing cells called?", a: "A tumour / neoplasm.", ch: "ch3" },
-      { q: "What is the difference between a benign tumour and a malignant tumour?", a: "Benign is non-cancerous and localized; malignant is cancerous, invading and destroying surrounding tissues.", ch: "ch3" },
-      { q: "What is metastasis?", a: "The spread of malignant cancer cells via blood or lymph to distant secondary sites.", ch: "ch3" },
-      { q: "Why does cancer chemotherapy often cause side effects like hair loss and nausea?", a: "Because chemotherapy targets all rapidly dividing cells, including healthy hair follicles and gut lining cells.", ch: "ch3" },
-      { q: "What medical field studies cellular structure and microscopic pathology to screen for cancer?", a: "Cytology (e.g., Cervical Smear test).", ch: "ch3" },
-      { q: "Why do severe skin burns cause fluid 'weeping'?", a: "Damaged cell membranes become hyper-permeable, allowing fluids, proteins, and ions to leak out freely.", ch: "ch3" },
-      { q: "What instrument is required to visualize ultra-fine organelle details inside a cell?", a: "An electron microscope.", ch: "ch3" },
-      { q: "What shape are human red blood cells?", a: "Biconcave disc.", ch: "ch3" },
-      { q: "What primary protein fills red blood cells?", a: "Haemoglobin.", ch: "ch3" },
-      { q: "What cytoplasmic organelle organizes cilia on respiratory cells?", a: "Centrioles / basal bodies.", ch: "ch3" },
-      { q: "What is cytosol also termed clinically?", a: "Intracellular fluid.", ch: "ch3" },
-      { q: "What fundamental rule describes cell structure?", a: "A cell's structure is specifically adapted to perform its physiological function.", ch: "ch3" },
-      { q: "What organelles convert glucose into ATP energy?", a: "Mitochondria.", ch: "ch3" },
-      { q: "Name a cell type that contains no mitochondria.", a: "Mature erythrocytes (Red Blood Cells).", ch: "ch3" },
-      { q: "Name a cell type containing high concentrations of lysosomes.", a: "Phagocytic white blood cells (macrophages).", ch: "ch3" },
-      { q: "What structure separates the nucleus contents from cytosol?", a: "The nuclear membrane / envelope.", ch: "ch3" },
-      { q: "What form does stored carbohydrate take inside animal cell inclusions?", a: "Glycogen granules.", ch: "ch3" },
-      { q: "What form does stored fat take inside adipocyte inclusions?", a: "Triglyceride lipid droplets.", ch: "ch3" },
-      { q: "What organelle creates lysosomes?", a: "The Golgi apparatus.", ch: "ch3" },
-      { q: "What organelle synthesises membrane phospholipids?", a: "Smooth Endoplasmic Reticulum.", ch: "ch3" },
-      { q: "What structural adaptation allows sperm cells to swim?", a: "Flagellum (tail) powered by abundant midpiece mitochondria.", ch: "ch3" },
-      { q: "What specialized cell layer covers and lines all outer and inner body surfaces?", a: "Epithelial cells.", ch: "ch3" },
-      { q: "What term describes the total genetic material inside a cell nucleus?", a: "DNA / Genome.", ch: "ch3" },
-      { q: "How many daughter cells are produced from one parent cell during mitosis?", a: "Two identical daughter cells.", ch: "ch3" },
-      { q: "Are daughter cells produced by mitosis genetically identical or different?", a: "Genetically identical.", ch: "ch3" },
-      { q: "What organelle moves chromosomes apart during cell division?", a: "Centrioles (via mitotic spindle fibers).", ch: "ch3" },
-      { q: "What prefix means 'cell'?", a: "Cyto- / -cyte.", ch: "ch3" },
-      { q: "What Maori term means nucleus?", a: "Karihi.", ch: "ch3" },
-      { q: "What Maori term means cell membrane?", a: "Kiriuhi pūtau.", ch: "ch3" },
-      { q: "What Maori term means cytoplasm?", a: "Waitepe.", ch: "ch3" },
-      { q: "What Maori term means cell organelles?", a: "Wāhanga pūtau.", ch: "ch3" },
-      { q: "What Maori term means cell?", a: "Pūtau.", ch: "ch3" },
-      { q: "What Maori term means mitosis?", a: "Whāū pūira.", ch: "ch3" },
-      { q: "What cellular component is composed of a gel-like mixture of cytosol, organelles, and inclusions?", a: "Cytoplasm.", ch: "ch3" },
-      { q: "Which organelle acts as a factory assembly line studded with protein workers?", a: "Rough Endoplasmic Reticulum (with ribosomes).", ch: "ch3" },
-      { q: "What lipid molecules stabilize membrane fluidity against temperature changes?", a: "Cholesterol.", ch: "ch3" },
-      { q: "What term describes a cell membrane's ability to regulate entry/exit?", a: "Selective permeability.", ch: "ch3" },
-      { q: "What is the main structural feature of a nerve cell body?", a: "Contains the nucleus and metabolic organelles.", ch: "ch3" },
-      { q: "What extension of a neuron conducts electrical signals away from the cell body?", a: "The axon.", ch: "ch3" },
-      { q: "What extensions of a neuron receive incoming signals toward the cell body?", a: "Dendrites.", ch: "ch3" },
-      { q: "Which microscope component adjusts light brightness passing through the slide?", a: "The iris diaphragm / light control switch.", ch: "ch3" },
-      { q: "Which objective lens should be positioned pointing down when storing a microscope?", a: "The 4x objective lens.", ch: "ch3" },
-      { q: "What structural element forms the framework of the cell cytoplasm?", a: "The cytoskeleton (microtubules & microfilaments).", ch: "ch3" },
-      { q: "Which organelle packages proteins into secretory vesicles for exocytosis?", a: "Golgi apparatus.", ch: "ch3" },
-      { q: "What occurs during prophase of mitosis?", a: "Chromosomes condense, centrioles move to poles, and nuclear envelope breaks down.", ch: "ch3" },
-      { q: "What occurs during metaphase of mitosis?", a: "Chromosomes align along the central equatorial plate.", ch: "ch3" },
-      { q: "What occurs during anaphase of mitosis?", a: "Sister chromatids are pulled apart to opposite cell poles.", ch: "ch3" },
-      { q: "What occurs during telophase of mitosis?", a: "Two new nuclear membranes reform around separated chromosome sets.", ch: "ch3" },
-      { q: "What structural difference distinguishes cardiac muscle cells from skeletal muscle cells?", a: "Skeletal muscle cells are multinucleate; cardiac muscle cells have single central nuclei and intercalated discs.", ch: "ch3" },
-      { q: "Why do cells need continuous supplies of oxygen gas?", a: "Oxygen acts as the final electron acceptor in mitochondrial ATP generation.", ch: "ch3" },
-      { q: "What metabolic waste gas must cells constantly remove?", a: "Carbon dioxide (CO2).", ch: "ch3" },
-      { q: "What is the study of cell structure and function called?", a: "Cytology / Cell Biology.", ch: "ch3" },
-      { q: "Name two non-dividing cell types in adult humans.", a: "Neurons and Cardiac muscle cells.", ch: "ch3" },
-      { q: "How do skeletal muscle cells increase in size during strength training if they don't divide?", a: "Existing muscle fibers hypertrophy (increase in volume and protein content).", ch: "ch3" },
-      { q: "How frequently are digestive tract lining epithelial cells replaced?", a: "Every few days.", ch: "ch3" },
-      { q: "How long does it take for a deep skin basal cell to reach the surface and shed?", a: "Nearly 2 months.", ch: "ch3" },
-      { q: "What term describes programmed cell death?", a: "Apoptosis.", ch: "ch3" },
-      { q: "What cell organelle destroys old or malfunctioning mitochondria?", a: "Lysosome (autophagy).", ch: "ch3" },
-      { q: "What is cytosol mostly made of?", a: "Water (~70-80%) with dissolved solutes.", ch: "ch3" },
-      { q: "Which structural membrane component acts as identifying 'sugar coating'?", a: "Surface carbohydrates (glycolipids/glycoproteins).", ch: "ch3" },
-      { q: "Why do red blood cells squeeze easily through narrow capillaries?", a: "Biconcave shape and flexible cell membrane without a rigid nucleus.", ch: "ch3" },
-      { q: "What fundamental unit links chemistry to tissues in human body organization?", a: "Cells.", ch: "ch3" },
 
       // Chapter 4
       { q: "What is cell transport?", a: "The movement of substances into and out of a cell across its cell membrane.", ch: "ch4" },
       { q: "What are the two major categories of cell transport mechanisms?", a: "Passive transport and Active transport.", ch: "ch4" },
       { q: "What defines passive transport?", a: "Movement of substances across a membrane without any cellular energy (ATP) expenditure.", ch: "ch4" },
       { q: "What defines active transport?", a: "Movement of substances across a membrane requiring cellular energy expenditure (ATP).", ch: "ch4" },
-      { q: "In passive transport, in what direction do molecules move relative to their concentration gradient?", a: "Down the concentration gradient (from high concentration to low concentration).", ch: "ch4" },
-      { q: "In active transport, in what direction can solutes move relative to their concentration gradient?", a: "Against the concentration gradient (from low concentration to high concentration, 'uphill').", ch: "ch4" },
       { q: "List three primary types of passive transport.", a: "Simple diffusion, Facilitated diffusion, and Osmosis.", ch: "ch4" },
-      { q: "List three primary types of active transport.", a: "Active transport pumps (e.g., Na+/K+ pump), Endocytosis, and Exocytosis.", ch: "ch4" },
-      { q: "What is simple diffusion?", a: "The unassisted net movement of small or lipid-soluble solute particles from high to low concentration directly through the phospholipid bilayer.", ch: "ch4" },
-      { q: "What drives the passive motion of diffusing molecules?", a: "Kinetic energy inherent in molecular movement and random collisions.", ch: "ch4" },
-      { q: "Name two vital gases that cross cell membranes via simple diffusion.", a: "Oxygen (O2) and Carbon Dioxide (CO2).", ch: "ch4" },
-      { q: "In an active, exercising muscle cell, is internal oxygen concentration higher or lower than blood oxygen?", a: "Lower.", ch: "ch4" },
-      { q: "What is the net direction of oxygen diffusion at an active muscle tissue capillary?", a: "From blood into the muscle cell.", ch: "ch4" },
-      { q: "In an active muscle cell, is internal carbon dioxide concentration higher or lower than blood?", a: "Higher.", ch: "ch4" },
-      { q: "What is the net direction of carbon dioxide diffusion at an active muscle tissue capillary?", a: "From the muscle cell into the blood.", ch: "ch4" },
-      { q: "What physical factors permit a molecule to pass by simple diffusion?", a: "Small particle size and lipid solubility (non-polar).", ch: "ch4" },
-      { q: "What is facilitated diffusion?", a: "Passive transport of lipid-insoluble or larger molecules down their concentration gradient using membrane protein channels or carriers.", ch: "ch4" },
-      { q: "Does facilitated diffusion require metabolic ATP energy?", a: "No, it is completely passive.", ch: "ch4" },
-      { q: "How does glucose cross the plasma membrane into body cells?", a: "Via facilitated diffusion using specific carrier proteins.", ch: "ch4" },
-      { q: "What is the difference between a protein channel and a carrier protein in facilitated diffusion?", a: "Channels act as open fluid tunnels; carrier proteins bind specific molecules and change shape to ferry them across.", ch: "ch4" },
-      { q: "Why can't glucose pass through the cell membrane via simple diffusion?", a: "Glucose is too large and lipid-insoluble (polar) to pass through the hydrophobic lipid core.", ch: "ch4" },
-      { q: "What is dynamic equilibrium in diffusion?", a: "State where solute molecules are evenly distributed, and movement in all directions occurs at equal rates.", ch: "ch4" },
-      { q: "What is osmosis?", a: "The passive net movement of water molecules across a semi-permeable membrane.", ch: "ch4" },
-      { q: "In terms of solute concentration, which way does water move during osmosis?", a: "From low solute concentration to high solute concentration ('solutes suck water').", ch: "ch4" },
-      { q: "In terms of water concentration, which way does water move during osmosis?", a: "From high water concentration to low water concentration.", ch: "ch4" },
-      { q: "What property must a membrane possess for osmosis to take place?", a: "Semi-permeability (permeable to water, impermeable to solutes).", ch: "ch4" },
-      { q: "What term describes the ability of an extracellular solution to change cell volume by altering water content?", a: "Tonicity.", ch: "ch4" },
-      { q: "What is an isotonic solution?", a: "A solution with the same solute concentration as the intracellular fluid inside the cell.", ch: "ch4" },
-      { q: "What happens to a red blood cell placed in an isotonic solution?", a: "No net water movement occurs; cell shape remains normal.", ch: "ch4" },
-      { q: "What is a hypertonic solution?", a: "A solution with a higher solute concentration than the intracellular fluid inside the cell.", ch: "ch4" },
-      { q: "What happens to a red blood cell placed in a hypertonic solution?", a: "Water leaves the cell by osmosis, causing it to shrink and crinkle (crenation).", ch: "ch4" },
-      { q: "What is a hypotonic solution?", a: "A solution with a lower solute concentration than the intracellular fluid inside the cell.", ch: "ch4" },
-      { q: "What happens to a red blood cell placed in a hypotonic solution?", a: "Water enters the cell by osmosis, causing it to swell and potentially lyse (burst).", ch: "ch4" },
-      { q: "What standard medical intravenous solution is isotonic to human red blood cells?", a: "0.9% Normal Saline (Sodium Chloride).", ch: "ch4" },
-      { q: "What happens when pure distilled water (pure H2O) is injected directly into human blood?", a: "Distilled water is strongly hypotonic; red blood cells rapidly gain water, swell, and lyse.", ch: "ch4" },
-      { q: "What simple household observation demonstrates osmosis in plant tissue?", a: "Salt sprinkled on cucumber draws water out of cells by osmosis, making the cucumber shrink and pool water.", ch: "ch4" },
-      { q: "What primary energy molecule powers active transport pumps?", a: "ATP (Adenosine Triphosphate).", ch: "ch4" },
-      { q: "What is an active transport pump?", a: "A membrane protein that hydrolyses ATP to pump ions or solutes against their concentration gradient.", ch: "ch4" },
-      { q: "What vital ion pump maintains high internal K+ and low internal Na+ in human cells?", a: "The Sodium-Potassium Pump (Na+/K+ pump).", ch: "ch4" },
-      { q: "Why must nerve cells continuously run active transport pumps?", a: "To maintain steep Na+ and K+ electrical concentration gradients required for nerve impulses.", ch: "ch4" },
-      { q: "What is endocytosis?", a: "Active vesicular transport bringing large particles or fluid bulk into the cell by engulfing them in membrane vesicles.", ch: "ch4" },
-      { q: "What are the two main types of endocytosis?", a: "Pinocytosis and Phagocytosis.", ch: "ch4" },
-      { q: "What is pinocytosis?", a: "Endocytosis of extracellular liquid droplets ('cellular drinking').", ch: "ch4" },
-      { q: "What is phagocytosis?", a: "Endocytosis of large solid particles, such as bacteria or cell debris ('cellular eating').", ch: "ch4" },
-      { q: "Which white blood cells perform phagocytosis to destroy invading microbes?", a: "Phagocytes / Macrophages.", ch: "ch4" },
-      { q: "What organelle fuses with a phagosome to digest engulfed bacteria?", a: "A Lysosome.", ch: "ch4" },
-      { q: "What is exocytosis?", a: "Active vesicular transport releasing intracellular substances out of the cell by fusing secretory vesicles with the plasma membrane.", ch: "ch4" },
-      { q: "Give two examples of materials exported from human cells via exocytosis.", a: "Hormones (e.g., insulin), digestive enzymes, and mucus.", ch: "ch4" },
-      { q: "Where are proteins destined for exocytosis synthesized and packaged?", a: "Synthesised on Rough ER, modified/packaged in Golgi apparatus, and transported in secretory vesicles.", ch: "ch4" },
-      { q: "Is exocytosis an active or passive cell process?", a: "Active process (requires ATP energy).", ch: "ch4" },
-      { q: "What prefix means 'inside' or 'within'?", a: "Intra-.", ch: "ch4" },
-      { q: "What prefix means 'outside'?", a: "Extra-.", ch: "ch4" },
-      { q: "What prefix means 'same' or 'equal'?", a: "Iso-.", ch: "ch4" },
-      { q: "What prefix means 'above', 'excessive', or 'greater'?", a: "Hyper-.", ch: "ch4" },
-      { q: "What prefix means 'under', 'below', or 'less'?", a: "Hypo-.", ch: "ch4" },
-      { q: "What term describes a solution with higher solute concentration than inside the cell?", a: "Hypertonic.", ch: "ch4" },
-      { q: "What term describes a solution with lower solute concentration than inside the cell?", a: "Hypotonic.", ch: "ch4" },
-      { q: "What term describes a solution with equal solute concentration to inside the cell?", a: "Isotonic.", ch: "ch4" },
-      { q: "What is crenation?", a: "Shrinkage and crinkling of a cell when placed in a hypertonic solution.", ch: "ch4" },
-      { q: "What is lysis?", a: "Rupture/bursting of a cell when placed in a hypotonic solution.", ch: "ch4" },
-      { q: "Does simple diffusion require carrier proteins?", a: "No.", ch: "ch4" },
-      { q: "Does facilitated diffusion require carrier or channel proteins?", a: "Yes.", ch: "ch4" },
-      { q: "Does active pump transport require carrier proteins?", a: "Yes.", ch: "ch4" },
-      { q: "In which direction does net water movement occur during osmosis relative to solute concentration?", a: "Towards higher solute concentration.", ch: "ch4" },
-      { q: "What type of cellular transport is involved when a pancreatic cell secretes insulin into blood?", a: "Exocytosis.", ch: "ch4" },
-      { q: "What type of cellular transport brings lipid-soluble steroid hormones directly into cytosol?", a: "Simple diffusion.", ch: "ch4" },
-      { q: "What type of transport brings glucose into resting muscle cells down its concentration gradient?", a: "Facilitated diffusion.", ch: "ch4" },
-      { q: "What type of transport extracts waste urea out of kidney tubule filtrate?", a: "Diffusion / Passive transport.", ch: "ch4" },
-      { q: "What type of transport is used by macrophages to ingest foreign bacteria?", a: "Phagocytosis (endocytosis).", ch: "ch4" },
-      { q: "What type of transport is used by intestinal cells to drink extracellular fluid droplets?", a: "Pinocytosis (endocytosis).", ch: "ch4" },
-      { q: "Why does a ball rolling downhill represent passive transport in diagrams?", a: "It moves naturally from high energy to low energy down a gradient without pushing work.", ch: "ch4" },
-      { q: "Why does a person pushing a heavy boulder uphill represent active transport in diagrams?", a: "It requires continuous mechanical work (ATP) to move a mass against a gradient.", ch: "ch4" },
-      { q: "If solute concentration outside a cell is 3%, and cytosol solute concentration is 0.9%, what is the tonicity of the solution?", a: "Hypertonic.", ch: "ch4" },
-      { q: "If solute concentration outside a cell is 0.2%, and cytosol solute concentration is 0.9%, what is the tonicity of the solution?", a: "Hypotonic.", ch: "ch4" },
-      { q: "If solute concentration outside a cell is 0.9%, and cytosol solute concentration is 0.9%, what is the tonicity of the solution?", a: "Isotonic.", ch: "ch4" },
-      { q: "What is the net direction of water movement when a cell is placed in an isotonic solution?", a: "No net water movement (water enters and exits at equal rates).", ch: "ch4" },
-      { q: "What is the net direction of water movement when a cell is placed in a hypertonic solution?", a: "Net water movement out of the cell.", ch: "ch4" },
-      { q: "What is the net direction of water movement when a cell is placed in a hypotonic solution?", a: "Net water movement into the cell.", ch: "ch4" },
-      { q: "What component of the plasma membrane restricts free passage of polar ions?", a: "The hydrophobic fatty acid core of the phospholipid bilayer.", ch: "ch4" },
-      { q: "How do small polar water molecules cross plasma membranes rapidly despite hydrophobic tails?", a: "Via aquaporin protein channels (and simple movement through small membrane flexes).", ch: "ch4" },
-      { q: "Is ATP consumed during simple diffusion of CO2 out of lungs?", a: "No.", ch: "ch4" },
-      { q: "Is ATP consumed during sodium-potassium pumping?", a: "Yes.", ch: "ch4" },
-      { q: "Is ATP consumed during pinocytosis?", a: "Yes.", ch: "ch4" },
-      { q: "Is ATP consumed during facilitated diffusion of glucose?", a: "No.", ch: "ch4" },
-      { q: "Is ATP consumed during exocytosis of neurotransmitters?", a: "Yes.", ch: "ch4" },
-      { q: "What is a concentration gradient?", a: "A difference in the concentration of a chemical substance between two adjacent regions.", ch: "ch4" },
-      { q: "What happens to the rate of simple diffusion if the temperature increases?", a: "Diffusion rate increases due to higher kinetic energy and faster particle movement.", ch: "ch4" },
-      { q: "What happens to the rate of simple diffusion if the concentration gradient becomes steeper?", a: "Diffusion rate increases.", ch: "ch4" },
-      { q: "What term describes a solution with equal solute particles compared to cytosol?", a: "Isotonic.", ch: "ch4" },
-      { q: "Why are intravenous fluids given to hospitalized dehydrated patients usually 0.9% saline?", a: "Because 0.9% saline is isotonic to blood cells, preventing dangerous shrinking or bursting.", ch: "ch4" },
-      { q: "What happens to red blood cells if a patient is mistakenly given an IV of pure hypertonic concentrated salt solution?", a: "Red blood cells rapidly shrink (crenate) and lose physiological function.", ch: "ch4" },
-      { q: "What active transport process secretes large quantities of digestive enzymes into the intestine?", a: "Exocytosis.", ch: "ch4" },
-      { q: "What membrane structural feature forms vesicles during endocytosis?", a: "The cell membrane folds inward (invaginates) and pinches off.", ch: "ch4" },
-      { q: "What happens to a secretory vesicle during exocytosis?", a: "The vesicle membrane fuses with the plasma membrane, opening to release contents externally.", ch: "ch4" },
-      { q: "Why do nerve cells expend up to 70% of their total ATP on Na+/K+ pumps?", a: "To continuously reset resting membrane potential following nerve impulse conduction.", ch: "ch4" },
-      { q: "Name two substances that exit human cells via simple diffusion.", a: "Carbon dioxide (CO2) and urea.", ch: "ch4" },
-      { q: "Name two essential nutrients that enter human cells via transport mechanisms.", a: "Glucose and amino acids.", ch: "ch4" },
-      { q: "What structural component of the plasma membrane acts as specific carrier channels for facilitated diffusion?", a: "Transmembrane proteins.", ch: "ch4" },
-      { q: "What term describes the state where net diffusion drops to zero because concentration is equal everywhere?", a: "Equilibrium.", ch: "ch4" },
-      { q: "What fundamental cell boundary controls all transport mechanisms into and out of human cells?", a: "The semi-permeable cell membrane ( plasma membrane).", ch: "ch4" },
-      { q: "What energy currency molecule is hydrolyzed by active transport pumps?", a: "ATP.", ch: "ch4" },
-      { q: "Which subatomic particle transfer forms ionic bonds in dissolved salts?", a: "Electrons.", ch: "ch4" },
-      { q: "Which subatomic particle count defines an element's atomic number?", a: "Protons.", ch: "ch4" },
-      { q: "What type of bond involves electron sharing between atoms?", a: "Covalent bond.", ch: "ch4" },
-      { q: "What property of water cushions brain tissue from mechanical trauma?", a: "Protective fluid cushioning (cerebrospinal fluid).", ch: "ch4" },
-      { q: "What pH value is exact neutral?", a: "7.00.", ch: "ch4" },
-      { q: "What is the normal physiological pH range of human blood?", a: "7.35 - 7.45.", ch: "ch4" },
-      { q: "What are the single-ring building block sugars of carbohydrates called?", a: "Monosaccharides.", ch: "ch4" },
-      { q: "What polysaccharide acts as human storage carbohydrate in liver and muscle?", a: "Glycogen.", ch: "ch4" },
-      { q: "What building block monomers form functional and structural body proteins?", a: "Amino acids.", ch: "ch4" },
-      { q: "What lipid bilayer forms the basic structural boundary of human cells?", a: "Phospholipid bilayer.", ch: "ch4" },
-      { q: "What organelle acts as the powerhouse of human cells by producing ATP?", a: "Mitochondria.", ch: "ch4" },
-      { q: "What organelle contains digestive enzymes to clean up waste inside cells?", a: "Lysosomes.", ch: "ch4" },
-      { q: "What organelle modifies, sorts, and packages Rough ER proteins into vesicles?", a: "Golgi apparatus.", ch: "ch4" },
-      { q: "What organelle stores genetic DNA instructions inside human cells?", a: "Nucleus.", ch: "ch4" },
-      { q: "What organelle forms spindle fibers to divide chromosomes during mitosis?", a: "Centrioles.", ch: "ch4" },
-      { q: "How many chromosomes are present in a standard human cell nucleus?", a: "46 chromosomes.", ch: "ch4" },
-      { q: "What nuclear division process yields two genetically identical daughter cells?", a: "Mitosis.", ch: "ch4" },
-      { q: "What specialized shape characterizes human red blood cells?", a: "Biconcave disc.", ch: "ch4" },
-      { q: "Why do mature human red blood cells lack a nucleus?", a: "To maximize internal space for oxygen-carrying haemoglobin.", ch: "ch4" },
-      { q: "What structural feature allows macrophages to move through tissue space?", a: "Pseudopods ('false feet').", ch: "ch4" },
-      { q: "What cell type has long axons and dendrites to conduct electrical signals?", a: "Neurons.", ch: "ch4" },
-      { q: "What structural features characterize skeletal muscle cells under a microscope?", a: "Long cylindrical fibers with striations and multiple nuclei.", ch: "ch4" },
-      { q: "What total magnification is produced by a 10x eyepiece and 10x objective lens?", a: "100x total magnification.", ch: "ch4" },
-      { q: "What total magnification is produced by a 10x eyepiece and 40x objective lens?", a: "400x total magnification.", ch: "ch4" },
-      { q: "Why must coarse focus knobs never be used under 10x or 40x objectives?", a: "To prevent crushing the microscope slide and damaging objective lenses.", ch: "ch4" },
-      { q: "What transport category moves solutes down concentration gradients without ATP?", a: "Passive transport.", ch: "ch4" },
-      { q: "What transport category moves solutes against concentration gradients using ATP?", a: "Active transport.", ch: "ch4" },
-      { q: "What passive transport mechanism moves O2 and CO2 across membranes?", a: "Simple diffusion.", ch: "ch4" },
-      { q: "What passive transport mechanism moves glucose into cells via protein carriers?", a: "Facilitated diffusion.", ch: "ch4" },
-      { q: "What passive transport mechanism describes net water movement across semi-permeable membranes?", a: "Osmosis.", ch: "ch4" },
-      { q: "Which way does water move during osmosis relative to solute concentration?", a: "Toward higher solute concentration.", ch: "ch4" },
-      { q: "What happens to red blood cells placed in an isotonic solution (0.9% saline)?", a: "They retain normal size and biconcave shape.", ch: "ch4" },
-      { q: "What happens to red blood cells placed in a hypertonic solution?", a: "They lose water and shrink (crenate).", ch: "ch4" },
-      { q: "What happens to red blood cells placed in a hypotonic solution?", a: "They gain water, swell, and may burst (lyse).", ch: "ch4" },
-      { q: "What active vesicular transport mechanism exports packaged proteins out of cells?", a: "Exocytosis.", ch: "ch4" },
-      { q: "What active vesicular transport mechanism ingests solid bacteria ('cellular eating')?", a: "Phagocytosis.", ch: "ch4" },
-      { q: "What active vesicular transport mechanism ingests extracellular fluid droplets ('cellular drinking')?", a: "Pinocytosis.", ch: "ch4" },
-      { q: "What protein pump maintains cellular resting membrane potentials using ATP?", a: "Sodium-Potassium Pump (Na+/K+ pump).", ch: "ch4" },
-      { q: "What four elements comprise 96% of human body mass?", a: "Carbon, Hydrogen, Oxygen, Nitrogen.", ch: "ch4" },
-      { q: "What positively charged subatomic particle resides in the nucleus?", a: "Proton.", ch: "ch4" },
-      { q: "What uncharged subatomic particle resides in the nucleus?", a: "Neutron.", ch: "ch4" },
-      { q: "What negatively charged subatomic particle orbits the nucleus?", a: "Electron.", ch: "ch4" },
-      { q: "What term describes an atom that has gained or lost electrons?", a: "Ion.", ch: "ch4" },
-      { q: "What term describes a positively charged ion?", a: "Cation.", ch: "ch4" },
-      { q: "What term describes a negatively charged ion?", a: "Anion.", ch: "ch4" },
-      { q: "What scale measures hydrogen ion concentration from 0 to 14?", a: "The pH scale.", ch: "ch4" },
-      { q: "What type of organic macromolecule acts as biological enzymes and antibodies?", a: "Proteins.", ch: "ch4" },
-      { q: "What type of organic macromolecule stores energy and forms plasma membranes?", a: "Lipids.", ch: "ch4" },
-      { q: "What type of organic macromolecule acts as universal cellular fuel?", a: "Carbohydrates (Glucose).", ch: "ch4" }
+      { q: "List three primary types of active transport.", a: "Active transport pumps (e.g., Na+/K+ pump), Endocytosis, and Exocytosis.", ch: "ch4" }
     ];
 
     let currentCards = [...rawData];
@@ -782,17 +374,19 @@
 
     function renderCard() {
       const cardEl = document.getElementById("flashcard");
+      const cardFront = document.getElementById("cardFront");
+      
       cardEl.classList.remove("flipped");
       
+      // Dynamic background color change for front of the card
+      const randomGradient = cardGradients[currentIndex % cardGradients.length];
+      cardFront.style.background = randomGradient;
+
       setTimeout(() => {
         if (currentCards.length > 0) {
           document.getElementById("questionText").innerText = currentCards[currentIndex].q;
           document.getElementById("answerText").innerText = currentCards[currentIndex].a;
           document.getElementById("progressText").innerText = `${currentIndex + 1} / ${currentCards.length}`;
-        } else {
-          document.getElementById("questionText").innerText = "کارتی یافت نشد.";
-          document.getElementById("answerText").innerText = "";
-          document.getElementById("progressText").innerText = "0 / 0";
         }
       }, 150);
     }
@@ -833,19 +427,25 @@
       renderCard();
     }
 
-    // کلیدهای میانبر کیبورد (فلش چپ/راست و اسپیس)
+    function resetToDashboard() {
+      document.getElementById("chapterSelect").value = "all";
+      currentCards = [...rawData];
+      currentIndex = 0;
+      renderCard();
+    }
+
+    // Keyboard Shortcuts
     document.addEventListener('keydown', function(event) {
       if (event.code === 'ArrowRight') {
-        prevCard();
-      } else if (event.code === 'ArrowLeft') {
         nextCard();
+      } else if (event.code === 'ArrowLeft') {
+        prevCard();
       } else if (event.code === 'Space') {
         flipCard();
         event.preventDefault();
       }
     });
 
-    // بارگذاری کارت اول
     renderCard();
   </script>
 </body>
