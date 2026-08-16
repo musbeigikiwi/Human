@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy & Physiology - Chapter 2 Flashcards</title>
+<style>
+  :root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --accent-color: #38bdf8;
+    --text-color: #f8fafc;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s ease;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--accent-color);
+  }
+  .progress {
+    font-size: 1rem;
+    margin-top: 5px;
+    opacity: 0.8;
+  }
+  .flashcard-container {
+    width: 90%;
+    max-width: 600px;
+    height: 320px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+  .flashcard.flipped {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+  }
+  .card-back {
+    transform: rotateY(180deg);
+  }
+  .card-label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+  }
+  .card-text {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+  .controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 2px solid var(--accent-color);
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  button:hover {
+    background-color: var(--accent-color);
+    color: #0f172a;
+  }
+  .btn-dashboard {
+    background-color: #10b981;
+    border-color: #10b981;
+    color: #0b132b;
+  }
+  .btn-dashboard:hover {
+    background-color: #059669;
+    border-color: #059669;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Chemistry: Chapter 2</h1>
+  <div class="progress" id="progress">Card 1 / 75</div>
+</div>
+
+<div class="flashcard-container" onclick="flipCard()">
+  <div class="flashcard" id="card">
+    <div class="card-face card-front">
+      <div class="card-label">Question</div>
+      <div class="card-text" id="question">Loading...</div>
+    </div>
+    <div class="card-face card-back">
+      <div class="card-label">Answer</div>
+      <div class="card-text" id="answer">Loading...</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="prevCard(event)">Previous</button>
+  <button onclick="nextCard(event)">Next</button>
+  <button class="btn-dashboard" onclick="location.href='index.html'">🏠 Back to Dashboard</button>
+</div>
+
+<script>
+const flashcards = [
+  // Atoms, Subatomic Particles & Elements
+  { q: "What is Chemistry (Mātai matū)?", a: "The study of matter, its building blocks, and how they interact with each other." },
+  { q: "What is an Atom?", a: "The basic building block of all matter." },
+  { q: "What is an Element (Pūmotu)?", a: "A pure substance made up of only one type of atom." },
+  { q: "What are the three subatomic particles in an atom?", a: "Protons, Neutrons, and Electrons." },
+  { q: "What is the location and charge of a Proton?", a: "Located in the nucleus; Positive (+1) charge." },
+  { q: "What is the location and charge of a Neutron?", a: "Located in the nucleus; Neutral (0) / No charge." },
+  { q: "What is the location and charge of an Electron?", a: "Orbits around the nucleus in electron shells; Negative (−1) charge." },
+  { q: "Why is an atom overall electrically neutral?", a: "Because the number of positive protons equals the number of negative electrons." },
+  { q: "What is the Atomic Number?", a: "The number of protons in the nucleus of an atom." },
+  { q: "Which 4 elements make up approximately 96% of the human body mass?", a: "Carbon (C), Oxygen (O), Hydrogen (H), and Nitrogen (N)." },
+  { q: "What is the atomic symbol for Sodium and why?", a: "Na (derived from its Latin name, Natrium)." },
+  { q: "What is the atomic symbol for Potassium?", a: "K" },
+  { q: "What is the atomic symbol for Calcium?", a: "Ca" },
+  { q: "What is the atomic symbol for Chlorine?", a: "Cl" },
+  { q: "What is the atomic symbol for Iron?", a: "Fe" },
+
+  // Electron Shells & Chemical Bonding
+  { q: "How many electrons can the first (innermost) electron shell hold?", a: "Maximum 2 electrons." },
+  { q: "How many electrons can the second and third electron shells hold?", a: "Up to 8 electrons each." },
+  { q: "What is the outer electron shell of an atom called?", a: "The Valence Shell." },
+  { q: "When is an atom chemically stable and non-reactive?", a: "When its valence shell is completely full (or completely empty)." },
+  { q: "Why do atoms form chemical bonds with each other?", a: "To fill or empty their valence shell and achieve stability." },
+  { q: "What subatomic particles are shared or transferred during chemical bonding?", a: "Electrons." },
+  { q: "What is a Covalent Bond?", a: "A chemical bond formed when atoms share electrons." },
+  { q: "What is an Ionic Bond?", a: "A chemical bond formed when electrons are completely transferred from one atom to another." },
+  { q: "What is formed when two or more atoms join together by chemical bonds?", a: "A Molecule (Rāpoi ngota)." },
+
+  // Ions & Electrolytes
+  { q: "What is an Ion?", a: "An atom that has gained or lost one or more electrons, giving it a positive or negative charge." },
+  { q: "What is a Cation?", a: "A positively charged ion formed when an atom loses electron(s)." },
+  { q: "What is an Anion?", a: "A negatively charged ion formed when an atom gains electron(s)." },
+  { q: "If a Sodium (Na) atom loses 1 electron, what does it become?", a: "A Sodium cation (Na⁺)." },
+  { q: "If a Chlorine (Cl) atom gains 1 electron, what does it become?", a: "A Chloride anion (Cl⁻)." },
+  { q: "What are Electrolytes?", a: "Ions dissolved in body fluids that carry electrical charges and conduct electric currents." },
+  { q: "Name key clinical functions of electrolytes like Na⁺ and K⁺.", a: "Conduction of nerve impulses, muscle contraction, and maintaining water balance." },
+  { q: "Which ion in hemoglobin binds to oxygen for transport in the blood?", a: "Iron (Fe²⁺)." },
+
+  // Water & Inorganic Compounds
+  { q: "What percentage of human body tissue is made of water (Kātao)?", a: "Approximately 60% to 80%." },
+  { q: "What is the chemical formula for water?", a: "H₂O (2 hydrogen atoms covalently bonded to 1 oxygen atom)." },
+  { q: "Why is water called the 'Universal Solvent'?", a: "Because it dissolves a wide variety of solutes in body fluids, allowing chemical reactions to occur." },
+  { q: "What protective role does water play in the body?", a: "Cushioning (e.g., cerebrospinal fluid protecting the brain, amniotic fluid protecting a fetus)." },
+  { q: "How does water prevent sudden body temperature fluctuations?", a: "It has a high heat capacity, absorbing and releasing large amounts of heat before changing temperature." },
+  { q: "What is a Salt?", a: "An ionic compound that dissociates into positive and negative ions when dissolved in water (e.g., NaCl → Na⁺ + Cl⁻)." },
+
+  // Acids, Bases & pH Scale
+  { q: "What is an Acid?", a: "A substance that releases Hydrogen ions (H⁺) in solution (a proton donor)." },
+  { q: "What is a Base (Alkali)?", a: "A substance that releases Hydroxide ions (OH⁻) or accepts H⁺ ions in solution." },
+  { q: "What acid is produced in the human stomach to aid digestion?", a: "Hydrochloric Acid (HCl)." },
+  { q: "What does the pH scale measure?", a: "The concentration of Hydrogen ions (H⁺) in a solution." },
+  { q: "What is the range of the pH scale?", a: "0 to 14 (with no measurement units)." },
+  { q: "What pH value represents a Neutral solution?", a: "pH 7.00 (where H⁺ ions equal OH⁻ ions)." },
+  { q: "What pH range indicates an Acidic solution?", a: "pH less than 7 (pH < 7.0)." },
+  { q: "What pH range indicates a Basic/Alkaline solution?", a: "pH greater than 7 (pH > 7.0)." },
+  { q: "Is a solution with pH 3.2 more acidic or less acidic than pH 4.6?", a: "More acidic (lower pH number = higher H⁺ concentration)." },
+  { q: "What is the exact normal pH range for human arterial blood?", a: "7.35 to 7.45 (slightly alkaline)." },
+  { q: "Why is Acidosis (blood pH < 7.35) or high fever dangerous to life?", a: "It denatures body proteins (like enzymes and hemoglobin), changing their shape so they cannot function." },
+  { q: "What chemical equation represents a Neutralization reaction between HCl and NaOH?", a: "HCl + NaOH → NaCl + H₂O (Acid + Base → Salt + Water)." },
+  { q: "How do antacids relieve gastric reflux / heartburn?", a: "They are basic/alkaline compounds that neutralize excess hydrochloric acid in the stomach." },
+  { q: "Compare Universal Indicator vs. pH Meter for lab measurement.", a: "Universal indicator gives a quick approximate pH by color; pH meter gives precise numerical pH (to 2 decimal places)." },
+
+  // Organic Biomolecules: Carbohydrates
+  { q: "What element forms the fundamental backbone of all organic molecules?", a: "Carbon (C)." },
+  { q: "What are the three main classes of organic nutrients?", a: "Carbohydrates, Lipids, and Proteins." },
+  { q: "What are Carbohydrates (Warowaihā) and their primary role?", a: "Organic molecules made of C, H, and O; primary source of cellular energy." },
+  { q: "What is a Monosaccharide?", a: "A simple single-ring sugar (e.g., Glucose, Fructose, Galactose)." },
+  { q: "Why is Glucose called the 'Universal Cellular Fuel'?", a: "It is broken down by body cells during cellular respiration to generate ATP energy." },
+  { q: "What is a Disaccharide?", a: "A double sugar made of two monosaccharides (e.g., Sucrose, Lactose, Maltose)." },
+  { q: "What is a Polysaccharide?", a: "A complex carbohydrate polymer made of many bonded glucose units." },
+  { q: "In what form do humans store excess glucose in liver and muscle tissue?", a: "Glycogen." },
+  { q: "In what form do plants store glucose?", a: "Starch." },
+
+  // Organic Biomolecules: Lipids & Proteins
+  { q: "What are Lipids (Ngako) and their building blocks?", a: "Insoluble organic molecules made of Fatty Acids and Glycerol." },
+  { q: "State four key functions of lipids in the human body.", a: "Long-term energy storage, organ protection/cushioning, thermal insulation, and forming cell membranes." },
+  { q: "What are Proteins (Pūmua) composed of?", a: "Long folded chains of Amino Acids linked by peptide bonds." },
+  { q: "How many different amino acids exist to build human proteins?", a: "20 different amino acids." },
+  { q: "What four chemical elements are always present in amino acids and proteins?", a: "Carbon, Hydrogen, Oxygen, and Nitrogen (C, H, O, N)." },
+  { q: "What determines the specific function of a protein?", a: "Its unique three-dimensional folded shape." },
+  { q: "Give two examples of Structural Proteins in the body.", a: "Collagen (in bones, cartilage, tendons) and Keratin (in hair, nails, skin)." },
+  { q: "Give three examples of Functional Proteins in the body.", a: "Enzymes, Hormones, and Antibodies." },
+  { q: "What is an Enzyme?", a: "A functional protein that acts as a biological catalyst to speed up chemical reactions." },
+  { q: "What is Denaturation of a protein?", a: "The destruction of a protein's 3D shape caused by heat or extreme pH, rendering it non-functional." },
+  { q: "What observation occurs when egg white protein (albumen) is heated or mixed with acid?", a: "It coagulates (turns opaque white and forms solid clumps)." }
+];
+
+const themes = [
+  { bg: "#0f172a", cardBg: "#1e293b", accent: "#38bdf8", text: "#f8fafc" },
+  { bg: "#14532d", cardBg: "#064e3b", accent: "#4ade80", text: "#f0fdf4" },
+  { bg: "#581c87", cardBg: "#3b0764", accent: "#c084fc", text: "#faf5ff" },
+  { bg: "#7c2d12", cardBg: "#451a03", accent: "#fb923c", text: "#fff7ed" },
+  { bg: "#831843", cardBg: "#500724", accent: "#f472b6", text: "#fdf2f8" },
+  { bg: "#1e3a8a", cardBg: "#172554", accent: "#60a5fa", text: "#eff6ff" }
+];
+
+let currentIndex = 0;
+let currentThemeIndex = 0;
+
+function updateCard() {
+  document.getElementById('question').innerText = flashcards[currentIndex].q;
+  document.getElementById('answer').innerText = flashcards[currentIndex].a;
+  document.getElementById('progress').innerText = `Card ${currentIndex + 1} / ${flashcards.length}`;
+  
+  const card = document.getElementById('card');
+  card.classList.remove('flipped');
+}
+
+function flipCard() {
+  const card = document.getElementById('card');
+  card.classList.toggle('flipped');
+
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  const theme = themes[currentThemeIndex];
+  
+  document.documentElement.style.setProperty('--bg-color', theme.bg);
+  document.documentElement.style.setProperty('--card-bg', theme.cardBg);
+  document.documentElement.style.setProperty('--accent-color', theme.accent);
+  document.documentElement.style.setProperty('--text-color', theme.text);
+}
+
+function nextCard(event) {
+  event.stopPropagation();
+  if (currentIndex === flashcards.length - 1) {
+    if (confirm("Great job! You finished Chapter 2. Return to Dashboard?")) {
+      window.location.href = 'index.html';
+      return;
+    }
+  }
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  updateCard();
+}
+
+function prevCard(event) {
+  event.stopPropagation();
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  updateCard();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') flipCard();
+  if (e.code === 'ArrowRight') nextCard(e);
+  if (e.code === 'ArrowLeft') prevCard(e);
+});
+
+updateCard();
+</script>
+
+</body>
+</html>
