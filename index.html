@@ -24,11 +24,50 @@
       background-attachment: fixed;
       color: var(--text-main);
       margin: 0;
-      padding: 30px 20px;
+      padding: 20px;
       min-height: 100vh;
     }
 
     .container { max-width: 950px; margin: 0 auto; }
+
+    /* Breaking News Ticker Bar */
+    .news-ticker-container {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .news-badge {
+      background: #dc2626;
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-right: 14px;
+    }
+
+    .news-ticker-text {
+      white-space: nowrap;
+      animation: ticker 25s linear infinite;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent-glow);
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
 
     .header-card {
       background: var(--card-bg);
@@ -94,7 +133,6 @@
     .stream-tag { font-size: 15px; font-weight: 700; color: var(--accent-glow); margin-bottom: 4px; }
     .course-title { color: var(--text-muted); font-size: 13.5px; }
 
-    /* Fixed & Precision-Aligned Wall Clock Design */
     .clock-wrapper { display: flex; flex-direction: column; align-items: center; }
 
     .clock {
@@ -108,7 +146,6 @@
       overflow: hidden;
     }
 
-    /* Fixed Clock Face Numbers Positioning */
     .clock-number {
       position: absolute;
       font-size: 10px;
@@ -147,12 +184,10 @@
 
     .clock-label { font-size: 10px; font-weight: 800; color: var(--accent-glow); margin-top: 6px; text-transform: uppercase; }
 
-    /* Progress Bar */
     .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
     .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
     .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
-    /* Navigation Hub */
     .tab-navigation {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -291,10 +326,17 @@
 
   <div class="container">
     
+    <!-- Breaking News Live Motivation Ticker -->
+    <div class="news-ticker-container">
+      <span class="news-badge">LIVE NEWS</span>
+      <div class="news-ticker-text">
+        🔴 Mastering Anatomy today to save lives tomorrow — Dedicated to excellence in healthcare and nursing! &nbsp;&nbsp;&nbsp; ⚡ Success is the sum of small efforts repeated daily. Keep pushing forward Stream C! &nbsp;&nbsp;&nbsp; 💡 Understanding the human body is the first step toward extraordinary healing.
+      </div>
+    </div>
+
     <div class="header-card">
       <div class="header-layout">
         
-        <!-- Left Clock -->
         <div class="clock-wrapper">
           <div class="clock">
             <div class="clock-number num-12">12</div>
@@ -309,7 +351,6 @@
           <div class="clock-label">NZ Time</div>
         </div>
 
-        <!-- Center Text -->
         <div class="header-center-text">
           <div class="header-top-bar">
             <span class="badge-tag">🎓 WINTEC A&P REVISION</span>
@@ -320,7 +361,6 @@
           <div class="course-title">Course <strong>GEDU404B/2602</strong> — Applied Structure & Function of the Human Body</div>
         </div>
 
-        <!-- Right Clock -->
         <div class="clock-wrapper">
           <div class="clock">
             <div class="clock-number num-12">12</div>
