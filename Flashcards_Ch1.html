@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy & Physiology - Chapter 1 Flashcards</title>
+<style>
+  :root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --accent-color: #38bdf8;
+    --text-color: #f8fafc;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s ease;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--accent-color);
+  }
+  .progress {
+    font-size: 1rem;
+    margin-top: 5px;
+    opacity: 0.8;
+  }
+  .flashcard-container {
+    width: 90%;
+    max-width: 600px;
+    height: 320px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+  .flashcard.flipped {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+  }
+  .card-back {
+    transform: rotateY(180deg);
+  }
+  .card-label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+  }
+  .card-text {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+  .controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+  }
+  button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 2px solid var(--accent-color);
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  button:hover {
+    background-color: var(--accent-color);
+    color: #0f172a;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Anatomy & Physiology: Ch 1</h1>
+  <div class="progress" id="progress">Card 1 / 200</div>
+</div>
+
+<div class="flashcard-container" onclick="flipCard()">
+  <div class="flashcard" id="card">
+    <div class="card-face card-front">
+      <div class="card-label">Question</div>
+      <div class="card-text" id="question">Loading...</div>
+    </div>
+    <div class="card-face card-back">
+      <div class="card-label">Answer</div>
+      <div class="card-text" id="answer">Loading...</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="prevCard(event)">Previous</button>
+  <button onclick="nextCard(event)">Next</button>
+</div>
+
+<script>
+const flashcards = [
+  // Section 1: Anatomy & Physiology Basics
+  { q: "What is Anatomy?", a: "The study of the structure, shape, and position of body parts and their relationships to one another." },
+  { q: "What is Physiology?", a: "The study of how body parts function and work together." },
+  { q: "What is the Māori term for Anatomy?", a: "Mātai tinana" },
+  { q: "What is the Māori term for Physiology?", a: "Mātai whaiaroaro" },
+  { q: "What is the fundamental relationship between structure and function?", a: "Structure determines function." },
+  { q: "What is Gross (Macroscopic) Anatomy?", a: "The study of large, easily observable body structures with the naked eye." },
+  { q: "What is Microscopic Anatomy?", a: "The study of body structures too small to be seen without a microscope." },
+  { q: "What is Cytology?", a: "The microscopic study of cells." },
+  { q: "What is Histology?", a: "The microscopic study of tissues." },
+  { q: "What is Developmental Anatomy?", a: "The study of structural changes in the body throughout the lifespan." },
+  { q: "What is Embryology?", a: "The study of developmental changes occurring before birth." },
+  { q: "Is 'The heart has four chambers' an anatomical or physiological statement?", a: "Anatomical" },
+  { q: "Is 'The heart contracts to pump blood' an anatomical or physiological statement?", a: "Physiological" },
+  { q: "Is Auscultation (listening to heart sounds) an assessment of anatomy or physiology?", a: "Physiology" },
+  { q: "Is Palpation (feeling a muscle) an assessment of anatomy or physiology?", a: "Anatomy" },
+  { q: "What does the suffix '-ology' mean?", a: "Study of" },
+  { q: "What does the prefix 'Micro-' mean?", a: "Small / requires microscope" },
+  { q: "What does the prefix 'Macro-' mean?", a: "Large / visible to naked eye" },
+  { q: "What does the prefix 'Cyt-' mean?", a: "Cell" },
+  { q: "What does the prefix 'Histo-' mean?", a: "Tissue" },
+
+  // Section 2: Levels of Structural Organization
+  { q: "List the 6 levels of structural organization from simplest to most complex.", a: "Chemical → Cellular → Tissue → Organ → Organ System → Organismal" },
+  { q: "What is the simplest level of structural organization?", a: "Chemical level" },
+  { q: "What is the smallest structural and functional unit of life?", a: "Cell" },
+  { q: "What is an Organelle?", a: "A specialized sub-cellular structure that performs specific functions within a cell." },
+  { q: "What is the most abundant chemical compound in the human body?", a: "Water (H₂O)" },
+  { q: "Approximately how many distinct cell types exist in the human body?", a: "About 250 cell types" },
+  { q: "Name three examples of human cells.", a: "Neuron, smooth muscle cell, red blood cell" },
+  { q: "What is a Tissue?", a: "A group of similar cells working together to perform a specific function." },
+  { q: "Name the four primary tissue types in the human body.", a: "Epithelial, Connective, Muscle, Nervous" },
+  { q: "What is the main function of Epithelial tissue?", a: "Covering and lining body surfaces and cavities." },
+  { q: "What is the main function of Connective tissue?", a: "Supporting, protecting, and binding body structures together." },
+  { q: "What is the main function of Muscle tissue?", a: "Contracting to produce movement." },
+  { q: "What is the main function of Nervous tissue?", a: "Transmitting electrical signals for rapid communication." },
+  { q: "What is an Organ?", a: "A structure composed of two or more tissue types that performs specific functions." },
+  { q: "Is skin considered an organ?", a: "Yes (it is the largest organ of the body)." },
+  { q: "What tissue types are found in the stomach?", a: "Epithelial, smooth muscle, connective, and nervous tissues." },
+  { q: "What is an Organ System?", a: "A group of organs working together to accomplish a common vital purpose." },
+  { q: "What is the Organismal level?", a: "The highest level of organization, representing the sum total of all structural levels working to maintain life." },
+  { q: "What is the Māori term for Organism/Human Being?", a: "Ira tangata" },
+  { q: "Give an example of the Chemical level.", a: "Carbon atoms, glucose molecules, DNA" },
+  { q: "Give an example of the Tissue level.", a: "Smooth muscle tissue layer" },
+  { q: "Give an example of the Organ level.", a: "Stomach, heart, lungs" },
+  { q: "Give an example of the Organ System level.", a: "Digestive system, Cardiovascular system" },
+  { q: "Can an organ belong to more than one organ system?", a: "Yes (e.g., the pancreas belongs to both Digestive and Endocrine systems)." },
+  { q: "What are the most common chemical elements in the human body?", a: "Oxygen, Carbon, Hydrogen, Nitrogen" },
+
+  // Section 3: The 11 Organ Systems
+  { q: "How many major organ systems make up the human body?", a: "11 systems" },
+  { q: "What is the primary function of the Integumentary System?", a: "Forms external body covering, protects deeper tissues, synthesizes vitamin D, prevents water loss." },
+  { q: "What are the major organs of the Integumentary System?", a: "Skin, hair, nails, and sweat/oil glands" },
+  { q: "What are the primary functions of the Skeletal System?", a: "Provides framework, protects organs, stores minerals, forms blood cells." },
+  { q: "What are the major organs of the Skeletal System?", a: "Bones, cartilages, joints, and ligaments" },
+  { q: "What is the primary function of the Muscular System?", a: "Produces movement, maintains posture, generates heat." },
+  { q: "What are the primary organs of the Muscular System?", a: "Skeletal muscles" },
+  { q: "What is the primary function of the Nervous System?", a: "Fast-acting control system that responds to internal and external changes using nerve impulses." },
+  { q: "What are the major organs of the Nervous System?", a: "Brain, spinal cord, nerves, sensory receptors" },
+  { q: "What is the primary function of the Endocrine System?", a: "Secretes hormones to regulate growth, reproduction, and metabolism." },
+  { q: "Name major organs/glands of the Endocrine System.", a: "Pituitary gland, thyroid gland, pancreas, adrenal glands, ovaries/testes" },
+  { q: "What is the primary function of the Cardiovascular System?", a: "Transports oxygen, nutrients, hormones, and waste via blood pumped by the heart." },
+  { q: "What are the major organs of the Cardiovascular System?", a: "Heart and blood vessels" },
+  { q: "What is the primary function of the Lymphatic/Immune System?", a: "Returns leaked fluid to blood, disposes of debris, houses immune cells." },
+  { q: "What are the major organs of the Lymphatic System?", a: "Lymph nodes, lymphatic vessels, spleen, thymus" },
+  { q: "What is the primary function of the Respiratory System?", a: "Supplies oxygen to blood and removes carbon dioxide." },
+  { q: "What are the major organs of the Respiratory System?", a: "Nasal cavity, pharynx, larynx, trachea, bronchi, lungs" },
+  { q: "What is the primary function of the Digestive System?", a: "Breaks down food, absorbs nutrients into blood, eliminates indigestible waste." },
+  { q: "What are the major organs of the Digestive System?", a: "Mouth, esophagus, stomach, small intestine, large intestine, liver, pancreas" },
+  { q: "What is the primary function of the Urinary System?", a: "Eliminates nitrogenous wastes, regulates water, electrolyte, and acid-base balance." },
+  { q: "What are the major organs of the Urinary System?", a: "Kidneys, ureters, urinary bladder, urethra" },
+  { q: "Which three organ systems are primarily responsible for waste elimination?", a: "Urinary, Digestive, and Respiratory systems" },
+  { q: "What is the primary function of the Reproductive System?", a: "Production of offspring, sex cells, and sex hormones." },
+  { q: "Which two organ systems control and coordinate body functions?", a: "Nervous System and Endocrine System" },
+  { q: "What is Homeostasis?", a: "The maintenance of a stable, balanced internal environment in the body." },
+  { q: "How do the Digestive and Cardiovascular systems work together?", a: "Digestive absorbs nutrients; Cardiovascular transports them to all body cells." },
+  { q: "How do the Respiratory and Cardiovascular systems work together?", a: "Respiratory provides O₂; Cardiovascular distributes O₂ and delivers CO₂ back for elimination." },
+  { q: "Which system is responsible for blood cell formation (hematopoiesis)?", a: "Skeletal System (bone marrow)" },
+  { q: "Which system houses white blood cells involved in immunity?", a: "Lymphatic / Immune System" },
+  { q: "Which system removes urea and uric acid from the bloodstream?", a: "Urinary System" },
+
+  // Section 4: Anatomical Position & Directional Terms
+  { q: "What is Anatomical Position?", a: "Standard reference posture: standing upright, facing forward, arms at sides, palms facing forward, feet flat." },
+  { q: "In anatomical position, which direction do the thumbs point?", a: "Laterally (pointing outward, away from the body)" },
+  { q: "What does Superior (Cranial) mean?", a: "Toward the head or upper part of a structure/body." },
+  { q: "What does Inferior (Caudal) mean?", a: "Away from the head or toward the lower part of a structure/body." },
+  { q: "What does Anterior (Ventral) mean?", a: "Toward or at the front of the body." },
+  { q: "What does Posterior (Dorsal) mean?", a: "Toward or at the back of the body." },
+  { q: "What does Medial mean?", a: "Toward or at the midline of the body." },
+  { q: "What does Lateral mean?", a: "Away from the midline of the body; on the outer side." },
+  { q: "What does Proximal mean?", a: "Closer to the origin of a body part or point of attachment of a limb." },
+  { q: "What does Distal mean?", a: "Farther from the origin of a body part or point of attachment of a limb." },
+  { q: "What does Superficial (External) mean?", a: "Toward or at the body surface." },
+  { q: "What does Deep (Internal) mean?", a: "Away from the body surface; more internal." },
+  { q: "The ankle is _____ to the thigh.", a: "Distal" },
+  { q: "The elbow is _____ to the eye.", a: "Lateral and Inferior" },
+  { q: "The sternum (breastbone) is _____ to the heart.", a: "Anterior (and Superficial)" },
+  { q: "The heart is _____ to the sternum.", a: "Posterior (and Deep)" },
+  { q: "The humerus (upper arm) is _____ to the ulna (forearm).", a: "Proximal" },
+  { q: "The femur (thigh) is _____ to the toes.", a: "Proximal" },
+  { q: "The nose is _____ to the eyes.", a: "Medial" },
+  { q: "The ears are _____ to the eyes.", a: "Lateral" },
+  { q: "The skin is _____ to the skeletal muscles.", a: "Superficial" },
+  { q: "The bones are _____ to the skin.", a: "Deep" },
+  { q: "The shoulder is _____ to the elbow.", a: "Proximal" },
+  { q: "The fingers are _____ to the wrist.", a: "Distal" },
+  { q: "The head is _____ to the chest.", a: "Superior" },
+  { q: "The stomach is _____ to the lungs.", a: "Inferior" },
+  { q: "The spine is _____ to the breastbone.", a: "Posterior" },
+  { q: "The patella (knee cap) is _____ to the tibia (shin).", a: "Proximal" },
+  { q: "The carpals (wrist) are _____ to the phalanges (finger bones).", a: "Proximal" },
+  { q: "The tarsals (ankle) are _____ to the fibula.", a: "Distal" },
+  { q: "The nipples are _____ to the sternum.", a: "Lateral" },
+  { q: "The cervical region (neck) is _____ to the sternal region.", a: "Superior" },
+  { q: "The teeth are _____ to the lips.", a: "Deep (or Posterior)" },
+  { q: "The abdomen is _____ to the thorax.", a: "Inferior" },
+  { q: "The little finger is _____ to the thumb.", a: "Medial" },
+  { q: "The palm is on the _____ surface of the hand.", a: "Anterior" },
+  { q: "In clinical evaluation, 'right' and 'left' refer to whose side?", a: "The patient's right and left (not the observer's)." },
+
+  // Section 5: Body Planes & Cuts
+  { q: "How does a Sagittal plane divide the body?", a: "Into left and right parts." },
+  { q: "What is a Midsagittal (Median) plane?", a: "A sagittal plane passing exactly down the midline, dividing body into equal left and right halves." },
+  { q: "How does a Frontal (Coronal) plane divide the body?", a: "Into anterior (front) and posterior (back) parts." },
+  { q: "How does a Transverse (Horizontal) plane divide the body?", a: "Into superior (upper) and inferior (lower) parts." },
+  { q: "A cut dividing the brain into left and right hemispheres is in which plane?", a: "Sagittal plane" },
+  { q: "A cut separating the face from the back of the head is in which plane?", a: "Frontal (Coronal) plane" },
+  { q: "A cross-sectional CT scan of the chest is taken along which plane?", a: "Transverse plane" },
+  { q: "Which body plane(s) would allow viewing both kidneys simultaneously?", a: "Frontal or Transverse plane" },
+  { q: "Does a sagittal cut through the chest show both lungs?", a: "No, it shows only one lung on that side." },
+  { q: "Which organs are visible in a transverse section at the level of the chest?", a: "Heart, lungs, esophagus, trachea" },
+  { q: "Is the stomach visible in a transverse scan through the mid-chest?", a: "No (stomach is inferior, in the abdominal cavity)." },
+  { q: "True or False: A transverse plane divides the body into right and left halves.", a: "False (it divides into superior and inferior)." },
+  { q: "True or False: A sagittal plane divides the body into top and bottom.", a: "False (it divides into left and right)." },
+  { q: "True or False: A frontal plane divides the body into front and back.", a: "True" },
+  { q: "What is another name for Frontal plane?", a: "Coronal plane" },
+  { q: "What is another name for Transverse plane?", a: "Horizontal plane / Cross section" },
+  { q: "Which plane is used to cut off limbs transversely?", a: "Transverse plane" },
+  { q: "A longitudinal section along the length of the torso could be which planes?", a: "Frontal or Sagittal" },
+  { q: "A cross section of a blood vessel is cut along which plane?", a: "Transverse plane" },
+  { q: "Which plane is best for lateral views of internal brain structures?", a: "Sagittal plane" },
+
+  // Section 6: Body Cavities
+  { q: "What are the two major closed body cavities?", a: "Dorsal body cavity and Ventral body cavity" },
+  { q: "What subdivisions make up the Dorsal body cavity?", a: "Cranial cavity and Spinal (Vertebral) cavity" },
+  { q: "What organ is protected inside the Cranial cavity?", a: "Brain" },
+  { q: "What organ is protected inside the Spinal cavity?", a: "Spinal cord" },
+  { q: "What subdivisions make up the Ventral body cavity?", a: "Thoracic cavity and Abdominopelvic cavity" },
+  { q: "What muscular structure separates the Thoracic cavity from the Abdominopelvic cavity?", a: "Diaphragm" },
+  { q: "Which major organs reside within the Thoracic cavity?", a: "Heart, lungs, esophagus, trachea" },
+  { q: "The Abdominopelvic cavity is divided into which two continuous regions?", a: "Abdominal cavity and Pelvic cavity" },
+  { q: "Is there a physical wall separating the abdominal cavity from the pelvic cavity?", a: "No" },
+  { q: "Which organs are contained in the Abdominal cavity?", a: "Stomach, liver, intestines, spleen, gallbladder, kidneys, pancreas" },
+  { q: "Which organs are contained in the Pelvic cavity?", a: "Urinary bladder, reproductive organs, rectum" },
+  { q: "In which cavity are the ovaries located?", a: "Pelvic cavity" },
+  { q: "In which cavity are the kidneys located?", a: "Abdominal cavity" },
+  { q: "In which cavity are the lungs located?", a: "Thoracic cavity" },
+  { q: "In which cavity is the heart located?", a: "Thoracic cavity (specifically within the mediastinum/pericardial cavity)" },
+  { q: "In which cavity is the urinary bladder located?", a: "Pelvic cavity" },
+  { q: "Into how many Quadrants is the abdominopelvic cavity clinical divided?", a: "4 Quadrants" },
+  { q: "Name the 4 Abdominopelvic Quadrants.", a: "Right Upper (RUQ), Left Upper (LUQ), Right Lower (RLQ), Left Lower (LLQ)" },
+  { q: "In which quadrant is the liver predominantly located?", a: "Right Upper Quadrant (RUQ)" },
+  { q: "In which quadrant is the appendix located?", a: "Right Lower Quadrant (RLQ)" },
+  { q: "In which quadrant is the stomach predominantly located?", a: "Left Upper Quadrant (LUQ)" },
+  { q: "Is the thoracic cavity superior to the abdominal cavity?", a: "Yes" },
+  { q: "Is the pelvic cavity inferior to the abdominal cavity?", a: "Yes" },
+  { q: "Is the cranial cavity superior to the spinal cavity?", a: "Yes" },
+  { q: "Which major body cavity provides the most complete bony protection?", a: "Dorsal body cavity" },
+
+  // Section 7: Regional Terms
+  { q: "What is the purpose of Anatomical Regional Terms?", a: "To precisely identify specific body areas during clinical assessment." },
+  { q: "What body region does 'Cephalic' refer to?", a: "Head" },
+  { q: "What body region does 'Cervical' refer to?", a: "Neck" },
+  { q: "What body region does 'Sternal' refer to?", a: "Breastbone / Sternum area" },
+  { q: "What body region does 'Axillary' refer to?", a: "Armpit" },
+  { q: "What body region does 'Brachial' refer to?", a: "Arm (upper arm)" },
+  { q: "What body region does 'Antecubital' refer to?", a: "Anterior surface of elbow" },
+  { q: "What body region does 'Umbilical' refer to?", a: "Navel / Belly button" },
+  { q: "What body region does 'Femoral' refer to?", a: "Thigh" },
+  { q: "What body region does 'Patellar' refer to?", a: "Anterior knee (kneecap)" },
+  { q: "What body region does 'Popliteal' refer to?", a: "Posterior knee area" },
+  { q: "What body region does 'Plantar' refer to?", a: "Sole of the foot" },
+  { q: "What body region does 'Gluteal' refer to?", a: "Buttock" },
+  { q: "What body region does 'Lumbar' refer to?", a: "Lower back" },
+  { q: "What body region does 'Digital' refer to?", a: "Fingers or Toes" },
+
+  // Section 8: Measurement, Lab Concepts & Solutions
+  { q: "Which measurement system is standard in health sciences?", a: "Metric System / SI Units" },
+  { q: "What is the base metric unit for Mass?", a: "Kilogram (kg) / Gram (g)" },
+  { q: "What is the base metric unit for Volume?", a: "Litre (L)" },
+  { q: "What is the base metric unit for Length?", a: "Metre (m)" },
+  { q: "What is the standard abbreviation for millilitre?", a: "mL or ml" },
+  { q: "How many grams (g) are in 1 kilogram (kg)?", a: "1,000 g" },
+  { q: "How many milligrams (mg) are in 1 gram (g)?", a: "1,000 mg" },
+  { q: "How many millilitres (mL) are in 1 Litre (L)?", a: "1,000 mL" },
+  { q: "What does 'cc' stand for and what volume is it equivalent to?", a: "Cubic Centimetre (cm³); 1 cc = 1 mL" },
+  { q: "Electronic lab balances typically measure mass in which unit?", a: "Grams (g)" },
+  { q: "What does Taring (zeroing) a balance mean?", a: "Resetting balance to 0.00 g with weigh boat attached to measure only net substance." },
+  { q: "Approximately how much does 1 mL of pure water weigh?", a: "1 gram (1 g)" },
+  { q: "Approximately how much does 1 Litre of pure water weigh?", a: "1 kilogram (1 kg)" },
+  { q: "How is infant urine output calculated in clinical settings?", a: "By weighing diapers: 1 gram increase in diaper mass = 1 mL of urine." },
+  { q: "What is a Solution?", a: "A homogeneous mixture of two or more substances." },
+  { q: "What is a Solute?", a: "The substance dissolved in a solution (e.g., salt or sugar)." },
+  { q: "What is a Solvent?", a: "The dissolving medium in a solution (e.g., water)." },
+  { q: "What is Concentration?", a: "The amount of solute dissolved in a given volume of solvent." },
+  { q: "What is a Concentrated solution?", a: "A solution containing a relatively large amount of solute." },
+  { q: "What is a Dilute solution?", a: "A solution containing a relatively small amount of solute." },
+  { q: "What are the measurement markings on a syringe called?", a: "Graduations" },
+  { q: "Which part of the syringe plunger seal is read to determine volume?", a: "The top edge of the leading black ring (closest to needle tip)." },
+  { q: "True or False: Read syringe volume from the pointed tip of the plunger.", a: "False (read from top flat ring edge)." },
+  { q: "How do you calculate the value of unlabelled graduation marks on a syringe?", a: "Difference between numbered lines divided by number of small subdivisions." },
+  { q: "If there are 5 subdivisions between 3 mL and 4 mL on a syringe, what does each line equal?", a: "0.2 mL (1 mL ÷ 5 = 0.2 mL)" }
+];
+
+const themes = [
+  { bg: "#0f172a", cardBg: "#1e293b", accent: "#38bdf8", text: "#f8fafc" },
+  { bg: "#14532d", cardBg: "#064e3b", accent: "#4ade80", text: "#f0fdf4" },
+  { bg: "#581c87", cardBg: "#3b0764", accent: "#c084fc", text: "#faf5ff" },
+  { bg: "#7c2d12", cardBg: "#451a03", accent: "#fb923c", text: "#fff7ed" },
+  { bg: "#831843", cardBg: "#500724", accent: "#f472b6", text: "#fdf2f8" },
+  { bg: "#1e3a8a", cardBg: "#172554", accent: "#60a5fa", text: "#eff6ff" }
+];
+
+let currentIndex = 0;
+let currentThemeIndex = 0;
+
+function updateCard() {
+  document.getElementById('question').innerText = flashcards[currentIndex].q;
+  document.getElementById('answer').innerText = flashcards[currentIndex].a;
+  document.getElementById('progress').innerText = `Card ${currentIndex + 1} / ${flashcards.length}`;
+  
+  const card = document.getElementById('card');
+  card.classList.remove('flipped');
+}
+
+function flipCard() {
+  const card = document.getElementById('card');
+  card.classList.toggle('flipped');
+
+  // Change color theme on flip
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  const theme = themes[currentThemeIndex];
+  
+  document.documentElement.style.setProperty('--bg-color', theme.bg);
+  document.documentElement.style.setProperty('--card-bg', theme.cardBg);
+  document.documentElement.style.setProperty('--accent-color', theme.accent);
+  document.documentElement.style.setProperty('--text-color', theme.text);
+}
+
+function nextCard(event) {
+  event.stopPropagation();
+  currentIndex = (currentIndex + 1) % flashcards.length;
+  updateCard();
+}
+
+function prevCard(event) {
+  event.stopPropagation();
+  currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+  updateCard();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') flipCard();
+  if (e.code === 'ArrowRight') nextCard(e);
+  if (e.code === 'ArrowLeft') prevCard(e);
+});
+
+// Initialize
+updateCard();
+</script>
+
+</body>
+</html>
