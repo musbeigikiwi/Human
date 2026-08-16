@@ -30,7 +30,6 @@
 
     .container { max-width: 950px; margin: 0 auto; }
 
-    /* Glass Header */
     .header-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -95,34 +94,34 @@
     .stream-tag { font-size: 15px; font-weight: 700; color: var(--accent-glow); margin-bottom: 4px; }
     .course-title { color: var(--text-muted); font-size: 13.5px; }
 
-    /* Real Wall Clock Design (New Zealand Time) */
+    /* Fixed & Precision-Aligned Wall Clock Design */
     .clock-wrapper { display: flex; flex-direction: column; align-items: center; }
 
     .clock {
-      width: 75px;
-      height: 75px;
+      width: 80px;
+      height: 80px;
       background: #ffffff;
       border-radius: 50%;
       border: 4px solid #334155;
       position: relative;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
 
+    /* Fixed Clock Face Numbers Positioning */
     .clock-number {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      font-size: 8px;
-      font-weight: 800;
+      font-size: 10px;
+      font-weight: 900;
       color: #0f172a;
-      padding: 3px;
+      line-height: 1;
+      user-select: none;
     }
 
-    .num-12 { top: 2px; }
-    .num-3 { right: 4px; top: 30px; text-align: right; }
-    .num-6 { bottom: 2px; }
-    .num-9 { left: 4px; top: 30px; text-align: left; }
+    .num-12 { top: 6px; left: 50%; transform: translateX(-50%); }
+    .num-3  { right: 6px; top: 50%; transform: translateY(-50%); }
+    .num-6  { bottom: 6px; left: 50%; transform: translateX(-50%); }
+    .num-9  { left: 6px; top: 50%; transform: translateY(-50%); }
 
     .clock-center {
       position: absolute;
@@ -139,11 +138,12 @@
       bottom: 50%; left: 50%;
       transform-origin: bottom center;
       border-radius: 4px;
+      z-index: 5;
     }
 
-    .hand.hour { width: 3px; height: 20px; background: #0f172a; }
-    .hand.minute { width: 2px; height: 26px; background: #2563eb; }
-    .hand.second { width: 1.5px; height: 30px; background: #dc2626; }
+    .hand.hour { width: 3px; height: 22px; background: #0f172a; margin-left: -1.5px; }
+    .hand.minute { width: 2px; height: 28px; background: #2563eb; margin-left: -1px; }
+    .hand.second { width: 1.5px; height: 32px; background: #dc2626; margin-left: -0.75px; z-index: 6; }
 
     .clock-label { font-size: 10px; font-weight: 800; color: var(--accent-glow); margin-top: 6px; text-transform: uppercase; }
 
@@ -152,7 +152,7 @@
     .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
     .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
-    /* Nav Hub Buttons */
+    /* Navigation Hub */
     .tab-navigation {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -189,7 +189,6 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Dashboard Cards */
     .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
@@ -208,7 +207,6 @@
     .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 12px 0; color: #ffffff; }
     .topic-stats { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); font-weight: 600; }
 
-    /* Dynamic Quiz Card (Colors Change per Question) */
     .quiz-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -257,7 +255,6 @@
 
     .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
-    /* Bilingual Footer */
     .contact-footer {
       background: var(--card-bg);
       border-radius: 18px;
@@ -294,7 +291,6 @@
 
   <div class="container">
     
-    <!-- Dark Glass Header with New Zealand Round Clocks -->
     <div class="header-card">
       <div class="header-layout">
         
@@ -350,7 +346,6 @@
       </div>
     </div>
 
-    <!-- Navigation Hub -->
     <div class="tab-navigation">
       <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
         <span style="font-size: 18px;">🚀</span>
@@ -370,7 +365,6 @@
       </a>
     </div>
 
-    <!-- Topics Tab -->
     <div id="topics-tab" class="tab-content active">
       <div class="topics-grid">
         <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
@@ -401,7 +395,6 @@
       </div>
     </div>
 
-    <!-- Dynamic Quiz Tab -->
     <div id="quiz-tab" class="tab-content">
       <div class="quiz-card" id="dynamic-quiz-card">
         <div class="quiz-meta">
@@ -420,7 +413,6 @@
       </div>
     </div>
 
-    <!-- Bilingual Footer -->
     <div class="contact-footer">
       <h3>Contact & Developer Info</h3>
       <p class="lang-fa">این وب‌سایت توسط <strong>Mustafa Beigi (مصطفی بیگی)</strong> از بخش <strong>Stream C - Te-ara-Puteka</strong> برای یادگیری بهتر درس <strong>Human Anatomy and Physiology</strong> طراحی و ساخته شده است.</p>
@@ -433,7 +425,6 @@
   </div>
 
   <script>
-    // Audio Toggle
     const audio = document.getElementById('bg-audio');
     let audioPlaying = false;
 
@@ -454,10 +445,8 @@
       }
     }
 
-    // New Zealand Local Time Real Clocks (Analog)
     function updateNZClocks() {
       const now = new Date();
-      // Format to New Zealand Time zone
       const nzString = now.toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
       const nzDate = new Date(nzString);
 
@@ -469,12 +458,10 @@
       const minDeg = ((min + sec / 60) / 60) * 360;
       const hrDeg = ((hr % 12 + min / 60) / 12) * 360;
 
-      // Left Clock
       document.getElementById('l-sec').style.transform = `rotate(${secDeg}deg)`;
       document.getElementById('l-min').style.transform = `rotate(${minDeg}deg)`;
       document.getElementById('l-hour').style.transform = `rotate(${hrDeg}deg)`;
 
-      // Right Clock
       document.getElementById('r-sec').style.transform = `rotate(${secDeg}deg)`;
       document.getElementById('r-min').style.transform = `rotate(${minDeg}deg)`;
       document.getElementById('r-hour').style.transform = `rotate(${hrDeg}deg)`;
@@ -483,7 +470,6 @@
     setInterval(updateNZClocks, 1000);
     updateNZClocks();
 
-    // Tab Navigation
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-card-btn').forEach(b => b.classList.remove('active'));
@@ -491,7 +477,6 @@
       if (btn) btn.classList.add('active');
     }
 
-    // MCQ Engine & Color Changing Mechanics per Question
     let activeDeck = [];
     let currentIndex = 0;
     let currentChapterFile = '';
@@ -499,7 +484,6 @@
     let timer;
     let timeLeft = 60;
 
-    // Array of subtle glass theme colors for question transitions
     const questionColors = [
       { bg: "rgba(16, 185, 129, 0.12)", border: "rgba(16, 185, 129, 0.3)" },
       { bg: "rgba(37, 99, 235, 0.12)", border: "rgba(37, 99, 235, 0.3)" },
