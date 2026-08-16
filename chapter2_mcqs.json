@@ -1,0 +1,377 @@
+[
+  {
+    "question": "What is the basic unit of matter?",
+    "options": ["solution", "organ", "tissue", "atom"],
+    "correct": 3
+  },
+  {
+    "question": "Which subatomic particle has a positive charge?",
+    "options": ["electron", "neutron", "proton", "anion"],
+    "correct": 2
+  },
+  {
+    "question": "Which subatomic particle has no electrical charge?",
+    "options": ["electron", "proton", "cation", "neutron"],
+    "correct": 3
+  },
+  {
+    "question": "Where are electrons found in an atom?",
+    "options": ["inside the proton", "in shells around the nucleus", "only in the nucleus", "between molecules"],
+    "correct": 1
+  },
+  {
+    "question": "The atomic number of an element equals the number of:",
+    "options": ["neutrons", "protons", "electron shells", "molecules"],
+    "correct": 1
+  },
+  {
+    "question": "An element is:",
+    "options": ["a molecule containing water", "two solutions mixed together", "a pure substance made of one type of atom", "a charged electron shell"],
+    "correct": 2
+  },
+  {
+    "question": "A molecule is best defined as:",
+    "options": ["one proton", "one electron shell", "two or more atoms chemically bonded", "a liquid element"],
+    "correct": 2
+  },
+  {
+    "question": "What is the chemical symbol for sodium?",
+    "options": ["Na", "So", "S", "N"],
+    "correct": 0
+  },
+  {
+    "question": "A neutral atom has:",
+    "options": ["more electrons than protons", "equal numbers of protons and electrons", "no neutrons", "only one electron shell"],
+    "correct": 1
+  },
+  {
+    "question": "What is the maximum number of electrons in the first electron shell?",
+    "options": ["2", "1", "4", "8"],
+    "correct": 0
+  },
+  {
+    "question": "A bond formed when atoms share electrons is called:",
+    "options": ["ionic", "neutral", "acidic", "covalent"],
+    "correct": 3
+  },
+  {
+    "question": "An ionic bond begins with:",
+    "options": ["mixing two solvents", "sharing protons", "loss of neutrons", "complete transfer of one or more electrons"],
+    "correct": 3
+  },
+  {
+    "question": "An atom that gains an electron becomes a:",
+    "options": ["negative anion", "positive cation", "neutral neutron", "covalent molecule"],
+    "correct": 0
+  },
+  {
+    "question": "An atom that loses an electron becomes a:",
+    "options": ["neutral molecule", "negative anion", "positive cation", "solvent"],
+    "correct": 2
+  },
+  {
+    "question": "What is the chemical formula for water?",
+    "options": ["H2O", "HO", "O2H", "H2O2"],
+    "correct": 0
+  },
+  {
+    "question": "A solution contains:",
+    "options": ["only a solvent", "one or more solutes dissolved in a solvent", "only a solute", "only water and salt"],
+    "correct": 1
+  },
+  {
+    "question": "An acid releases which ion in water?",
+    "options": ["H+", "OH−", "Na+", "Cl−"],
+    "correct": 0
+  },
+  {
+    "question": "A base (alkali) is associated with:",
+    "options": ["releasing H+ only", "releasing OH− and accepting H+", "removing all water", "forming electrons"],
+    "correct": 1
+  },
+  {
+    "question": "Which substance is a carbohydrate?",
+    "options": ["cholesterol", "collagen", "glucose", "water"],
+    "correct": 2
+  },
+  {
+    "question": "A carbohydrate made of two simple sugars is a:",
+    "options": ["monosaccharide", "disaccharide", "polysaccharide", "amino acid"],
+    "correct": 1
+  },
+  {
+    "question": "Starch is an example of a:",
+    "options": ["lipid", "protein", "polysaccharide", "mineral"],
+    "correct": 2
+  },
+  {
+    "question": "Lipids are built mainly from:",
+    "options": ["fatty acids and glycerol", "amino acids", "glucose only", "ions and water"],
+    "correct": 0
+  },
+  {
+    "question": "Proteins are chains of:",
+    "options": ["hydrogen ions", "fatty acids", "amino acids", "monosaccharides"],
+    "correct": 2
+  },
+  {
+    "question": "The pH scale measures the concentration of:",
+    "options": ["hydrogen ions", "oxygen molecules", "salt crystals", "proteins"],
+    "correct": 0
+  },
+  {
+    "question": "What is the normal pH range of human blood?",
+    "options": ["7.35–7.45", "7.00 exactly", "6.35–6.45", "8.35–8.45"],
+    "correct": 0
+  },
+  {
+    "question": "A neutral atom has 8 protons. How many electrons does it have?",
+    "options": ["2", "6", "8", "16"],
+    "correct": 2
+  },
+  {
+    "question": "An atom has 2 electrons in its first shell and 6 in its outer shell. To fill the outer shell, it needs:",
+    "options": ["eight more shells", "six more protons", "one fewer neutron", "two more electrons"],
+    "correct": 3
+  },
+  {
+    "question": "Which list contains the four elements that make up about 96% of the human body?",
+    "options": ["oxygen, sodium, magnesium, chlorine", "calcium, sodium, chlorine, iron", "carbon, calcium, potassium, iodine", "oxygen, carbon, hydrogen, nitrogen"],
+    "correct": 3
+  },
+  {
+    "question": "What happens when sodium and chlorine form sodium chloride?",
+    "options": ["Chlorine transfers a proton to sodium.", "Sodium transfers an electron to chlorine.", "They share neutrons equally.", "Both atoms lose all outer-shell electrons."],
+    "correct": 1
+  },
+  {
+    "question": "After chlorine gains one electron, which description is correct?",
+    "options": ["Cl− anion", "Cl+ cation", "neutral Cl atom", "Cl proton"],
+    "correct": 0
+  },
+  {
+    "question": "Which particle normally changes during ionic or covalent bonding?",
+    "options": ["proton", "neutron", "electron", "nucleus"],
+    "correct": 2
+  },
+  {
+    "question": "Which property of water helps the body resist rapid temperature changes?",
+    "options": ["Water is strongly coloured.", "Water releases sodium ions.", "Water reduces temperature fluctuations.", "Water is a protein."],
+    "correct": 2
+  },
+  {
+    "question": "Why is water important as a transport medium in the body?",
+    "options": ["It cannot cross membranes.", "It is always acidic.", "It is made of amino acids.", "Many solutes dissolve in it."],
+    "correct": 3
+  },
+  {
+    "question": "When NaCl dissolves in water, it separates into:",
+    "options": ["Na and Cl atoms with no charge", "H+ and OH− ions", "Na+ and Cl− ions", "two water molecules"],
+    "correct": 2
+  },
+  {
+    "question": "A typical neutralisation reaction between an acid and a base produces:",
+    "options": ["only hydrogen gas", "salt and water", "a protein and lipid", "only an acid"],
+    "correct": 1
+  },
+  {
+    "question": "Which solution is more acidic?",
+    "options": ["pH 9", "pH 6", "pH 7", "pH 4"],
+    "correct": 3
+  },
+  {
+    "question": "A solution with pH 10 is classified as:",
+    "options": ["acidic", "alkaline (basic)", "neutral", "a protein"],
+    "correct": 1
+  },
+  {
+    "question": "In a neutral solution:",
+    "options": ["H+ is greater than OH−", "H+ and OH− are equal", "OH− is greater than H+", "there are no ions"],
+    "correct": 1
+  },
+  {
+    "question": "Plants commonly store glucose as:",
+    "options": ["starch", "glycogen", "collagen", "glycerol"],
+    "correct": 0
+  },
+  {
+    "question": "Humans commonly store carbohydrate as:",
+    "options": ["cellulose", "fructose only", "glycogen", "keratin"],
+    "correct": 2
+  },
+  {
+    "question": "What is the main importance of glucose to cells?",
+    "options": ["It forms all electron shells.", "It is a universal cellular fuel used to make ATP.", "It neutralises every acid.", "It is the main digestive enzyme."],
+    "correct": 1
+  },
+  {
+    "question": "Which statement correctly compares fats and oils at room temperature?",
+    "options": ["Both always dissolve in water.", "Fats are proteins; oils are carbohydrates.", "Fats are usually solid; oils are usually liquid.", "Oils are solid; fats are liquid."],
+    "correct": 2
+  },
+  {
+    "question": "Which property is characteristic of lipids?",
+    "options": ["They are generally insoluble in water.", "They dissolve readily in water.", "They are made only of H+ ions.", "They always have pH 7."],
+    "correct": 0
+  },
+  {
+    "question": "Which is a functional role of a protein?",
+    "options": ["being a solvent", "forming electron shells", "enzyme activity", "creating sodium ions"],
+    "correct": 2
+  },
+  {
+    "question": "Which protein has a mainly structural role?",
+    "options": ["sodium chloride", "glucose", "glycerol", "collagen"],
+    "correct": 3
+  },
+  {
+    "question": "Why are electrolyte ions important in the body?",
+    "options": ["They make every solution neutral.", "They replace all proteins.", "They support nerve impulses and muscle contraction.", "They remove all water from cells."],
+    "correct": 2
+  },
+  {
+    "question": "Which is a limitation of universal indicator?",
+    "options": ["It always gives pH to two decimal places.", "It measures protein concentration.", "It cannot be used with any solution.", "Colour interpretation is approximate and subjective."],
+    "correct": 3
+  },
+  {
+    "question": "Which tool gives the most precise pH measurement in the laboratory?",
+    "options": ["thermometer", "universal indicator colour chart", "pH meter", "electronic balance"],
+    "correct": 2
+  },
+  {
+    "question": "Heat or strong acid can cause a protein to:",
+    "options": ["denature and change shape", "gain a new electron shell", "turn into a carbohydrate", "become a neutral atom"],
+    "correct": 0
+  },
+  {
+    "question": "Rice contains 31.0 g carbohydrate per 100 g. How much carbohydrate is in a 120 g serving?",
+    "options": ["37.2 g", "31.0 g", "25.8 g", "51.0 g"],
+    "correct": 0
+  },
+  {
+    "question": "An ion has 11 protons and 10 electrons. What is it?",
+    "options": ["a 1− anion", "a 1+ cation", "a neutral atom", "a neutron"],
+    "correct": 1
+  },
+  {
+    "question": "An ion has 17 protons and 18 electrons. Which description is correct?",
+    "options": ["1+ cation", "molecule with no charge", "neutral atom", "1− anion"],
+    "correct": 3
+  },
+  {
+    "question": "An atom has the electron arrangement 2,8,1. Which change would most simply give it a full outer shell?",
+    "options": ["gain seven protons", "share all eleven electrons", "gain one neutron", "lose one outer electron"],
+    "correct": 3
+  },
+  {
+    "question": "Two atoms become stable by sharing a pair of valence electrons. Which conclusion is correct?",
+    "options": ["They formed two anions by electron transfer.", "They formed a covalent bond.", "Their proton numbers changed.", "They formed a salt by losing neutrons."],
+    "correct": 1
+  },
+  {
+    "question": "Why do Na+ and Cl− remain associated after electron transfer?",
+    "options": ["Opposite electrical charges attract.", "They share the same nucleus.", "Their neutrons attract water only.", "Both ions have become positively charged."],
+    "correct": 0
+  },
+  {
+    "question": "Cerebrospinal fluid around the brain and amniotic fluid around a fetus demonstrate which role of water?",
+    "options": ["cushioning and protection", "forming atomic nuclei", "making lipids soluble", "producing cations"],
+    "correct": 0
+  },
+  {
+    "question": "After prolonged vomiting, why might an electrolyte drink be useful?",
+    "options": ["It converts lipids to protons.", "It denatures stomach proteins.", "It removes all sodium from blood.", "It replaces lost water and dissolved ions."],
+    "correct": 3
+  },
+  {
+    "question": "A student dissolves 5 g of glucose in 100 mL of water. Which statement is correct?",
+    "options": ["Water is the solvent and glucose is the solute.", "Glucose is the solvent and water is the solute.", "Both substances are solvents.", "The mixture contains no solution."],
+    "correct": 0
+  },
+  {
+    "question": "An unknown solution has pH 3 and releases H+ ions. It is best classified as:",
+    "options": ["neutral", "acidic", "alkaline", "a lipid"],
+    "correct": 1
+  },
+  {
+    "question": "An unknown solution has pH 11 and supplies OH− ions. It is:",
+    "options": ["an acid", "a monosaccharide", "neutral water", "a base (alkali)"],
+    "correct": 3
+  },
+  {
+    "question": "Why can a major change in blood pH be life-threatening?",
+    "options": ["It increases the number of protons in every atom.", "It can alter protein shape and function.", "It converts blood to pure water.", "It removes all carbon from the body."],
+    "correct": 1
+  },
+  {
+    "question": "How does an antacid relieve excess stomach acidity?",
+    "options": ["Its basic component neutralises some stomach acid.", "It adds more H+ to the stomach.", "It converts acid to protein.", "It removes every ion from the stomach."],
+    "correct": 0
+  },
+  {
+    "question": "A deeply coloured drink must be tested for pH. Which method is most suitable and why?",
+    "options": ["An electronic balance, because pH is a mass.", "Universal indicator, because colour never affects it.", "A pH meter, because the drink colour may interfere with indicator colour.", "A thermometer, because pH is temperature."],
+    "correct": 2
+  },
+  {
+    "question": "A student measures acid, then places the unrinsed pH probe into water. What is the main problem?",
+    "options": ["The acid may contaminate the water and lower its measured pH.", "The probe will count proteins instead.", "The water will become a lipid.", "The acid will increase the atomic number of hydrogen."],
+    "correct": 0
+  },
+  {
+    "question": "In the neutralisation lab, universal indicator changes from purple to green as HCl is added to NaOH. What does green indicate?",
+    "options": ["a strongly alkaline solution", "a strongly acidic solution", "approximately pH 7, the neutral endpoint", "complete protein denaturation"],
+    "correct": 2
+  },
+  {
+    "question": "Why should acid be added slowly while stirring during a neutralisation experiment?",
+    "options": ["To approach the endpoint safely and avoid overshooting it", "To create more protons in the sodium nucleus", "To turn the indicator into a protein", "To make the pH meter less precise"],
+    "correct": 0
+  },
+  {
+    "question": "Egg white becomes opaque and coagulates after acid is added. The best explanation is:",
+    "options": ["Its glucose became an ion.", "Its proteins have denatured and changed shape.", "Its atoms lost all protons.", "Its lipids became water-soluble."],
+    "correct": 1
+  },
+  {
+    "question": "A very high temperature reduces the function of a protein. Which sequence is most accurate?",
+    "options": ["Heat converts the protein into NaCl.", "Heat adds protons, so the protein becomes an element.", "Heat changes amino acids into glucose.", "Heat changes protein shape, so its function may be lost."],
+    "correct": 3
+  },
+  {
+    "question": "Milk curdles after acid is added. This observation mainly demonstrates:",
+    "options": ["neutral blood pH", "ionic bonding of sodium and chlorine", "formation of a monosaccharide", "protein denaturation"],
+    "correct": 3
+  },
+  {
+    "question": "A nutrient molecule contains carbon and is classified as a simple sugar. Which group does it belong to?",
+    "options": ["lipids", "carbohydrates", "proteins", "salts"],
+    "correct": 1
+  },
+  {
+    "question": "A long biological molecule is made from repeating amino-acid units. It must be a:",
+    "options": ["lipid", "polysaccharide", "protein", "salt"],
+    "correct": 2
+  },
+  {
+    "question": "Many glucose units are joined for energy storage in a human cell. The product is:",
+    "options": ["sucrose, an amino acid", "starch, a protein", "collagen, a lipid", "glycogen, a polysaccharide"],
+    "correct": 3
+  },
+  {
+    "question": "Which pairing of a biological molecule with its function is correct?",
+    "options": ["carbohydrate—digestive enzyme", "lipid—long-term energy storage and insulation", "protein—main solvent of blood", "water—stored as glycogen"],
+    "correct": 1
+  },
+  {
+    "question": "Why is an iron ion important in haemoglobin?",
+    "options": ["It makes blood pH exactly 7.", "It helps haemoglobin bind and transport oxygen.", "It converts protein into glucose.", "It supplies OH− to every cell."],
+    "correct": 1
+  },
+  {
+    "question": "A sample gives pH 2.5 on a correctly calibrated meter and causes egg white to coagulate. Which interpretation is best?",
+    "options": ["The sample is a salt because it has no H+.", "The sample is alkaline and forms glycogen.", "The sample is neutral and dissolves all lipids.", "The sample is acidic and can denature protein."],
+    "correct": 3
+  }
+]
