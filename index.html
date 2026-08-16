@@ -156,7 +156,7 @@
     .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
     .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
-    /* Navigation Hub Grid */
+    /* Navigation Hub */
     .tab-navigation {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -193,7 +193,7 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Topics */
+    /* Topics Grid */
     .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
@@ -260,7 +260,7 @@
 
     .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
-    /* Links Section Styling */
+    /* Links Section */
     .links-card {
       background: var(--card-bg);
       border-radius: 20px;
@@ -336,12 +336,12 @@
 
   <div class="container">
     
-    <!-- Live News Ticker -->
+    <!-- Live News Ticker with School Holiday -->
     <div class="news-ticker-container">
       <span class="news-badge">LIVE NEWS</span>
       <div class="ticker-wrapper">
         <marquee behavior="scroll" direction="left" scrollamount="6">
-          🔴 Science Test 1 for Stream B & C: Thursday 27 August 2026! &nbsp;&nbsp;&nbsp;&nbsp; ⚡ Mastering Anatomy today to save lives tomorrow — Stream C Te-ara-Puteka! &nbsp;&nbsp;&nbsp;&nbsp; 💡 Science Test 2: Thursday 24 September 2026!
+          🔴 Science Test 1 for Stream B & C: Tuesday 25 August 2026! &nbsp;&nbsp;&nbsp;&nbsp; 🌴 SCHOOL HOLIDAYS (Mid-Semester Break): 28 September – 05 October 2026! &nbsp;&nbsp;&nbsp;&nbsp; ⚡ Science Test 2: Tuesday 22 September 2026! &nbsp;&nbsp;&nbsp;&nbsp; 💡 Science Test 3: Tuesday 17 November 2026!
         </marquee>
       </div>
     </div>
@@ -399,7 +399,7 @@
       </div>
     </div>
 
-    <!-- Navigation Hub (6 Buttons Layout) -->
+    <!-- Navigation Hub -->
     <div class="tab-navigation">
       <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
         <span style="font-size: 16px;">🚀</span>
