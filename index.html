@@ -1,725 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa Beigi Mastery Deck — A&P Studio</title>
-  <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #0b131f 0%, #111c2e 50%, #0d2826 100%);
-      --card-bg: rgba(22, 34, 50, 0.75);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --accent-teal: #10b981;
-      --accent-glow: #34d399;
-      --accent-orange: #f97316;
-      --accent-blue: #3b82f6;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mustafa Beigi Mastery Deck - Wintec A&P</title>
+<style>
+  :root {
+    --bg-main: #0b132b;
+    --card-bg: #1c2541;
+    --card-hover: #232e52;
+    --accent-green: #10b981;
+    --accent-blue: #38bdf8;
+    --accent-orange: #f97316;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+  }
 
-    * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-gradient);
-      background-attachment: fixed;
-      color: var(--text-main);
-      margin: 0;
-      padding: 20px;
-      min-height: 100vh;
-    }
+  .container {
+    width: 100%;
+    max-width: 1100px;
+  }
 
-    .container { max-width: 950px; margin: 0 auto; }
+  .ticker-wrap {
+    width: 100%;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--accent-green);
+    border-radius: 8px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+  }
+  .ticker-tag {
+    background: #ef4444;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin-right: 12px;
+  }
 
-    /* News Ticker */
-    .news-ticker-container {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 12px;
-      padding: 8px 14px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+  .header-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+  }
 
-    .news-badge {
-      background: #dc2626;
-      color: white;
-      font-size: 11px;
-      font-weight: 900;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
+  .clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .analog-clock {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--accent-blue);
+    border-radius: 50%;
+    background: #fff;
+  }
+  .clock-label {
+    font-size: 0.75rem;
+    color: var(--accent-green);
+    font-weight: bold;
+  }
 
-    .ticker-wrapper { flex: 1; overflow: hidden; display: flex; align-items: center; }
-    marquee { font-size: 13.5px; font-weight: 600; color: var(--accent-glow); }
+  .header-center {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 20px;
+  }
+  .badge-wintec {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent-green);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .sound-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-left: 8px;
+  }
+  .main-title {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 800;
+  }
+  .sub-title {
+    color: var(--accent-green);
+    font-weight: bold;
+    margin: 4px 0;
+  }
+  .course-code {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
 
-    /* Header */
-    .header-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 24px;
-      padding: 24px 30px;
-      border: 1px solid var(--card-border);
-      margin-bottom: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
+  .nav-tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  .tab-btn {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: var(--accent-green);
+    color: #0b132b;
+  }
+  .tab-btn:hover:not(.active) {
+    background: var(--card-hover);
+  }
 
-    .header-layout { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-    .header-center-text { text-align: center; flex: 1; }
-
-    .header-top-bar { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 8px; }
-
-    .badge-tag {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: var(--accent-glow);
-      text-transform: uppercase;
-      font-weight: 800;
-      background: rgba(16, 185, 129, 0.12);
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .sound-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--card-border);
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-main);
-      transition: all 0.3s ease;
-    }
-
-    .sound-btn.playing { background: var(--accent-teal); color: white; border-color: var(--accent-glow); }
-
-    h1 { font-size: 32px; margin: 4px 0; font-weight: 800; color: #ffffff; }
-    .stream-tag { font-size: 15px; font-weight: 700; color: var(--accent-glow); margin-bottom: 4px; }
-    .course-title { color: var(--text-muted); font-size: 13.5px; }
-
-    /* Clocks */
-    .clock-wrapper { display: flex; flex-direction: column; align-items: center; }
-
-    .clock {
-      width: 80px;
-      height: 80px;
-      background: #ffffff;
-      border-radius: 50%;
-      border: 4px solid #334155;
-      position: relative;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      overflow: hidden;
-    }
-
-    .clock-number {
-      position: absolute;
-      font-size: 10px;
-      font-weight: 900;
-      color: #0f172a;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .num-12 { top: 6px; left: 50%; transform: translateX(-50%); }
-    .num-3  { right: 6px; top: 50%; transform: translateY(-50%); }
-    .num-6  { bottom: 6px; left: 50%; transform: translateX(-50%); }
-    .num-9  { left: 6px; top: 50%; transform: translateY(-50%); }
-
-    .clock-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 6px; height: 6px;
-      background: #0f172a;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-    }
-
-    .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom center; border-radius: 4px; z-index: 5; }
-    .hand.hour { width: 3px; height: 22px; background: #0f172a; margin-left: -1.5px; }
-    .hand.minute { width: 2px; height: 28px; background: #2563eb; margin-left: -1px; }
-    .hand.second { width: 1.5px; height: 32px; background: #dc2626; margin-left: -0.75px; z-index: 6; }
-
-    .clock-label { font-size: 10px; font-weight: 800; color: var(--accent-glow); margin-top: 6px; text-transform: uppercase; }
-
-    .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
-    .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
-    .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
-
-    /* Navigation Hub */
-    .tab-navigation {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    @media (max-width: 850px) { 
-      .tab-navigation { grid-template-columns: repeat(3, 1fr); }
-      .clock-wrapper { display: none; }
-    }
-
-    .nav-card-btn {
-      padding: 12px 6px;
-      font-weight: 700;
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      color: var(--text-muted);
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 12.5px;
-    }
-
-    .nav-card-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; transform: translateY(-2px); }
-    .nav-card-btn.active { background: var(--accent-teal); color: white; border-color: var(--accent-glow); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* Topics Grid */
-    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-    @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
-
-    .topic-card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 22px;
-      border: 1px solid var(--card-border);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .topic-card:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent-glow); transform: translateY(-3px); }
-    .topic-tag { font-size: 11px; color: var(--accent-orange); text-transform: uppercase; font-weight: 800; }
-    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 12px 0; color: #ffffff; }
-    .topic-stats { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); font-weight: 600; }
-
-    /* Quiz Card */
-    .quiz-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      border-radius: 20px;
-      padding: 30px;
-      border: 1px solid var(--card-border);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      margin-bottom: 24px;
-      transition: background 0.5s ease, border-color 0.5s ease;
-    }
-
-    .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 20px; font-weight: 700; }
-
-    .option-btn {
-      width: 100%;
-      text-align: left;
-      padding: 16px 18px;
-      margin-top: 12px;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .option-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); }
-    .option-btn.correct { background: rgba(16, 185, 129, 0.25) !important; border-color: #10b981 !important; color: #a7f3d0 !important; font-weight: 700; }
-    .option-btn.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: #ef4444 !important; color: #fecaca !important; font-weight: 700; }
-
-    .nav-controls { display: flex; gap: 12px; margin-top: 24px; }
-
-    .btn {
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
-
-    /* Links Section */
-    .links-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px;
-      border: 1px solid var(--card-border);
-      margin-bottom: 24px;
-    }
-
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .external-link-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-main);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .external-link-btn:hover {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--accent-glow);
-      transform: translateY(-2px);
-    }
-
-    .link-icon { font-size: 24px; }
-    .link-info { display: flex; flex-direction: column; }
-    .link-title { font-weight: 700; font-size: 14px; color: #ffffff; }
-    .link-desc { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
-
-    .contact-footer {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 22px;
-      border: 1px solid var(--card-border);
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .contact-footer h3 { margin: 0 0 8px 0; color: #ffffff; font-size: 17px; }
-    .lang-fa { direction: rtl; color: var(--text-muted); font-size: 13.5px; margin-bottom: 4px; }
-    .lang-en { direction: ltr; color: var(--accent-glow); font-size: 13px; margin-bottom: 14px; font-weight: 600; }
-
-    .whatsapp-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13.5px;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-  </style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  .card {
+    background-color: var(--card-bg);
+    border: 2px solid #334155;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    color: #f8fafc;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+  }
+  .card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    border-color: #334155;
+  }
+  .card h2 {
+    color: var(--accent-blue);
+    margin-top: 0;
+    font-size: 1.3rem;
+  }
+  .card p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+  }
+  .badge {
+    align-self: center;
+    background-color: #0284c7;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  .badge.pending {
+    background-color: #475569;
+  }
+</style>
 </head>
 <body>
 
-  <audio id="bg-audio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
-  </audio>
+<div class="container">
 
-  <div class="container">
-    
-    <!-- Live News Ticker with School Holiday -->
-    <div class="news-ticker-container">
-      <span class="news-badge">LIVE NEWS</span>
-      <div class="ticker-wrapper">
-        <marquee behavior="scroll" direction="left" scrollamount="6">
-          🔴 Science Test 1 for Stream B & C: Tuesday 25 August 2026! &nbsp;&nbsp;&nbsp;&nbsp; 🌴 SCHOOL HOLIDAYS (Mid-Semester Break): 28 September – 05 October 2026! &nbsp;&nbsp;&nbsp;&nbsp; ⚡ Science Test 2: Tuesday 22 September 2026! &nbsp;&nbsp;&nbsp;&nbsp; 💡 Science Test 3: Tuesday 17 November 2026!
-        </marquee>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <div class="header-card">
-      <div class="header-layout">
-        
-        <div class="clock-wrapper">
-          <div class="clock">
-            <div class="clock-number num-12">12</div>
-            <div class="clock-number num-3">3</div>
-            <div class="clock-number num-6">6</div>
-            <div class="clock-number num-9">9</div>
-            <div class="clock-center"></div>
-            <div class="hand hour" id="l-hour"></div>
-            <div class="hand minute" id="l-min"></div>
-            <div class="hand second" id="l-sec"></div>
-          </div>
-          <div class="clock-label">NZ Time</div>
-        </div>
-
-        <div class="header-center-text">
-          <div class="header-top-bar">
-            <span class="badge-tag">🎓 WINTEC A&P REVISION</span>
-            <button class="sound-btn" id="sound-btn" onclick="toggleAudio()">🎵 Sound: OFF</button>
-          </div>
-          <h1>Mustafa Beigi Mastery Deck</h1>
-          <div class="stream-tag">Stream C - Te-ara-Puteka</div>
-          <div class="course-title">Course <strong>GEDU404B/2602</strong> — Applied Structure & Function of the Human Body</div>
-        </div>
-
-        <div class="clock-wrapper">
-          <div class="clock">
-            <div class="clock-number num-12">12</div>
-            <div class="clock-number num-3">3</div>
-            <div class="clock-number num-6">6</div>
-            <div class="clock-number num-9">9</div>
-            <div class="clock-center"></div>
-            <div class="hand hour" id="r-hour"></div>
-            <div class="hand minute" id="r-min"></div>
-            <div class="hand second" id="r-sec"></div>
-          </div>
-          <div class="clock-label">NZ Time</div>
-        </div>
-
-      </div>
-
-      <div class="mastery-header">
-        <span>Overall Question Progress</span>
-        <span id="mastery-percent">0%</span>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="mastery-bar"></div>
-      </div>
-    </div>
-
-    <!-- Navigation Hub -->
-    <div class="tab-navigation">
-      <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
-        <span style="font-size: 16px;">🚀</span>
-        <span>Dashboard</span>
-      </button>
-      <button class="nav-card-btn" onclick="switchTab('quiz-tab', this)">
-        <span style="font-size: 16px;">📝</span>
-        <span>MCQs Quiz</span>
-      </button>
-      <button class="nav-card-btn" onclick="switchTab('links-tab', this)">
-        <span style="font-size: 16px;">🔗</span>
-        <span>Wintec Portals</span>
-      </button>
-      <a href="calendar.html" class="nav-card-btn">
-        <span style="font-size: 16px;">📅</span>
-        <span>Calendar</span>
-      </a>
-      <a href="flashcards.html" class="nav-card-btn">
-        <span style="font-size: 16px;">⚡</span>
-        <span>Flashcards</span>
-      </a>
-      <a href="notes.html" class="nav-card-btn">
-        <span style="font-size: 16px;">📚</span>
-        <span>Short Notes</span>
-      </a>
-    </div>
-
-    <!-- Dashboard -->
-    <div id="topics-tab" class="tab-content active">
-      <div class="topics-grid">
-        <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
-          <div class="topic-tag">CHAPTER 01</div>
-          <div class="topic-name">Anatomy & Physiology</div>
-          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
-        </div>
-        <div class="topic-card" onclick="loadChapter('chapter2_mcqs.json')">
-          <div class="topic-tag">CHAPTER 02</div>
-          <div class="topic-name">Chemistry</div>
-          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
-        </div>
-        <div class="topic-card" onclick="loadChapter('chapter3_mcqs.json')">
-          <div class="topic-tag">CHAPTER 03</div>
-          <div class="topic-name">Cells & Microscopes</div>
-          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
-        </div>
-        <div class="topic-card" onclick="loadChapter('chapter4_mcqs.json')">
-          <div class="topic-tag">CHAPTER 04</div>
-          <div class="topic-name">Cell Transport</div>
-          <div class="topic-stats"><span>75 Questions</span><span>Tap to Start ➔</span></div>
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">▶ Quick Start Chapter 1 Test</button>
-        <button class="btn" onclick="resetProgress()" style="color: #f87171; border-color: rgba(239, 68, 68, 0.3);">🔄 Reset MCQ Progress</button>
-      </div>
-    </div>
-
-    <!-- Quiz Tab -->
-    <div id="quiz-tab" class="tab-content">
-      <div class="quiz-card" id="dynamic-quiz-card">
-        <div class="quiz-meta">
-          <span style="color: var(--accent-orange);">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
-          <span>⏱️ <span id="timer-display">01:00</span></span>
-        </div>
-
-        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px; color: #ffffff; line-height: 1.4;">Select a chapter from Dashboard to start...</h2>
-
-        <div id="options-container"></div>
-
-        <div class="nav-controls">
-          <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
-          <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Wintec Quick Links Tab -->
-    <div id="links-tab" class="tab-content">
-      <div class="links-card">
-        <h2 style="color:var(--accent-glow); margin-top:0;">🔗 Wintec Student Portals & E-Books</h2>
-        <p style="color: var(--text-muted); font-size: 13.5px;">Quick access to official Wintec learning platforms, library catalog, and textbooks.</p>
-
-        <div class="links-grid">
-          <a href="https://www.wintec.ac.nz/student-resources/my-learning" target="_blank" class="external-link-btn">
-            <span class="link-icon">🎓</span>
-            <div class="link-info">
-              <span class="link-title">Wintec Moodle / My Learning</span>
-              <span class="link-desc">Access course materials, lectures, and submissions</span>
-            </div>
-          </a>
-
-          <a href="https://accounts.lt.app/user/login?product=adinstruments" target="_blank" class="external-link-btn">
-            <span class="link-icon">🔬</span>
-            <div class="link-info">
-              <span class="link-title">LT KuraCloud</span>
-              <span class="link-desc">Making Science Easier — ADInstruments Portal</span>
-            </div>
-          </a>
-
-          <a href="https://wintec.mykoha.co.nz/cgi-bin/koha/opac-main.pl" target="_blank" class="external-link-btn">
-            <span class="link-icon">📚</span>
-            <div class="link-info">
-              <span class="link-title">Wintec Library (Koha)</span>
-              <span class="link-desc">Official Library OPAC Catalog & Search</span>
-            </div>
-          </a>
-
-          <a href="https://wintec.libcal.com/reserve/citystudyrooms" target="_blank" class="external-link-btn">
-            <span class="link-icon">🏫</span>
-            <div class="link-info">
-              <span class="link-title">Group Study Room Booking</span>
-              <span class="link-desc">Reserve City Campus Library Study Rooms</span>
-            </div>
-          </a>
-
-          <a href="https://libguides.wintec.ac.nz/te_ara_putake/welcome" target="_blank" class="external-link-btn">
-            <span class="link-icon">🌟</span>
-            <div class="link-info">
-              <span class="link-title">Te-ara-Pūtake Guide</span>
-              <span class="link-desc">Wintec LibGuides Learning Hub</span>
-            </div>
-          </a>
-
-          <a href="https://ebookcentral.proquest.com/lib/wintec/detail.action?docID=6551382" target="_blank" class="external-link-btn">
-            <span class="link-icon">📖</span>
-            <div class="link-info">
-              <span class="link-title">Essentials of A&P (13th Ed.)</span>
-              <span class="link-desc">Marieb & Keller — ProQuest E-Book</span>
-            </div>
-          </a>
-
-          <a href="https://wintec.mykoha.co.nz/cgi-bin/koha/opac-detail.pl?biblionumber=603690&query_desc=kw%2Cwrdl%3A%20Human%20anatomy%20illness%208th%20edition" target="_blank" class="external-link-btn">
-            <span class="link-icon">🩺</span>
-            <div class="link-info">
-              <span class="link-title">The Human Body in Health & Illness</span>
-              <span class="link-desc">Barbara Herlihy (8th Edition) Catalog</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="contact-footer">
-      <h3>Contact & Developer Info</h3>
-      <p class="lang-fa">این وب‌سایت توسط <strong>Mustafa Beigi (مصطفی بیگی)</strong> از بخش <strong>Stream C - Te-ara-Puteka</strong> برای یادگیری بهتر درس <strong>Human Anatomy and Physiology</strong> طراحی و ساخته شده است.</p>
-      <p class="lang-en">This website was designed and created by <strong>Mustafa Beigi</strong> (Stream C - Te-ara-Puteka) for better learning and mastery of <strong>Human Anatomy and Physiology</strong>.</p>
-      <a href="https://wa.me/64273433480?text=Hello%20Mustafa,%20I%20have%20a%20question%20about%20the%20Anatomy%20website" target="_blank" class="whatsapp-btn">
-        💬 Contact via WhatsApp (+64 27 343 3480)
-      </a>
-    </div>
-
+  <div class="ticker-wrap">
+    <span class="ticker-tag">LIVE NEWS</span>
+    <span>⚡ Science Test 2: Tuesday 22 September 2026! 💡 Science Test 3: Tuesday 17 November 2026!</span>
   </div>
 
-  <script>
-    const audio = document.getElementById('bg-audio');
-    let audioPlaying = false;
+  <div class="header-card">
+    <div class="clock-container">
+      <canvas id="clock1" class="analog-clock" width="60" height="60"></canvas>
+      <span class="clock-label">NZ TIME</span>
+    </div>
 
-    function toggleAudio() {
-      const btn = document.getElementById('sound-btn');
-      if (audioPlaying) {
-        audio.pause();
-        audioPlaying = false;
-        btn.innerText = "🎵 Sound: OFF";
-        btn.classList.remove('playing');
-      } else {
-        audio.volume = 0.5;
-        audio.play().then(() => {
-          audioPlaying = true;
-          btn.innerText = "🔊 Sound: ON";
-          btn.classList.add('playing');
-        }).catch(() => alert("Tap anywhere first, then turn audio ON."));
-      }
-    }
+    <div class="header-center">
+      <div>
+        <span class="badge-wintec">🧪 WINTEC A&P REVISION</span>
+        <span class="sound-badge">🔊 Sound: OFF</span>
+      </div>
+      <h1 class="main-title">Mustafa Beigi Mastery Deck</h1>
+      <div class="sub-title">Stream C - Te-ara-Puteka</div>
+      <div class="course-code">Course GEDU404B/2602 — Applied Structure & Function of the Human Body</div>
+    </div>
 
-    function updateNZClocks() {
-      const now = new Date();
-      const nzString = now.toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
-      const nzDate = new Date(nzString);
+    <div class="clock-container">
+      <canvas id="clock2" class="analog-clock" width="60" height="60"></canvas>
+      <span class="clock-label">NZ TIME</span>
+    </div>
+  </div>
 
-      const sec = nzDate.getSeconds();
-      const min = nzDate.getMinutes();
-      const hr = nzDate.getHours();
+  <div class="nav-tabs">
+    <button class="tab-btn">🚀 Dashboard</button>
+    <button class="tab-btn">📝 MCQs Quiz</button>
+    <button class="tab-btn">🔗 Wintec Portals</button>
+    <button class="tab-btn">📅 Calendar</button>
+    <button class="tab-btn active">⚡ Flashcards</button>
+    <button class="tab-btn">📚 Short Notes</button>
+  </div>
 
-      const secDeg = (sec / 60) * 360;
-      const minDeg = ((min + sec / 60) / 60) * 360;
-      const hrDeg = ((hr % 12 + min / 60) / 12) * 360;
+  <h1 style="text-align:center; font-size:1.5rem; color:var(--accent-blue); margin-bottom:5px;">Anatomy & Physiology Study Portal</h1>
+  <p style="text-align:center; color:var(--text-secondary); margin-bottom:30px;">Select a chapter to start studying interactive flashcards</p>
 
-      document.getElementById('l-sec').style.transform = `rotate(${secDeg}deg)`;
-      document.getElementById('l-min').style.transform = `rotate(${minDeg}deg)`;
-      document.getElementById('l-hour').style.transform = `rotate(${hrDeg}deg)`;
+  <div class="grid">
+    <a href="Flashcards_Ch1.html" class="card">
+      <div>
+        <h2>Chapter 1</h2>
+        <p>Introduction to Anatomy & Physiology, Body Systems & Lab Concepts</p>
+      </div>
+      <span class="badge">200 Cards</span>
+    </a>
 
-      document.getElementById('r-sec').style.transform = `rotate(${secDeg}deg)`;
-      document.getElementById('r-min').style.transform = `rotate(${minDeg}deg)`;
-      document.getElementById('r-hour').style.transform = `rotate(${hrDeg}deg)`;
-    }
+    <a href="Flashcards_Ch2.html" class="card disabled">
+      <div>
+        <h2>Chapter 2</h2>
+        <p>The Chemical Level of Organization</p>
+      </div>
+      <span class="badge pending">Coming Soon</span>
+    </a>
 
-    setInterval(updateNZClocks, 1000);
-    updateNZClocks();
+    <a href="Flashcards_Ch3.html" class="card disabled">
+      <div>
+        <h2>Chapter 3</h2>
+        <p>The Cellular Level of Organization</p>
+      </div>
+      <span class="badge pending">Coming Soon</span>
+    </a>
 
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-card-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      if (btn) btn.classList.add('active');
-    }
+    <a href="Flashcards_Ch4.html" class="card disabled">
+      <div>
+        <h2>Chapter 4</h2>
+        <p>The Tissue Level of Organization</p>
+      </div>
+      <span class="badge pending">Coming Soon</span>
+    </a>
+  </div>
 
-    let activeDeck = [];
-    let currentIndex = 0;
-    let currentChapterFile = '';
-    let userAnswers = JSON.parse(localStorage.getItem('mustafa_user_answers') || '{}');
-    let timer;
-    let timeLeft = 60;
+</div>
 
-    const questionColors = [
-      { bg: "rgba(16, 185, 129, 0.12)", border: "rgba(16, 185, 129, 0.3)" },
-      { bg: "rgba(37, 99, 235, 0.12)", border: "rgba(37, 99, 235, 0.3)" },
-      { bg: "rgba(168, 85, 247, 0.12)", border: "rgba(168, 85, 247, 0.3)" },
-      { bg: "rgba(249, 115, 22, 0.12)", border: "rgba(249, 115, 22, 0.3)" },
-      { bg: "rgba(14, 165, 233, 0.12)", border: "rgba(14, 165, 233, 0.3)" }
-    ];
+<script>
+function drawClock(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const radius = canvas.height / 2;
+  ctx.translate(radius, radius);
 
-    function applyQuestionTheme() {
-      const card = document.getElementById('dynamic-quiz-card');
-      const theme = questionColors[currentIndex % questionColors.length];
-      card.style.backgroundColor = theme.bg;
-      card.style.borderColor = theme.border;
-    }
+  setInterval(() => {
+    ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(0, 0, radius - 2, 0, 2 * Math.PI);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
-    function loadChapter(fileName) {
-      currentChapterFile = fileName;
-      fetch(fileName)
-        .then(res => res.json())
-        .then(data => {
-          activeDeck = data;
-          currentIndex = 0;
-          switchTab('quiz-tab', document.querySelectorAll('.nav-card-btn')[1]);
-          loadQuestion();
-          updateMastery();
-        });
-    }
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
-    function startTimer() {
-      clearInterval(timer);
-      timeLeft = 60;
-      timer = setInterval(() => {
-        timeLeft--;
-        const min = Math.floor(timeLeft / 60);
-        const sec = timeLeft % 60;
-        document.getElementById('timer-display').innerText = 
-          `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        if (timeLeft <= 0) clearInterval(timer);
-      }, 1000);
-    }
+    let hourPos = (hours % 12 + minutes / 60) * (Math.PI / 6);
+    drawHand(ctx, hourPos, radius * 0.5, 3, '#0b132b');
 
-    function loadQuestion() {
-      if (activeDeck.length === 0) return;
-      applyQuestionTheme();
-      startTimer();
-      const q = activeDeck[currentIndex];
-      const qKey = currentChapterFile + "_" + currentIndex;
+    let minutePos = (minutes + seconds / 60) * (Math.PI / 30);
+    drawHand(ctx, minutePos, radius * 0.7, 2, '#0b132b');
 
-      document.getElementById('q-num').innerText = currentIndex + 1;
-      document.getElementById('q-total').innerText = activeDeck.length;
-      document.getElementById('question-text').innerText = q.question;
+    let secondPos = seconds * (Math.PI / 30);
+    drawHand(ctx, secondPos, radius * 0.85, 1, '#ef4444');
+  }, 1000);
+}
 
-      const container = document.getElementById('options-container');
-      container.innerHTML = '';
-      const isAnswered = userAnswers.hasOwnProperty(qKey);
+function drawHand(ctx, pos, length, width, color) {
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = color;
+  ctx.moveTo(0,0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.stroke();
+  ctx.rotate(-pos);
+}
 
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = String.fromCharCode(65 + idx) + ". " + opt;
+drawClock('clock1');
+drawClock('clock2');
+</script>
 
-        if (isAnswered) {
-          if (idx === q.correct) btn.classList.add('correct');
-          if (userAnswers[qKey] === idx && idx !== q.correct) btn.classList.add('wrong');
-        } else {
-          btn.onclick = () => selectAnswer(qKey, idx);
-        }
-        container.appendChild(btn);
-      });
-    }
-
-    function selectAnswer(qKey, selectedIdx) {
-      clearInterval(timer);
-      userAnswers[qKey] = selectedIdx;
-      localStorage.setItem('mustafa_user_answers', JSON.stringify(userAnswers));
-      loadQuestion();
-      updateMastery();
-    }
-
-    function updateMastery() {
-      const answeredKeys = Object.keys(userAnswers);
-      const totalQuestions = 300; 
-      const percent = Math.round((answeredKeys.length / totalQuestions) * 100);
-      document.getElementById('mastery-percent').innerText = percent + "%";
-      document.getElementById('mastery-bar').style.width = percent + "%";
-    }
-
-    function nextQuestion() {
-      if (currentIndex < activeDeck.length - 1) { currentIndex++; loadQuestion(); }
-    }
-
-    function prevQuestion() {
-      if (currentIndex > 0) { currentIndex--; loadQuestion(); }
-    }
-
-    function resetProgress() {
-      if (confirm("Reset MCQ progress?")) {
-        userAnswers = {};
-        localStorage.removeItem('mustafa_user_answers');
-        updateMastery();
-        location.reload();
-      }
-    }
-
-    loadChapter('chapter1_mcqs.json');
-  </script>
 </body>
 </html>
