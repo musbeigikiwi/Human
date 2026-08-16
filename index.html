@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy & Physiology Studio</title>
+  <title>Mustafa MCQs — Anatomy & Studio</title>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -112,7 +112,7 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Drawing Studio Styling */
+    /* Studio & Drawing Canvas */
     .studio-card {
       background: var(--card-bg);
       border-radius: 20px;
@@ -123,7 +123,7 @@
     .canvas-container {
       position: relative;
       width: 100%;
-      height: 550px;
+      height: 600px;
       background: #000;
       border-radius: 16px;
       overflow: hidden;
@@ -166,7 +166,17 @@
       color: #0f172a;
     }
 
-    /* Flashcard & Quiz Styling */
+    .text-input-box {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #0f172a;
+      color: var(--text-main);
+      font-size: 13px;
+      width: 180px;
+    }
+
+    /* Flashcards & Quiz */
     .flashcard-wrapper { perspective: 1000px; margin: 20px 0; }
     .flashcard { width: 100%; height: 250px; background: transparent; border-radius: 20px; cursor: pointer; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
@@ -175,7 +185,6 @@
     .flashcard-front { background: var(--card-bg); color: var(--accent-primary); }
     .flashcard-back { background: #0f172a; color: var(--text-main); transform: rotateY(180deg); border-color: var(--accent-primary); }
 
-    .anatomy-iframe { width: 100%; height: 550px; border-radius: 20px; border: 1px solid var(--border-color); background: #000; }
     .quiz-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); }
     .option-btn { width: 100%; text-align: left; padding: 16px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: #0f172a; color: var(--text-main); cursor: pointer; }
     .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
@@ -183,18 +192,29 @@
 
     .btn { padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
     .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .gallery-thumb {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid var(--border-color);
+    }
+    .gallery-thumb:hover { border-color: var(--accent-primary); }
   </style>
 </head>
 <body>
 
-  <!-- Interstellar Theme Audio -->
-  <audio id="bg-music" loop playsinline preload="auto">
-    <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
-  </audio>
-
   <div class="ticker-wrap">
     <div class="ticker-move">
-      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! DRAW, LEARN AND EXCEL WITH APPLE PENCIL! ✏️ 🔥
+      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! DRAW, TYPE & SAVE NOTES WITH APPLE PENCIL! ✏️ 🔥
     </div>
   </div>
 
@@ -202,18 +222,21 @@
     <div class="header-card">
       <div class="header-top">
         <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S STUDY HUB</span>
-        <button class="btn" id="music-btn" onclick="toggleMusic()" style="background: var(--accent-primary); color: #0f172a; font-weight:700;">▶️ Play Interstellar Music</button>
       </div>
       <h1>Mustafa MCQs & Drawing Studio</h1>
-      <div style="color:var(--text-muted); font-size:14px;">Apple Pencil Anatomy Studio, Interactive 3D Model & Practice Deck</div>
+      <div style="color:var(--text-muted); font-size:14px; margin-bottom: 15px;">Apple Pencil Anatomy Studio, Interactive Type & Save Notes</div>
+      
+      <!-- Audio Player -->
+      <audio controls loop style="width: 100%; height: 40px; border-radius: 8px;">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
+      </audio>
     </div>
 
     <!-- Navigation Tabs -->
     <div class="tab-navigation">
       <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz</button>
-      <button class="tab-btn" onclick="switchTab('draw-tab', this)">✏️ Anatomy Studio (Draw/Upload)</button>
+      <button class="tab-btn" onclick="switchTab('draw-tab', this)">✏️ Anatomy Studio (Draw / Type / Save)</button>
       <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards</button>
-      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy Atlas</button>
     </div>
 
     <!-- 1. Quiz Section -->
@@ -232,26 +255,40 @@
       </div>
     </div>
 
-    <!-- 2. Drawing & Annotation Studio Section -->
+    <!-- 2. Drawing, Typing & Save Studio -->
     <div id="draw-tab" class="tab-content">
       <div class="studio-card">
+        <h3 style="margin-top:0; color:var(--accent-primary);">Select Anatomy Textbook Page or Upload Custom Photo</h3>
+        
+        <!-- پیش‌فرض تصاویر کتاب آناتومی -->
+        <div class="gallery-grid">
+          <img src="https://i.ibb.co/3s3Gk92/IMG-5631.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Integumentary, Skeletal, Muscular">
+          <img src="https://i.ibb.co/6yFvyZ8/IMG-5632.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Nervous, Endocrine, Cardiovascular">
+          <img src="https://i.ibb.co/FkVN3V2/IMG-5633.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Lymphatic, Respiratory, Digestive">
+          <img src="https://i.ibb.co/v4b7B4R/IMG-5634.jpg" class="gallery-thumb" onclick="loadPresetImage(this.src)" title="Urinary, Male & Female Reproductive">
+        </div>
+
         <div class="toolbar">
           <label class="btn btn-primary" style="cursor:pointer;">
-            📷 Upload Diagram / Textbook Photo
+            📷 Upload Photo
             <input type="file" id="img-loader" accept="image/*" style="display:none;" onchange="uploadImage(event)">
           </label>
           
-          <button class="tool-btn active" id="pen-btn" onclick="setTool('pen')">✏️ Pen Tool</button>
+          <button class="tool-btn active" id="pen-btn" onclick="setTool('pen')">✏️ Pen</button>
           <button class="tool-btn" id="high-btn" onclick="setTool('highlighter')">🖍️ Highlighter</button>
+          <button class="tool-btn" id="text-btn" onclick="setTool('text')">🔤 Type Text</button>
+          
+          <input type="text" id="type-input" class="text-input-box" placeholder="Type note here...">
           <input type="color" id="pen-color" value="#38bdf8" style="border:none; background:none; cursor:pointer; width:30px; height:30px;">
           
-          <button class="tool-btn" onclick="clearCanvas()" style="color:var(--accent-error);">🗑️ Clear Canvas</button>
+          <button class="btn btn-primary" onclick="saveCanvasImage()" style="background:var(--accent-success); color:#0f172a;">💾 Save Image</button>
+          <button class="tool-btn" onclick="clearCanvas()" style="color:var(--accent-error);">🗑️ Clear</button>
         </div>
 
         <div class="canvas-container" id="canvas-container">
           <canvas id="paint-canvas"></canvas>
         </div>
-        <p style="color:var(--text-muted); font-size:12px; margin-top:10px;">💡 Upload any organ system diagram and annotate directly using <strong>Apple Pencil Pro</strong> or touch input.</p>
+        <p style="color:var(--text-muted); font-size:12px; margin-top:10px;">💡 Tap on any textbook page above, draw with <strong>Apple Pencil</strong>, type notes anywhere by clicking on the canvas, and click <strong>Save Image</strong> to export your notes.</p>
       </div>
     </div>
 
@@ -278,41 +315,9 @@
       </div>
     </div>
 
-    <!-- 4. 3D Anatomy Model Section -->
-    <div id="3d-tab" class="tab-content">
-      <div class="quiz-card">
-        <h3 style="margin-top:0; color:var(--accent-primary);">Interactive 3D Human Anatomy Atlas</h3>
-        <iframe 
-          class="anatomy-iframe"
-          title="Full Human Anatomy 3D" 
-          src="https://sketchfab.com/models/d68d4076e05342a8a8eb6b7f32906b38/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=0&ui_stop=0&ui_watermark=0" 
-          allow="autoplay; fullscreen; vr">
-        </iframe>
-      </div>
-    </div>
-
   </div>
 
   <script>
-    // Music Controls
-    const music = document.getElementById('bg-music');
-    let isMusicPlaying = false;
-
-    function toggleMusic() {
-      const musicBtn = document.getElementById('music-btn');
-      if (isMusicPlaying) {
-        music.pause();
-        isMusicPlaying = false;
-        musicBtn.innerText = "▶️ Play Interstellar Music";
-      } else {
-        music.volume = 0.5;
-        music.play().then(() => {
-          isMusicPlaying = true;
-          musicBtn.innerText = "⏸️ Pause Music";
-        });
-      }
-    }
-
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -321,7 +326,7 @@
       if(tabId === 'draw-tab') resizeCanvas();
     }
 
-    // Canvas Drawing Logic for Apple Pencil
+    // Canvas Drawing, Typing & Save Logic
     const canvas = document.getElementById('paint-canvas');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
@@ -335,15 +340,20 @@
       redrawCanvas();
     }
 
+    function loadPresetImage(url) {
+      uploadedImg = new Image();
+      uploadedImg.crossOrigin = "anonymous";
+      uploadedImg.onload = function() { redrawCanvas(); }
+      uploadedImg.src = url;
+    }
+
     function uploadImage(e) {
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(event) {
         uploadedImg = new Image();
-        uploadedImg.onload = function() {
-          redrawCanvas();
-        }
+        uploadedImg.onload = function() { redrawCanvas(); }
         uploadedImg.src = event.target.result;
       }
       reader.readAsDataURL(file);
@@ -363,17 +373,29 @@
       currentTool = tool;
       document.getElementById('pen-btn').classList.toggle('active', tool === 'pen');
       document.getElementById('high-btn').classList.toggle('active', tool === 'highlighter');
+      document.getElementById('text-btn').classList.toggle('active', tool === 'text');
     }
 
-    function startDrawing(e) {
-      isDrawing = true;
-      ctx.beginPath();
+    function handlePointerStart(e) {
       const pos = getPos(e);
-      ctx.moveTo(pos.x, pos.y);
+      if (currentTool === 'text') {
+        const text = document.getElementById('type-input').value;
+        if (text) {
+          ctx.font = 'bold 20px sans-serif';
+          ctx.fillStyle = document.getElementById('pen-color').value;
+          ctx.fillText(text, pos.x, pos.y);
+        } else {
+          alert('Please enter text in the box first!');
+        }
+      } else {
+        isDrawing = true;
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+      }
     }
 
     function draw(e) {
-      if (!isDrawing) return;
+      if (!isDrawing || currentTool === 'text') return;
       const pos = getPos(e);
       ctx.lineTo(pos.x, pos.y);
       ctx.strokeStyle = document.getElementById('pen-color').value;
@@ -399,17 +421,24 @@
       return { x: clientX - rect.left, y: clientY - rect.top };
     }
 
-    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousedown', handlePointerStart);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
 
-    canvas.addEventListener('touchstart', startDrawing, {passive: true});
+    canvas.addEventListener('touchstart', handlePointerStart, {passive: true});
     canvas.addEventListener('touchmove', draw, {passive: true});
     canvas.addEventListener('touchend', stopDrawing);
 
     function clearCanvas() {
       uploadedImg = null;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function saveCanvasImage() {
+      const link = document.createElement('a');
+      link.download = 'anatomy-notes.png';
+      link.href = canvas.toDataURL();
+      link.click();
     }
 
     // Flashcards Data
