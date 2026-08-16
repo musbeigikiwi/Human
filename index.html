@@ -11,7 +11,6 @@
       --text-main: #2d3748;
       --text-muted: #718096;
       --accent-green: #1b4d3e;
-      --accent-green-hover: #143b2f;
       --accent-orange: #d96b43;
       --border-color: #e2e8f0;
     }
@@ -26,10 +25,7 @@
       padding: 40px 20px;
     }
 
-    .container {
-      max-width: 850px;
-      margin: 0 auto;
-    }
+    .container { max-width: 850px; margin: 0 auto; }
 
     .header-card {
       background: var(--card-bg);
@@ -39,20 +35,9 @@
       margin-bottom: 24px;
     }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 
-    .badge-tag {
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
+    .badge-tag { font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
     .sound-btn {
       background: #edf2f7;
@@ -66,220 +51,81 @@
       transition: all 0.2s ease;
     }
 
-    .sound-btn.playing {
-      background: var(--accent-green);
-      color: white;
-      border-color: var(--accent-green);
-    }
+    .sound-btn.playing { background: var(--accent-green); color: white; border-color: var(--accent-green); }
 
-    h1 {
-      font-size: 36px;
-      margin: 5px 0 8px 0;
-      font-family: Georgia, serif;
-      color: #1a202c;
-    }
+    h1 { font-size: 36px; margin: 5px 0 8px 0; font-family: Georgia, serif; color: #1a202c; }
 
-    .course-title {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+    .course-title { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
 
-    .mastery-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+    .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
 
-    .progress-bar-bg {
-      background: #e2e8f0;
-      height: 10px;
-      border-radius: 5px;
-      overflow: hidden;
-    }
+    .progress-bar-bg { background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden; }
 
-    .progress-bar-fill {
-      background: var(--accent-green);
-      height: 100%;
-      width: 0%;
-      transition: width 0.4s ease;
-    }
+    .progress-bar-fill { background: var(--accent-green); height: 100%; width: 0%; transition: width 0.4s ease; }
 
-    .tab-navigation {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+    .tab-navigation { display: flex; gap: 12px; margin-bottom: 24px; }
 
     .tab-btn {
-      flex: 1;
-      padding: 12px;
-      font-weight: 700;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--text-muted);
-      cursor: pointer;
+      flex: 1; padding: 12px; font-weight: 700; border-radius: 10px;
+      border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-muted); cursor: pointer;
     }
 
-    .tab-btn.active {
-      background: var(--accent-green);
-      color: white;
-      border-color: var(--accent-green);
-    }
+    .tab-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .topics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
 
-    @media (max-width: 640px) {
-      .topics-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
     .topic-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid var(--border-color);
-      cursor: pointer;
+      background: var(--card-bg); border-radius: 12px; padding: 20px;
+      border: 1px solid var(--border-color); cursor: pointer;
     }
 
-    .topic-tag {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
+    .topic-card:hover { border-color: var(--accent-green); }
 
-    .topic-name {
-      font-size: 18px;
-      font-weight: 700;
-      margin: 6px 0 16px 0;
-      color: #1a202c;
-    }
+    .topic-tag { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
-    .topic-stats {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 16px 0; color: #1a202c; }
 
-    .quiz-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 30px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
-    }
+    .topic-stats { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
 
-    .quiz-meta {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+    .quiz-card { background: var(--card-bg); border-radius: 16px; padding: 30px; border: 1px solid var(--border-color); margin-bottom: 24px; }
+
+    .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
 
     .option-btn {
-      width: 100%;
-      text-align: left;
-      padding: 16px;
-      margin-top: 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      background: white;
-      cursor: pointer;
-      font-size: 16px;
+      width: 100%; text-align: left; padding: 16px; margin-top: 12px;
+      border: 1px solid var(--border-color); border-radius: 10px; background: white; cursor: pointer; font-size: 16px;
     }
 
     .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
     .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
 
-    .nav-controls {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-    }
+    .nav-controls { display: flex; gap: 12px; margin-top: 24px; }
 
-    .action-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .action-stack { display: flex; flex-direction: column; gap: 12px; }
 
     .btn {
-      padding: 14px 20px;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background: white;
-      color: var(--text-main);
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 15px;
-      text-align: center;
+      padding: 14px 20px; border-radius: 10px; border: 1px solid var(--border-color);
+      background: white; color: var(--text-main); font-weight: 600; cursor: pointer; font-size: 15px; text-align: center;
     }
 
-    .btn-primary {
-      background: var(--accent-green);
-      color: white;
-      border: none;
-    }
+    .btn-primary { background: var(--accent-green); color: white; border: none; }
 
-    .flashcard {
-      width: 100%;
-      height: 240px;
-      background: white;
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
-      text-align: center;
-      cursor: pointer;
-      margin-bottom: 16px;
-    }
-
-    .history-card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid var(--border-color);
-    }
-
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #edf2f7;
-      font-size: 14px;
-    }
-
+    .history-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); }
+    .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #edf2f7; font-size: 14px; }
     .history-item:last-child { border-bottom: none; }
 
-    .footer-text {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 12px;
-      margin-top: 32px;
-    }
+    .footer-text { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 32px; }
   </style>
 </head>
 <body>
 
-  <!-- فایل صوتی پشتیبان برای اجرا در iPad Safari -->
+  <!-- موزیک پشتیبان Interstellar مخصوص آی‌پد -->
   <audio id="bg-audio" loop preload="auto">
-    <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
   </audio>
 
@@ -304,37 +150,36 @@
     <div class="tab-navigation">
       <button class="tab-btn active" onclick="switchTab('topics-tab', this)">Dashboard & Topics</button>
       <button class="tab-btn" onclick="switchTab('quiz-tab', this)">Practice Deck (MCQs)</button>
-      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">Flashcards</button>
       <button class="tab-btn" onclick="switchTab('history-tab', this)">📜 Study History</button>
     </div>
 
     <!-- Dashboard -->
     <div id="topics-tab" class="tab-content active">
       <div class="topics-grid">
-        <div class="topic-card" onclick="runFullDeck()">
-          <div class="topic-tag">TOPIC 01</div>
-          <div class="topic-name">Intro to A&P</div>
-          <div class="topic-stats"><span id="t1-count">0/10 mastered</span><span id="t1-pct">0%</span></div>
+        <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
+          <div class="topic-tag">CHAPTER 01</div>
+          <div class="topic-name">Anatomy & Physiology</div>
+          <div class="topic-stats"><span id="c1-count">0/75 mastered</span><span id="c1-pct">0%</span></div>
         </div>
-        <div class="topic-card" onclick="runFullDeck()">
-          <div class="topic-tag">TOPIC 02</div>
-          <div class="topic-name">Levels of Organisation</div>
-          <div class="topic-stats"><span id="t2-count">0/14 mastered</span><span id="t2-pct">0%</span></div>
+        <div class="topic-card" onclick="loadChapter('chapter2_mcqs.json')">
+          <div class="topic-tag">CHAPTER 02</div>
+          <div class="topic-name">Chemistry</div>
+          <div class="topic-stats"><span id="c2-count">0/75 mastered</span><span id="c2-pct">0%</span></div>
         </div>
-        <div class="topic-card" onclick="runFullDeck()">
-          <div class="topic-tag">TOPIC 03</div>
-          <div class="topic-name">Body Position & Cavities</div>
-          <div class="topic-stats"><span id="t3-count">0/14 mastered</span><span id="t3-pct">0%</span></div>
+        <div class="topic-card" onclick="loadChapter('chapter3_mcqs.json')">
+          <div class="topic-tag">CHAPTER 03</div>
+          <div class="topic-name">Cells & Microscopes</div>
+          <div class="topic-stats"><span id="c3-count">0/75 mastered</span><span id="c3-pct">0%</span></div>
         </div>
-        <div class="topic-card" onclick="runFullDeck()">
-          <div class="topic-tag">TOPIC 04</div>
-          <div class="topic-name">Units & Lab Skills</div>
-          <div class="topic-stats"><span id="t4-count">0/14 mastered</span><span id="t4-pct">0%</span></div>
+        <div class="topic-card" onclick="loadChapter('chapter4_mcqs.json')">
+          <div class="topic-tag">CHAPTER 04</div>
+          <div class="topic-name">Cell Transport</div>
+          <div class="topic-stats"><span id="c4-count">0/75 mastered</span><span id="c4-pct">0%</span></div>
         </div>
       </div>
 
       <div class="action-stack">
-        <button class="btn btn-primary" onclick="runFullDeck()">Run full deck (all topics)</button>
+        <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">Start Chapter 1 Deck</button>
         <button class="btn" onclick="filterMissed()">Review missed questions only (<span id="missed-count">0</span>)</button>
         <button class="btn" onclick="resetProgress()" style="color: #ef4444;">Reset all progress</button>
       </div>
@@ -348,7 +193,7 @@
           <span>⏱️ <span id="timer-display">01:00</span></span>
         </div>
 
-        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px;">Loading questions...</h2>
+        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px;">Select a chapter from Dashboard to start...</h2>
 
         <div id="options-container"></div>
 
@@ -356,18 +201,6 @@
           <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
           <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Flashcards -->
-    <div id="flashcards-tab" class="tab-content">
-      <div class="flashcard" onclick="flipFlashcard()">
-        <div id="fc-content" style="font-size: 20px; font-weight: 600; color: var(--accent-green);">Anatomy vs Physiology</div>
-      </div>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <button class="btn" onclick="prevFlashcard()">← Previous</button>
-        <span style="color:var(--text-muted); font-size:14px;">Card <span id="fc-num">1</span> of <span id="fc-total">5</span></span>
-        <button class="btn btn-primary" onclick="nextFlashcard()">Next →</button>
       </div>
     </div>
 
@@ -382,13 +215,11 @@
       </div>
     </div>
 
-    <div class="footer-text">
-      Built for personal study • questions sourced from Mustafa's own lesson reports
-    </div>
+    <div class="footer-text">Built for personal study • Ged U404B Revision</div>
   </div>
 
   <script>
-    // Audio Control for iOS/iPadOS Safari
+    // Audio Player
     const audio = document.getElementById('bg-audio');
     let audioPlaying = false;
 
@@ -405,10 +236,7 @@
           audioPlaying = true;
           btn.innerText = "🔊 Interstellar: ON";
           btn.classList.add('playing');
-        }).catch(err => {
-          console.log("Audio play error:", err);
-          alert("Click anywhere on the screen first, then tap Music ON!");
-        });
+        }).catch(err => alert("Tap anywhere first, then turn audio ON."));
       }
     }
 
@@ -417,28 +245,32 @@
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
       if (tabId === 'history-tab') renderHistory();
     }
 
-    // Quiz State Management & LocalStorage Persistence
-    let allQuestions = [];
+    // Quiz Engine
     let activeDeck = [];
     let currentIndex = 0;
+    let currentChapterFile = '';
     let userAnswers = JSON.parse(localStorage.getItem('mustafa_user_answers') || '{}');
     let missedQuestions = new Set(JSON.parse(localStorage.getItem('mustafa_missed_questions') || '[]'));
     let historyLogs = JSON.parse(localStorage.getItem('mustafa_study_history') || '[]');
     let timer;
     let timeLeft = 60;
 
-    fetch('questions.json')
-      .then(res => res.json())
-      .then(data => {
-        allQuestions = data;
-        activeDeck = [...allQuestions];
-        loadQuestion();
-        updateMastery();
-      });
+    function loadChapter(fileName) {
+      currentChapterFile = fileName;
+      fetch(fileName)
+        .then(res => res.json())
+        .then(data => {
+          activeDeck = data;
+          currentIndex = 0;
+          switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
+          loadQuestion();
+          updateMastery();
+        });
+    }
 
     function startTimer() {
       clearInterval(timer);
@@ -449,9 +281,7 @@
         const sec = timeLeft % 60;
         document.getElementById('timer-display').innerText = 
           `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-        }
+        if (timeLeft <= 0) clearInterval(timer);
       }, 1000);
     }
 
@@ -459,7 +289,7 @@
       if (activeDeck.length === 0) return;
       startTimer();
       const q = activeDeck[currentIndex];
-      const originalIndex = allQuestions.indexOf(q);
+      const qKey = currentChapterFile + "_" + currentIndex;
 
       document.getElementById('q-num').innerText = currentIndex + 1;
       document.getElementById('q-total').innerText = activeDeck.length;
@@ -467,7 +297,7 @@
 
       const container = document.getElementById('options-container');
       container.innerHTML = '';
-      const isAnswered = userAnswers.hasOwnProperty(originalIndex);
+      const isAnswered = userAnswers.hasOwnProperty(qKey);
 
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
@@ -476,51 +306,61 @@
 
         if (isAnswered) {
           if (idx === q.correct) btn.classList.add('correct');
-          if (userAnswers[originalIndex] === idx && idx !== q.correct) btn.classList.add('wrong');
+          if (userAnswers[qKey] === idx && idx !== q.correct) btn.classList.add('wrong');
         } else {
-          btn.onclick = () => selectAnswer(originalIndex, idx);
+          btn.onclick = () => selectAnswer(qKey, idx);
         }
         container.appendChild(btn);
       });
     }
 
-    function selectAnswer(originalIndex, selectedIdx) {
+    function selectAnswer(qKey, selectedIdx) {
       clearInterval(timer);
-      userAnswers[originalIndex] = selectedIdx;
-      const q = allQuestions[originalIndex];
+      userAnswers[qKey] = selectedIdx;
+      const q = activeDeck[currentIndex];
       const isCorrect = selectedIdx === q.correct;
 
-      if (isCorrect) {
-        missedQuestions.delete(originalIndex);
-      } else {
-        missedQuestions.add(originalIndex);
-      }
+      if (isCorrect) missedQuestions.delete(qKey);
+      else missedQuestions.add(qKey);
 
-      // Save progress to LocalStorage
       localStorage.setItem('mustafa_user_answers', JSON.stringify(userAnswers));
       localStorage.setItem('mustafa_missed_questions', JSON.stringify(Array.from(missedQuestions)));
 
-      // Log session history with date and exact time
       const now = new Date();
-      const timestamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' at ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      
+      const timestamp = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       historyLogs.unshift({
         time: timestamp,
-        question: `Q${originalIndex + 1}`,
+        question: `${currentChapterFile.replace('_mcqs.json','')} Q${currentIndex + 1}`,
         status: isCorrect ? '✅ Correct' : '❌ Incorrect'
       });
-
       localStorage.setItem('mustafa_study_history', JSON.stringify(historyLogs));
 
-      document.getElementById('missed-count').innerText = missedQuestions.size;
       loadQuestion();
       updateMastery();
+    }
+
+    function updateMastery() {
+      const answeredKeys = Object.keys(userAnswers);
+      let correctCount = 0;
+      
+      answeredKeys.forEach(k => {
+        if (!userAnswers[k]) return;
+        correctCount++;
+      });
+
+      // ۴ فصل کلاً ۳۰۰ تست دارند
+      const totalQuestions = 300; 
+      const percent = Math.round((correctCount / totalQuestions) * 100);
+
+      document.getElementById('mastery-percent').innerText = percent + "%";
+      document.getElementById('mastery-bar').style.width = percent + "%";
+      document.getElementById('missed-count').innerText = missedQuestions.size;
     }
 
     function renderHistory() {
       const listContainer = document.getElementById('history-list');
       if (historyLogs.length === 0) {
-        listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:14px;">No review sessions logged yet. Start answering questions!</div>';
+        listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:14px;">No review sessions logged yet.</div>';
         return;
       }
       listContainer.innerHTML = historyLogs.map(item => `
@@ -532,7 +372,7 @@
     }
 
     function clearHistory() {
-      if (confirm("Clear all logged timestamps?")) {
+      if (confirm("Clear all logs?")) {
         historyLogs = [];
         localStorage.removeItem('mustafa_study_history');
         renderHistory();
@@ -540,95 +380,25 @@
     }
 
     function nextQuestion() {
-      if (currentIndex < activeDeck.length - 1) {
-        currentIndex++;
-        loadQuestion();
-      }
+      if (currentIndex < activeDeck.length - 1) { currentIndex++; loadQuestion(); }
     }
 
     function prevQuestion() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        loadQuestion();
-      }
-    }
-
-    function runFullDeck() {
-      activeDeck = [...allQuestions];
-      currentIndex = 0;
-      switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
-      loadQuestion();
-    }
-
-    function filterMissed() {
-      if (missedQuestions.size === 0) {
-        alert("No missed questions to review!");
-        return;
-      }
-      activeDeck = allQuestions.filter((_, idx) => missedQuestions.has(idx));
-      currentIndex = 0;
-      switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
-      loadQuestion();
+      if (currentIndex > 0) { currentIndex--; loadQuestion(); }
     }
 
     function resetProgress() {
-      if (confirm("Reset all test progress and overall mastery?")) {
+      if (confirm("Reset all test progress?")) {
         userAnswers = {};
         missedQuestions.clear();
-        localStorage.removeItem('mustafa_user_answers');
-        localStorage.removeItem('mustafa_missed_questions');
-        document.getElementById('missed-count').innerText = '0';
+        localStorage.clear();
         updateMastery();
-        runFullDeck();
+        location.reload();
       }
     }
 
-    function updateMastery() {
-      if (!allQuestions || allQuestions.length === 0) return;
-      let correctCount = 0;
-      Object.keys(userAnswers).forEach(idx => {
-        if (userAnswers[idx] === allQuestions[idx].correct) correctCount++;
-      });
-      const percent = Math.round((correctCount / allQuestions.length) * 100);
-      document.getElementById('mastery-percent').innerText = percent + "%";
-      document.getElementById('mastery-bar').style.width = percent + "%";
-      document.getElementById('missed-count').innerText = missedQuestions.size;
-    }
-
-    // Flashcards Data
-    const fcData = [
-      { front: "Anatomy", back: "Study of body structure, shape, size, and relationships." },
-      { front: "Physiology", back: "Study of how body parts function and work together." },
-      { front: "Histology", back: "Microscopic study of tissues." },
-      { front: "Sagittal Plane", back: "Divides the body into Left and Right parts." },
-      { front: "Transverse Plane", back: "Divides the body into Superior (upper) and Inferior (lower) parts." }
-    ];
-
-    let fcIdx = 0;
-    let isFlipped = false;
-
-    function flipFlashcard() {
-      isFlipped = !isFlipped;
-      document.getElementById('fc-content').innerText = isFlipped ? fcData[fcIdx].back : fcData[fcIdx].front;
-    }
-
-    function nextFlashcard() {
-      if (fcIdx < fcData.length - 1) {
-        fcIdx++;
-        isFlipped = false;
-        document.getElementById('fc-content').innerText = fcData[fcIdx].front;
-        document.getElementById('fc-num').innerText = fcIdx + 1;
-      }
-    }
-
-    function prevFlashcard() {
-      if (fcIdx > 0) {
-        fcIdx--;
-        isFlipped = false;
-        document.getElementById('fc-content').innerText = fcData[fcIdx].front;
-        document.getElementById('fc-num').innerText = fcIdx + 1;
-      }
-    }
+    // بارگذاری اول
+    loadChapter('chapter1_mcqs.json');
   </script>
 </body>
 </html>
