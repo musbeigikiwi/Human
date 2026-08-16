@@ -81,26 +81,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      border-radius: 12px;
-      margin-top: 15px;
-      border: 1px solid var(--border-color);
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
     .tab-navigation {
       display: flex;
       gap: 10px;
@@ -151,6 +131,11 @@
 </head>
 <body>
 
+  <!-- Audio Player element for Interstellar Soundtrack -->
+  <audio id="interstellar-audio" loop playsinline preload="auto">
+    <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="ticker-wrap">
     <div class="ticker-move">
       🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! GO FOR A++ MUSTAFA! 🔥
@@ -161,14 +146,14 @@
     <div class="header-card">
       <div class="header-top">
         <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S REVISION HUB</span>
+        
+        <!-- Toggle Button for Sound -->
+        <button class="btn" id="music-toggle-btn" onclick="toggleAudio()" style="background: var(--accent-primary); color: #0f172a; font-weight:700;">
+          ▶️ Music: OFF
+        </button>
       </div>
       <h1>Mustafa MCQs & Flashcards</h1>
       <div style="color:var(--text-muted); font-size:14px;">Applied Structure & Function of the Human Body</div>
-      
-      <!-- Interstellar Video Player -->
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/UDVtMYqUAyw" title="Interstellar Main Theme - Hans Zimmer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
     </div>
 
     <!-- Navigation Tabs -->
@@ -219,6 +204,30 @@
   </div>
 
   <script>
+    const audio = document.getElementById('interstellar-audio');
+    let isAudioPlaying = false;
+
+    function toggleAudio() {
+      const btn = document.getElementById('music-toggle-btn');
+      if (isAudioPlaying) {
+        audio.pause();
+        isAudioPlaying = false;
+        btn.innerText = "▶️ Music: OFF";
+        btn.style.background = "var(--accent-primary)";
+        btn.style.color = "#0f172a";
+      } else {
+        audio.volume = 0.5;
+        audio.play().then(() => {
+          isAudioPlaying = true;
+          btn.innerText = "⏸️ Music: ON";
+          btn.style.background = "var(--accent-success)";
+          btn.style.color = "#0f172a";
+        }).catch(err => {
+          alert("Click anywhere on the screen first, then press Play!");
+        });
+      }
+    }
+
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
