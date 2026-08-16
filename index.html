@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs & 3D Anatomy Deck</title>
-  <!-- کتابخانه رسمی گوگل برای رندر ۳بعدی -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <title>Mustafa MCQs — Anatomy & Physiology</title>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -67,6 +65,13 @@
       margin-bottom: 20px;
     }
 
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
     h1 {
       font-size: 32px;
       margin: 5px 0;
@@ -106,81 +111,18 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* ================= فلش‌کارت‌های ۳بعدی ================= */
-    .flashcard-wrapper {
-      perspective: 1000px;
-      margin: 20px 0;
-    }
+    /* فلش‌کارت ۳بعدی */
+    .flashcard-wrapper { perspective: 1000px; margin: 20px 0; }
+    .flashcard { width: 100%; height: 250px; background: transparent; border-radius: 20px; cursor: pointer; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; }
+    .flashcard-front { background: var(--card-bg); color: var(--accent-primary); }
+    .flashcard-back { background: #0f172a; color: var(--text-main); transform: rotateY(180deg); border-color: var(--accent-primary); }
 
-    .flashcard {
-      width: 100%;
-      height: 250px;
-      background: transparent;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .flashcard-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flashcard-front, .flashcard-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-    }
-
-    .flashcard-front {
-      background: var(--card-bg);
-      color: var(--accent-primary);
-    }
-
-    .flashcard-back {
-      background: #0f172a;
-      color: var(--text-main);
-      transform: rotateY(180deg);
-      border-color: var(--accent-primary);
-    }
-
-    /* ================= مدل ۳بعدی آناتومی ================= */
-    model-viewer {
-      width: 100%;
-      height: 450px;
-      background-color: #0f172a;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-    }
-
-    .quiz-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 30px;
-      border: 1px solid var(--border-color);
-    }
-
-    .option-btn {
-      width: 100%; text-align: left; padding: 16px; margin-top: 10px;
-      border: 1px solid var(--border-color); border-radius: 12px;
-      background: #0f172a; color: var(--text-main); cursor: pointer;
-    }
+    .anatomy-iframe { width: 100%; height: 550px; border-radius: 20px; border: 1px solid var(--border-color); background: #000; }
+    .quiz-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); }
+    .option-btn { width: 100%; text-align: left; padding: 16px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: #0f172a; color: var(--text-main); cursor: pointer; }
     .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
     .option-btn.wrong { background-color: rgba(239, 68, 68, 0.2) !important; border-color: var(--accent-error) !important; color: #f87171 !important; }
 
@@ -188,28 +130,38 @@
     .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
   </style>
 </head>
-<body onclick="initAudio()">
+<body onclick="startMusicOnFirstTouch()">
+
+  <!-- پخش‌کننده موسیقی فیلم Interstellar به صورت لایت -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
+  </audio>
 
   <div class="ticker-wrap">
     <div class="ticker-move">
-      🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯
+      🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯 — LISTEN TO INTERSTELLAR SOUNDTRACK & FOCUS! 🌌
     </div>
   </div>
 
   <div class="container">
     <div class="header-card">
+      <div class="header-top">
+        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">REVISION DECK • TEST 1</span>
+        <!-- دکمه ON / OFF موزیک -->
+        <button class="btn" id="music-btn" onclick="toggleMusic(event)">🎵 Interstellar Music: OFF</button>
+      </div>
       <h1>Mustafa MCQs & 3D Anatomy</h1>
-      <div style="color:var(--text-muted); font-size:14px;">Interactive Flashcards, 3D Anatomy Models & Practice Quiz</div>
+      <div style="color:var(--text-muted); font-size:14px;">Interactive Flashcards, Realistic 3D Human Anatomy & Practice Quiz</div>
     </div>
 
     <!-- منوی تب‌ها -->
     <div class="tab-navigation">
       <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz (سوالات)</button>
       <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards (فلش کارت)</button>
-      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy (مدل ۳بعدی)</button>
+      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy (مدل دقیق ۳بعدی)</button>
     </div>
 
-    <!-- ================= ۱. بخش سوالات (QUIZ) ================= -->
+    <!-- ۱. بخش سوالات (QUIZ) -->
     <div id="quiz-tab" class="tab-content active">
       <div class="quiz-card">
         <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
@@ -225,7 +177,7 @@
       </div>
     </div>
 
-    <!-- ================= ۲. بخش فلش‌کارت مرور درس (FLASHCARDS) ================= -->
+    <!-- ۲. بخش فلش‌کارت مرور درس (FLASHCARDS) -->
     <div id="flashcards-tab" class="tab-content">
       <div class="flashcard-wrapper">
         <div class="flashcard" id="card-element" onclick="flipCard()">
@@ -248,25 +200,50 @@
       </div>
     </div>
 
-    <!-- ================= ۳. بخش مدل ۳بعدی آناتومی (3D MODEL) ================= -->
+    <!-- ۳. بخش مدل ۳بعدی دقیق آناتومی (3D ANATOMY) -->
     <div id="3d-tab" class="tab-content">
       <div class="quiz-card">
-        <h3 style="margin-top:0; color:var(--accent-primary);">Interactive Human Skeleton & Anatomy</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:15px;">مدل را با انگشت یا ماوس بچرخانید و زوم کنید تا استخوان‌ها و ساختار آناتومی را به‌صورت ۳بعدی ببینید.</p>
+        <h3 style="margin-top:0; color:var(--accent-primary);">Full 3D Human Anatomy Atlas</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:15px;">مدل واقعی ۳بعدی آناتومی: با ماوس یا انگشت مدل را ۳۶۰ درجه بچرخانید و بررسی نمایید.</p>
         
-        <!-- مدل ۳بعدی تعاملی گوگل -->
-        <model-viewer 
-          src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
-          alt="3D Anatomy Model" 
-          auto-rotate 
-          camera-controls>
-        </model-viewer>
+        <iframe 
+          class="anatomy-iframe"
+          title="Full Human Anatomy 3D" 
+          src="https://sketchfab.com/models/d68d4076e05342a8a8eb6b7f32906b38/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=0&ui_stop=0&ui_watermark=0" 
+          allow="autoplay; fullscreen; vr">
+        </iframe>
       </div>
     </div>
 
   </div>
 
   <script>
+    const music = document.getElementById('bg-music');
+    let isMusicPlaying = false;
+    let musicInitialized = false;
+
+    // کنترل موزیک فیلم Interstellar
+    function toggleMusic(e) {
+      if (e) e.stopPropagation();
+      if (isMusicPlaying) {
+        music.pause();
+        isMusicPlaying = false;
+        document.getElementById('music-btn').innerText = "🎵 Interstellar Music: OFF";
+      } else {
+        music.volume = 0.4; // صدای ملایم و لایت
+        music.play();
+        isMusicPlaying = true;
+        document.getElementById('music-btn').innerText = "🔊 Interstellar Music: ON";
+      }
+    }
+
+    function startMusicOnFirstTouch() {
+      if (!musicInitialized) {
+        musicInitialized = true;
+        toggleMusic();
+      }
+    }
+
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -274,16 +251,16 @@
       btn.classList.add('active');
     }
 
-    // دیتاهای فلش‌کارت درس ۱
+    // فلش‌کارت‌ها[cite: 1, 2]
     const flashcardsData = [
-      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)." },
-      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)." },
-      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues." },
-      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism." },
-      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts." },
-      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts." },
-      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts." },
-      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities." }
+      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)[cite: 1, 2]." },
+      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)[cite: 1, 2]." },
+      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues[cite: 1, 2]." },
+      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism[cite: 1, 2]." },
+      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts[cite: 1, 2]." },
+      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts[cite: 1, 2]." },
+      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts[cite: 1, 2]." },
+      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities[cite: 1, 2]." }
     ];
 
     let fcIndex = 0;
@@ -299,24 +276,8 @@
     function prevFlashcard() { if (fcIndex > 0) { fcIndex--; loadFlashcard(); } }
     loadFlashcard();
 
-    // بخش سوالات
-    let allQuestions = [], activeDeck = [], currentIndex = 0, userAnswers = {}, timer, timeLeft = 60, audioCtx = null;
-
-    function initAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
-
-    function playSound(freq, duration) {
-      if (!audioCtx) return;
-      try {
-        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.connect(gain); gain.connect(audioCtx.destination);
-        osc.start(); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-        osc.stop(audioCtx.currentTime + duration);
-      } catch(e) {}
-    }
+    // سیستم آزمون
+    let allQuestions = [], activeDeck = [], currentIndex = 0, userAnswers = {}, timer, timeLeft = 60;
 
     function startTimer() {
       clearInterval(timer); timeLeft = 60;
@@ -324,7 +285,6 @@
         timeLeft--;
         const min = Math.floor(timeLeft / 60), sec = timeLeft % 60;
         document.getElementById('timer-display').innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        playSound(800, 0.05);
         if (timeLeft <= 0) { clearInterval(timer); alert("Time's up!"); }
       }, 1000);
     }
@@ -356,7 +316,6 @@
           btn.onclick = () => {
             clearInterval(timer);
             userAnswers[currentIndex] = idx;
-            playSound(idx === q.correct ? 600 : 150, 0.3);
             loadQuestion();
           };
         }
