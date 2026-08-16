@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mustafa Beigi's Anatomy Revision Deck</title>
+  <style>
+    :root {
+      --bg-color: #f6f3ed;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --accent-orange: #d96b43;
+      --accent-green: #1b4d3e;
+      --border-color: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .sub-title {
+      color: var(--accent-orange);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.15;
+      margin: 10px 0 20px 0;
+      max-width: 700px;
+      font-weight: 800;
+    }
+
+    .intro {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-container { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .score-card {
+      background: var(--accent-green);
+      color: white;
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .score-title {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
+
+    .score-num {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      margin-top: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent-orange);
+      background-color: #fafafa;
+    }
+
+    .option-btn.correct {
+      background-color: #d1fae5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+
+    .option-btn.wrong {
+      background-color: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="sub-title">— Focus time</div>
+    <h1>Mustafa Beigi’s Anatomy Revision Deck: Mastering the Human Body, One Card at a Time.</h1>
+    <p class="intro">Take your time. There is no rush here—just a chance to find what you know.</p>
+
+    <div class="grid-container">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+          <span style="color: var(--accent-orange); font-weight:600;">◆ Question <span id="q-num">1</span></span>
+          <span class="badge" id="difficulty-badge">Anatomy • Easy</span>
+        </div>
+
+        <h2 id="question-text" style="font-size: 24px; margin-bottom: 30px;">Loading questions...</h2>
+
+        <div id="options-container"></div>
+      </div>
+
+      <div>
+        <div class="sidebar-card">
+          <h3 style="margin-top:0;">Today's path</h3>
+          <p style="color:var(--text-muted); font-size:14px;">🔴 Easy level (25 questions)</p>
+          <p style="color:var(--text-muted); font-size:14px;">⚪ Medium level (25 questions)</p>
+          <p style="color:var(--text-muted); font-size:14px;">⚪ Hard level (25 questions)</p>
+        </div>
+
+        <div class="score-card">
+          <div class="score-title">Current score</div>
+          <div class="score-num"><span id="score">0</span> / <span id="total">75</span></div>
+          <p style="font-size: 12px; opacity: 0.8; margin-top: 15px;">Every correct answer is one step forward</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let questions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    fetch('questions.json')
+      .then(res => res.json())
+      .then(data => {
+        questions = data;
+        document.getElementById('total').innerText = questions.length;
+        loadQuestion();
+      })
+      .catch(err => {
+        document.getElementById('question-text').innerText = "Questions file missing or invalid.";
+      });
+
+    function loadQuestion() {
+      if (currentIndex >= questions.length) {
+        document.getElementById('question-text').innerText = "🎉 Quiz completed! Your final score is: " + score;
+        document.getElementById('options-container').innerHTML = '';
+        return;
+      }
+
+      answered = false;
+      const q = questions[currentIndex];
+      document.getElementById('q-num').innerText = currentIndex + 1;
+      document.getElementById('question-text').innerText = q.question;
+      document.getElementById('difficulty-badge').innerText = `Anatomy • ${q.level || 'Easy'}`;
+      
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = String.fromCharCode(65 + idx) + ". " + opt;
+        btn.onclick = () => checkAnswer(idx, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, btn) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[currentIndex];
+      const buttons = document.querySelectorAll('.option-btn');
+
+      if (selected === q.correct) {
+        score++;
+        document.getElementById('score').innerText = score;
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('wrong');
+        buttons[q.correct].classList.add('correct');
+      }
+
+      setTimeout(() => {
+        currentIndex++;
+        loadQuestion();
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
