@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy & Physiology</title>
+  <title>Mustafa MCQs — Anatomy & Physiology Studio</title>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -26,6 +26,7 @@
       color: var(--text-main);
       margin: 0;
       padding-bottom: 40px;
+      touch-action: manipulation;
     }
 
     .ticker-wrap {
@@ -52,7 +53,7 @@
     }
 
     .container {
-      max-width: 950px;
+      max-width: 1000px;
       margin: 20px auto 0 auto;
       padding: 0 20px;
     }
@@ -111,7 +112,61 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* فلش‌کارت ۳بعدی */
+    /* Drawing Studio Styling */
+    .studio-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 550px;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      touch-action: none;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      background: #0f172a;
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .tool-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .tool-btn.active {
+      background: var(--accent-primary);
+      color: #0f172a;
+    }
+
+    /* Flashcard & Quiz Styling */
     .flashcard-wrapper { perspective: 1000px; margin: 20px 0; }
     .flashcard { width: 100%; height: 250px; background: transparent; border-radius: 20px; cursor: pointer; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
@@ -126,42 +181,42 @@
     .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
     .option-btn.wrong { background-color: rgba(239, 68, 68, 0.2) !important; border-color: var(--accent-error) !important; color: #f87171 !important; }
 
-    .btn { padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
+    .btn { padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
     .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
   </style>
 </head>
-<body onclick="startMusicOnFirstTouch()">
+<body>
 
-  <!-- پخش‌کننده موسیقی فیلم Interstellar به صورت لایت -->
-  <audio id="bg-music" loop preload="auto">
+  <!-- Interstellar Theme Audio -->
+  <audio id="bg-music" loop playsinline preload="auto">
     <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
   </audio>
 
   <div class="ticker-wrap">
     <div class="ticker-move">
-      🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯 — LISTEN TO INTERSTELLAR SOUNDTRACK & FOCUS! 🌌
+      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! DRAW, LEARN AND EXCEL WITH APPLE PENCIL! ✏️ 🔥
     </div>
   </div>
 
   <div class="container">
     <div class="header-card">
       <div class="header-top">
-        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">REVISION DECK • TEST 1</span>
-        <!-- دکمه ON / OFF موزیک -->
-        <button class="btn" id="music-btn" onclick="toggleMusic(event)">🎵 Interstellar Music: OFF</button>
+        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S STUDY HUB</span>
+        <button class="btn" id="music-btn" onclick="toggleMusic()" style="background: var(--accent-primary); color: #0f172a; font-weight:700;">▶️ Play Interstellar Music</button>
       </div>
-      <h1>Mustafa MCQs & 3D Anatomy</h1>
-      <div style="color:var(--text-muted); font-size:14px;">Interactive Flashcards, Realistic 3D Human Anatomy & Practice Quiz</div>
+      <h1>Mustafa MCQs & Drawing Studio</h1>
+      <div style="color:var(--text-muted); font-size:14px;">Apple Pencil Anatomy Studio, Interactive 3D Model & Practice Deck</div>
     </div>
 
-    <!-- منوی تب‌ها -->
+    <!-- Navigation Tabs -->
     <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz (سوالات)</button>
-      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards (فلش کارت)</button>
-      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy (مدل دقیق ۳بعدی)</button>
+      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz</button>
+      <button class="tab-btn" onclick="switchTab('draw-tab', this)">✏️ Anatomy Studio (Draw/Upload)</button>
+      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('3d-tab', this)">🦴 3D Anatomy Atlas</button>
     </div>
 
-    <!-- ۱. بخش سوالات (QUIZ) -->
+    <!-- 1. Quiz Section -->
     <div id="quiz-tab" class="tab-content active">
       <div class="quiz-card">
         <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
@@ -177,7 +232,30 @@
       </div>
     </div>
 
-    <!-- ۲. بخش فلش‌کارت مرور درس (FLASHCARDS) -->
+    <!-- 2. Drawing & Annotation Studio Section -->
+    <div id="draw-tab" class="tab-content">
+      <div class="studio-card">
+        <div class="toolbar">
+          <label class="btn btn-primary" style="cursor:pointer;">
+            📷 Upload Diagram / Textbook Photo
+            <input type="file" id="img-loader" accept="image/*" style="display:none;" onchange="uploadImage(event)">
+          </label>
+          
+          <button class="tool-btn active" id="pen-btn" onclick="setTool('pen')">✏️ Pen Tool</button>
+          <button class="tool-btn" id="high-btn" onclick="setTool('highlighter')">🖍️ Highlighter</button>
+          <input type="color" id="pen-color" value="#38bdf8" style="border:none; background:none; cursor:pointer; width:30px; height:30px;">
+          
+          <button class="tool-btn" onclick="clearCanvas()" style="color:var(--accent-error);">🗑️ Clear Canvas</button>
+        </div>
+
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="paint-canvas"></canvas>
+        </div>
+        <p style="color:var(--text-muted); font-size:12px; margin-top:10px;">💡 Upload any organ system diagram and annotate directly using <strong>Apple Pencil Pro</strong> or touch input.</p>
+      </div>
+    </div>
+
+    <!-- 3. Flashcards Section -->
     <div id="flashcards-tab" class="tab-content">
       <div class="flashcard-wrapper">
         <div class="flashcard" id="card-element" onclick="flipCard()">
@@ -200,12 +278,10 @@
       </div>
     </div>
 
-    <!-- ۳. بخش مدل ۳بعدی دقیق آناتومی (3D ANATOMY) -->
+    <!-- 4. 3D Anatomy Model Section -->
     <div id="3d-tab" class="tab-content">
       <div class="quiz-card">
-        <h3 style="margin-top:0; color:var(--accent-primary);">Full 3D Human Anatomy Atlas</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:15px;">مدل واقعی ۳بعدی آناتومی: با ماوس یا انگشت مدل را ۳۶۰ درجه بچرخانید و بررسی نمایید.</p>
-        
+        <h3 style="margin-top:0; color:var(--accent-primary);">Interactive 3D Human Anatomy Atlas</h3>
         <iframe 
           class="anatomy-iframe"
           title="Full Human Anatomy 3D" 
@@ -218,29 +294,22 @@
   </div>
 
   <script>
+    // Music Controls
     const music = document.getElementById('bg-music');
     let isMusicPlaying = false;
-    let musicInitialized = false;
 
-    // کنترل موزیک فیلم Interstellar
-    function toggleMusic(e) {
-      if (e) e.stopPropagation();
+    function toggleMusic() {
+      const musicBtn = document.getElementById('music-btn');
       if (isMusicPlaying) {
         music.pause();
         isMusicPlaying = false;
-        document.getElementById('music-btn').innerText = "🎵 Interstellar Music: OFF";
+        musicBtn.innerText = "▶️ Play Interstellar Music";
       } else {
-        music.volume = 0.4; // صدای ملایم و لایت
-        music.play();
-        isMusicPlaying = true;
-        document.getElementById('music-btn').innerText = "🔊 Interstellar Music: ON";
-      }
-    }
-
-    function startMusicOnFirstTouch() {
-      if (!musicInitialized) {
-        musicInitialized = true;
-        toggleMusic();
+        music.volume = 0.5;
+        music.play().then(() => {
+          isMusicPlaying = true;
+          musicBtn.innerText = "⏸️ Pause Music";
+        });
       }
     }
 
@@ -249,9 +318,101 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       btn.classList.add('active');
+      if(tabId === 'draw-tab') resizeCanvas();
     }
 
-    // فلش‌کارت‌ها[cite: 1, 2]
+    // Canvas Drawing Logic for Apple Pencil
+    const canvas = document.getElementById('paint-canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let currentTool = 'pen';
+    let uploadedImg = null;
+
+    function resizeCanvas() {
+      const container = document.getElementById('canvas-container');
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      redrawCanvas();
+    }
+
+    function uploadImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        uploadedImg = new Image();
+        uploadedImg.onload = function() {
+          redrawCanvas();
+        }
+        uploadedImg.src = event.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+
+    function redrawCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (uploadedImg) {
+        const ratio = Math.min(canvas.width / uploadedImg.width, canvas.height / uploadedImg.height);
+        const nw = uploadedImg.width * ratio;
+        const nh = uploadedImg.height * ratio;
+        ctx.drawImage(uploadedImg, (canvas.width - nw) / 2, (canvas.height - nh) / 2, nw, nh);
+      }
+    }
+
+    function setTool(tool) {
+      currentTool = tool;
+      document.getElementById('pen-btn').classList.toggle('active', tool === 'pen');
+      document.getElementById('high-btn').classList.toggle('active', tool === 'highlighter');
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      const pos = getPos(e);
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.strokeStyle = document.getElementById('pen-color').value;
+      
+      if (currentTool === 'pen') {
+        ctx.globalAlpha = 1.0;
+        ctx.lineWidth = 3;
+      } else if (currentTool === 'highlighter') {
+        ctx.globalAlpha = 0.3;
+        ctx.lineWidth = 18;
+      }
+
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+
+    function stopDrawing() { isDrawing = false; }
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+
+    canvas.addEventListener('touchstart', startDrawing, {passive: true});
+    canvas.addEventListener('touchmove', draw, {passive: true});
+    canvas.addEventListener('touchend', stopDrawing);
+
+    function clearCanvas() {
+      uploadedImg = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Flashcards Data
     const flashcardsData = [
       { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)[cite: 1, 2]." },
       { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)[cite: 1, 2]." },
@@ -276,7 +437,7 @@
     function prevFlashcard() { if (fcIndex > 0) { fcIndex--; loadFlashcard(); } }
     loadFlashcard();
 
-    // سیستم آزمون
+    // Quiz System
     let allQuestions = [], activeDeck = [], currentIndex = 0, userAnswers = {}, timer, timeLeft = 60;
 
     function startTimer() {
