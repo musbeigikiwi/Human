@@ -14,6 +14,7 @@
       --accent-teal: #10b981;
       --accent-glow: #34d399;
       --accent-orange: #f97316;
+      --accent-blue: #3b82f6;
     }
 
     * { box-sizing: border-box; }
@@ -155,21 +156,21 @@
     .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
     .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
-    /* Navigation Hub (5 Items) */
+    /* Navigation Hub Grid */
     .tab-navigation {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
       margin-bottom: 24px;
     }
 
-    @media (max-width: 768px) { 
+    @media (max-width: 850px) { 
       .tab-navigation { grid-template-columns: repeat(3, 1fr); }
       .clock-wrapper { display: none; }
     }
 
     .nav-card-btn {
-      padding: 14px 8px;
+      padding: 12px 6px;
       font-weight: 700;
       border-radius: 16px;
       border: 1px solid var(--card-border);
@@ -183,7 +184,7 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      font-size: 13px;
+      font-size: 12.5px;
     }
 
     .nav-card-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; transform: translateY(-2px); }
@@ -192,7 +193,7 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Topics Grid */
+    /* Topics */
     .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
@@ -259,6 +260,46 @@
 
     .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
+    /* Links Section Styling */
+    .links-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 24px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .external-link-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .external-link-btn:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .link-icon { font-size: 24px; }
+    .link-info { display: flex; flex-direction: column; }
+    .link-title { font-weight: 700; font-size: 14px; color: #ffffff; }
+    .link-desc { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+
     .contact-footer {
       background: var(--card-bg);
       border-radius: 18px;
@@ -305,7 +346,7 @@
       </div>
     </div>
 
-    <!-- Main Header -->
+    <!-- Header -->
     <div class="header-card">
       <div class="header-layout">
         
@@ -358,7 +399,7 @@
       </div>
     </div>
 
-    <!-- Navigation Hub (Includes Direct Link to calendar.html) -->
+    <!-- Navigation Hub (6 Buttons Layout) -->
     <div class="tab-navigation">
       <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
         <span style="font-size: 16px;">🚀</span>
@@ -367,6 +408,10 @@
       <button class="nav-card-btn" onclick="switchTab('quiz-tab', this)">
         <span style="font-size: 16px;">📝</span>
         <span>MCQs Quiz</span>
+      </button>
+      <button class="nav-card-btn" onclick="switchTab('links-tab', this)">
+        <span style="font-size: 16px;">🔗</span>
+        <span>Wintec Portals</span>
       </button>
       <a href="calendar.html" class="nav-card-btn">
         <span style="font-size: 16px;">📅</span>
@@ -382,7 +427,7 @@
       </a>
     </div>
 
-    <!-- Dashboard Tab -->
+    <!-- Dashboard -->
     <div id="topics-tab" class="tab-content active">
       <div class="topics-grid">
         <div class="topic-card" onclick="loadChapter('chapter1_mcqs.json')">
@@ -428,6 +473,72 @@
         <div class="nav-controls">
           <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
           <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wintec Quick Links Tab -->
+    <div id="links-tab" class="tab-content">
+      <div class="links-card">
+        <h2 style="color:var(--accent-glow); margin-top:0;">🔗 Wintec Student Portals & E-Books</h2>
+        <p style="color: var(--text-muted); font-size: 13.5px;">Quick access to official Wintec learning platforms, library catalog, and textbooks.</p>
+
+        <div class="links-grid">
+          <a href="https://www.wintec.ac.nz/student-resources/my-learning" target="_blank" class="external-link-btn">
+            <span class="link-icon">🎓</span>
+            <div class="link-info">
+              <span class="link-title">Wintec Moodle / My Learning</span>
+              <span class="link-desc">Access course materials, lectures, and submissions</span>
+            </div>
+          </a>
+
+          <a href="https://accounts.lt.app/user/login?product=adinstruments" target="_blank" class="external-link-btn">
+            <span class="link-icon">🔬</span>
+            <div class="link-info">
+              <span class="link-title">LT KuraCloud</span>
+              <span class="link-desc">Making Science Easier — ADInstruments Portal</span>
+            </div>
+          </a>
+
+          <a href="https://wintec.mykoha.co.nz/cgi-bin/koha/opac-main.pl" target="_blank" class="external-link-btn">
+            <span class="link-icon">📚</span>
+            <div class="link-info">
+              <span class="link-title">Wintec Library (Koha)</span>
+              <span class="link-desc">Official Library OPAC Catalog & Search</span>
+            </div>
+          </a>
+
+          <a href="https://wintec.libcal.com/reserve/citystudyrooms" target="_blank" class="external-link-btn">
+            <span class="link-icon">🏫</span>
+            <div class="link-info">
+              <span class="link-title">Group Study Room Booking</span>
+              <span class="link-desc">Reserve City Campus Library Study Rooms</span>
+            </div>
+          </a>
+
+          <a href="https://libguides.wintec.ac.nz/te_ara_putake/welcome" target="_blank" class="external-link-btn">
+            <span class="link-icon">🌟</span>
+            <div class="link-info">
+              <span class="link-title">Te-ara-Pūtake Guide</span>
+              <span class="link-desc">Wintec LibGuides Learning Hub</span>
+            </div>
+          </a>
+
+          <a href="https://ebookcentral.proquest.com/lib/wintec/detail.action?docID=6551382" target="_blank" class="external-link-btn">
+            <span class="link-icon">📖</span>
+            <div class="link-info">
+              <span class="link-title">Essentials of A&P (13th Ed.)</span>
+              <span class="link-desc">Marieb & Keller — ProQuest E-Book</span>
+            </div>
+          </a>
+
+          <a href="https://wintec.mykoha.co.nz/cgi-bin/koha/opac-detail.pl?biblionumber=603690&query_desc=kw%2Cwrdl%3A%20Human%20anatomy%20illness%208th%20edition" target="_blank" class="external-link-btn">
+            <span class="link-icon">🩺</span>
+            <div class="link-info">
+              <span class="link-title">The Human Body in Health & Illness</span>
+              <span class="link-desc">Barbara Herlihy (8th Edition) Catalog</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
