@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mustafa MCQs — Anatomy Revision Deck</title>
+  <title>Mustafa MCQs — Anatomy & Physiology</title>
   <style>
     :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-primary: #38bdf8;
-      --accent-success: #22c55e;
-      --accent-error: #ef4444;
-      --accent-warning: #f59e0b;
-      --border-color: #334155;
-      --news-bg: #dc2626;
+      --bg-color: #f2f5f3;
+      --card-bg: #ffffff;
+      --text-main: #2d3748;
+      --text-muted: #718096;
+      --accent-green: #1b4d3e;
+      --accent-green-hover: #143b2f;
+      --accent-orange: #d96b43;
+      --border-color: #e2e8f0;
     }
 
     * { box-sizing: border-box; }
@@ -25,44 +23,20 @@
       background-color: var(--bg-color);
       color: var(--text-main);
       margin: 0;
-      padding-bottom: 40px;
-    }
-
-    .ticker-wrap {
-      width: 100%;
-      background-color: var(--news-bg);
-      color: white;
-      overflow: hidden;
-      height: 40px;
-      line-height: 40px;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .ticker-move {
-      display: inline-block;
-      white-space: nowrap;
-      padding-left: 100%;
-      animation: ticker 25s linear infinite;
-    }
-
-    @keyframes ticker {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-100%, 0, 0); }
+      padding: 40px 20px;
     }
 
     .container {
-      max-width: 900px;
-      margin: 20px auto 0 auto;
-      padding: 0 20px;
+      max-width: 850px;
+      margin: 0 auto;
     }
 
     .header-card {
       background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 30px;
       border: 1px solid var(--border-color);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .header-top {
@@ -72,243 +46,572 @@
       margin-bottom: 12px;
     }
 
+    .badge-tag {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .sound-btn {
+      background: #edf2f7;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
     h1 {
-      font-size: 32px;
-      margin: 5px 0;
+      font-size: 36px;
+      margin: 5px 0 8px 0;
       font-family: Georgia, serif;
-      background: linear-gradient(to right, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #1a202c;
+    }
+
+    .course-title {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .mastery-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-bg {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      background: var(--accent-green);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
     }
 
     .tab-navigation {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 24px;
     }
 
     .tab-btn {
       flex: 1;
-      padding: 14px;
-      font-size: 15px;
+      padding: 12px;
       font-weight: 700;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid var(--border-color);
       background: var(--card-bg);
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.3s;
     }
 
     .tab-btn.active {
-      background: var(--accent-primary);
-      color: #0f172a;
-      border-color: var(--accent-primary);
+      background: var(--accent-green);
+      color: white;
+      border-color: var(--accent-green);
     }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Flashcards */
-    .flashcard-wrapper { perspective: 1000px; margin: 20px 0; }
-    .flashcard { width: 100%; height: 260px; background: transparent; border-radius: 20px; cursor: pointer; }
-    .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
-    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; }
-    .flashcard-front { background: var(--card-bg); color: var(--accent-primary); }
-    .flashcard-back { background: #0f172a; color: var(--text-main); transform: rotateY(180deg); border-color: var(--accent-primary); }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
 
-    /* Quiz */
-    .quiz-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); }
-    .option-btn { width: 100%; text-align: left; padding: 16px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: #0f172a; color: var(--text-main); cursor: pointer; font-size: 16px; transition: all 0.2s; }
-    .option-btn:hover { border-color: var(--accent-primary); }
-    .option-btn.correct { background-color: rgba(34, 197, 94, 0.2) !important; border-color: var(--accent-success) !important; color: #4ade80 !important; }
-    .option-btn.wrong { background-color: rgba(239, 68, 68, 0.2) !important; border-color: var(--accent-error) !important; color: #f87171 !important; }
+    @media (max-width: 640px) {
+      .topics-grid { grid-template-columns: 1fr; }
+    }
 
-    .btn { padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-weight: 600; cursor: pointer; }
-    .btn-primary { background: var(--accent-primary); color: #0f172a; border: none; font-weight: 700; }
+    .topic-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    .topic-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .topic-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 6px 0 16px 0;
+      color: #1a202c;
+    }
+
+    .topic-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .quiz-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      margin-top: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .option-btn.correct { background: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+    .option-btn.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+    .nav-controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .action-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: white;
+      color: var(--text-main);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+    }
+
+    .flashcard {
+      width: 100%;
+      height: 240px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    /* History Timeline Styling */
+    .history-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 14px;
+    }
+
+    .history-item:last-child { border-bottom: none; }
+
+    .footer-text {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 32px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Audio Player element for Interstellar Soundtrack -->
-  <audio id="interstellar-audio" loop playsinline preload="auto">
+  <!-- Audio File for Interstellar -->
+  <audio id="bg-audio" loop preload="auto">
     <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
   </audio>
-
-  <div class="ticker-wrap">
-    <div class="ticker-move">
-      🌌 MASTERING HUMAN ANATOMY WITH INTERSTELLAR SOUNDTRACK! GO FOR A++ MUSTAFA! 🔥
-    </div>
-  </div>
 
   <div class="container">
     <div class="header-card">
       <div class="header-top">
-        <span style="font-size:12px; letter-spacing:1px; color:var(--accent-primary); font-weight:700;">MUSTAFA'S REVISION HUB</span>
-        
-        <!-- Toggle Button for Sound -->
-        <button class="btn" id="music-toggle-btn" onclick="toggleAudio()" style="background: var(--accent-primary); color: #0f172a; font-weight:700;">
-          ▶️ Music: OFF
-        </button>
+        <span class="badge-tag">MUSTAFA'S REVISION DECK</span>
+        <button class="sound-btn" id="sound-btn" onclick="toggleAudio()">🎵 Interstellar: OFF</button>
       </div>
-      <h1>Mustafa MCQs & Flashcards</h1>
-      <div style="color:var(--text-muted); font-size:14px;">Applied Structure & Function of the Human Body</div>
+      <h1>Mustafa MCQs</h1>
+      <div class="course-title">Course <strong>GEDU404B/2602</strong> — Applied Structure & Function of the Human Body</div>
+
+      <div class="mastery-header">
+        <span>Overall mastery</span>
+        <span id="mastery-percent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="mastery-bar"></div>
+      </div>
     </div>
 
-    <!-- Navigation Tabs -->
     <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('quiz-tab', this)">📝 Practice Quiz (MCQs)</button>
-      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">🎴 Flashcards</button>
+      <button class="tab-btn active" onclick="switchTab('topics-tab', this)">Dashboard & Topics</button>
+      <button class="tab-btn" onclick="switchTab('quiz-tab', this)">Practice Deck (MCQs)</button>
+      <button class="tab-btn" onclick="switchTab('flashcards-tab', this)">Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('history-tab', this)">📜 Study History</button>
     </div>
 
-    <!-- 1. Quiz Section (4-Choice MCQs) -->
-    <div id="quiz-tab" class="tab-content active">
-      <div class="quiz-card">
-        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-          <span style="color:var(--accent-primary); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
-          <span style="color:var(--accent-warning); font-weight:700;">⏱️ <span id="timer-display">01:00</span></span>
+    <!-- Dashboard -->
+    <div id="topics-tab" class="tab-content active">
+      <div class="topics-grid">
+        <div class="topic-card" onclick="runFullDeck()">
+          <div class="topic-tag">TOPIC 01</div>
+          <div class="topic-name">Intro to A&P</div>
+          <div class="topic-stats"><span>0/10 mastered</span><span>0%</span></div>
         </div>
-        <h2 id="question-text" style="font-size:20px; margin-bottom:20px;">Loading...</h2>
+        <div class="topic-card" onclick="runFullDeck()">
+          <div class="topic-tag">TOPIC 02</div>
+          <div class="topic-name">Levels of Organisation</div>
+          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+        </div>
+        <div class="topic-card" onclick="runFullDeck()">
+          <div class="topic-tag">TOPIC 03</div>
+          <div class="topic-name">Body Position & Cavities</div>
+          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+        </div>
+        <div class="topic-card" onclick="runFullDeck()">
+          <div class="topic-tag">TOPIC 04</div>
+          <div class="topic-name">Units & Lab Skills</div>
+          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+        </div>
+      </div>
+
+      <div class="action-stack">
+        <button class="btn btn-primary" onclick="runFullDeck()">Run full deck (all topics)</button>
+        <button class="btn" onclick="filterMissed()">Review missed questions only (<span id="missed-count">0</span>)</button>
+        <button class="btn" onclick="resetProgress()" style="color: #ef4444;">Reset all progress</button>
+      </div>
+    </div>
+
+    <!-- MCQs Quiz -->
+    <div id="quiz-tab" class="tab-content">
+      <div class="quiz-card">
+        <div class="quiz-meta">
+          <span style="color: var(--accent-orange); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
+          <span>⏱️ <span id="timer-display">01:00</span></span>
+        </div>
+
+        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px;">Loading questions...</h2>
+
         <div id="options-container"></div>
-        <div style="display:flex; gap:10px; margin-top:20px;">
+
+        <div class="nav-controls">
           <button class="btn" id="prev-btn" onclick="prevQuestion()">Previous</button>
           <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">Next Question ➔</button>
         </div>
       </div>
     </div>
 
-    <!-- 2. Flashcards Section -->
+    <!-- Flashcards -->
     <div id="flashcards-tab" class="tab-content">
-      <div class="flashcard-wrapper">
-        <div class="flashcard" id="card-element" onclick="flipCard()">
-          <div class="flashcard-inner">
-            <div class="flashcard-front">
-              <span style="font-size:12px; color:var(--text-muted); font-weight:700;">FLASHCARD (Click to Flip)</span>
-              <h2 id="fc-term" style="margin-top:15px;">Anatomy vs Physiology</h2>
-            </div>
-            <div class="flashcard-back">
-              <span style="font-size:12px; color:var(--accent-primary); font-weight:700;">DEFINITION / EXPLANATION</span>
-              <p id="fc-definition" style="font-size:18px; line-height:1.5; margin-top:15px;"></p>
-            </div>
-          </div>
-        </div>
+      <div class="flashcard" onclick="flipFlashcard()">
+        <div id="fc-content" style="font-size: 20px; font-weight: 600; color: var(--accent-green);">Anatomy vs Physiology</div>
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <button class="btn" onclick="prevFlashcard()">← Previous Card</button>
-        <span style="color:var(--text-muted); font-size:14px;">Card <span id="fc-num">1</span> of <span id="fc-total">8</span></span>
-        <button class="btn btn-primary" onclick="nextFlashcard()">Next Card →</button>
+        <button class="btn" onclick="prevFlashcard()">← Previous</button>
+        <span style="color:var(--text-muted); font-size:14px;">Card <span id="fc-num">1</span> of <span id="fc-total">5</span></span>
+        <button class="btn btn-primary" onclick="nextFlashcard()">Next →</button>
       </div>
     </div>
 
+    <!-- Study History Log -->
+    <div id="history-tab" class="tab-content">
+      <div class="history-card">
+        <h3 style="margin-top:0; color:var(--accent-green);">Review Session Logs</h3>
+        <div id="history-list">
+          <div style="color:var(--text-muted); font-size:14px;">No review sessions logged yet. Start answering questions!</div>
+        </div>
+        <button class="btn" onclick="clearHistory()" style="margin-top:15px; font-size:12px; color:#ef4444;">Clear History Logs</button>
+      </div>
+    </div>
+
+    <div class="footer-text">
+      Built for personal study • questions sourced from Mustafa's own lesson reports
+    </div>
   </div>
 
   <script>
-    const audio = document.getElementById('interstellar-audio');
-    let isAudioPlaying = false;
+    // Audio Player
+    const audio = document.getElementById('bg-audio');
+    let audioPlaying = false;
 
     function toggleAudio() {
-      const btn = document.getElementById('music-toggle-btn');
-      if (isAudioPlaying) {
+      const btn = document.getElementById('sound-btn');
+      if (audioPlaying) {
         audio.pause();
-        isAudioPlaying = false;
-        btn.innerText = "▶️ Music: OFF";
-        btn.style.background = "var(--accent-primary)";
-        btn.style.color = "#0f172a";
+        audioPlaying = false;
+        btn.innerText = "🎵 Interstellar: OFF";
       } else {
-        audio.volume = 0.5;
+        audio.volume = 0.4;
         audio.play().then(() => {
-          isAudioPlaying = true;
-          btn.innerText = "⏸️ Music: ON";
-          btn.style.background = "var(--accent-success)";
-          btn.style.color = "#0f172a";
-        }).catch(err => {
+          audioPlaying = true;
+          btn.innerText = "🔊 Interstellar: ON";
+        }).catch(() => {
           alert("Click anywhere on the screen first, then press Play!");
         });
       }
     }
 
+    // Tabs Control
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       btn.classList.add('active');
+      if (tabId === 'history-tab') renderHistory();
     }
 
-    // Flashcards Data
-    const flashcardsData = [
-      { term: "Anatomy", def: "Study of body structure, position, shape, size, and relationships (e.g., The heart has four chambers)[cite: 1]." },
-      { term: "Physiology", def: "Study of how body parts work individually and together (e.g., The heart pumps blood)[cite: 1]." },
-      { term: "Histology vs Cytology", def: "Cytology = Study of cells. Histology = Study of tissues[cite: 1]." },
-      { term: "Levels of Organisation", def: "Chemical → Cellular → Tissue → Organ → Organ System → Organism[cite: 1]." },
-      { term: "Sagittal Plane", def: "Divides the body into Left and Right parts[cite: 1]." },
-      { term: "Frontal (Coronal) Plane", def: "Divides the body into Anterior (front) and Posterior (back) parts[cite: 1]." },
-      { term: "Transverse Plane", def: "Divides the body into Superior (upper) and Inferior (lower) parts[cite: 1]." },
-      { term: "Dorsal vs Ventral Cavities", def: "Dorsal = Cranial + Vertebral cavities. Ventral = Thoracic + Abdominopelvic cavities[cite: 1]." }
-    ];
+    // MCQ Engine
+    let allQuestions = [];
+    let activeDeck = [];
+    let currentIndex = 0;
+    let userAnswers = {};
+    let missedQuestions = new Set();
+    let historyLogs = JSON.parse(localStorage.getItem('mustafa_study_history') || '[]');
+    let timer;
+    let timeLeft = 60;
 
-    let fcIndex = 0;
-    function loadFlashcard() {
-      document.getElementById('card-element').classList.remove('flipped');
-      document.getElementById('fc-term').innerText = flashcardsData[fcIndex].term;
-      document.getElementById('fc-definition').innerText = flashcardsData[fcIndex].def;
-      document.getElementById('fc-num').innerText = fcIndex + 1;
-      document.getElementById('fc-total').innerText = flashcardsData.length;
-    }
-    function flipCard() { document.getElementById('card-element').classList.toggle('flipped'); }
-    function nextFlashcard() { if (fcIndex < flashcardsData.length - 1) { fcIndex++; loadFlashcard(); } }
-    function prevFlashcard() { if (fcIndex > 0) { fcIndex--; loadFlashcard(); } }
-    loadFlashcard();
-
-    // Quiz System
-    let allQuestions = [], activeDeck = [], currentIndex = 0, userAnswers = {}, timer, timeLeft = 60;
+    fetch('questions.json')
+      .then(res => res.json())
+      .then(data => {
+        allQuestions = data;
+        activeDeck = [...allQuestions];
+        loadQuestion();
+      });
 
     function startTimer() {
-      clearInterval(timer); timeLeft = 60;
+      clearInterval(timer);
+      timeLeft = 60;
       timer = setInterval(() => {
         timeLeft--;
-        const min = Math.floor(timeLeft / 60), sec = timeLeft % 60;
-        document.getElementById('timer-display').innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        if (timeLeft <= 0) { clearInterval(timer); alert("Time's up!"); }
+        const min = Math.floor(timeLeft / 60);
+        const sec = timeLeft % 60;
+        document.getElementById('timer-display').innerText = 
+          `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          alert("Time's up!");
+        }
       }, 1000);
     }
-
-    fetch('questions.json').then(res => res.json()).then(data => {
-      allQuestions = data; activeDeck = [...allQuestions]; loadQuestion();
-    });
 
     function loadQuestion() {
       if (activeDeck.length === 0) return;
       startTimer();
       const q = activeDeck[currentIndex];
+      const originalIndex = allQuestions.indexOf(q);
+
       document.getElementById('q-num').innerText = currentIndex + 1;
       document.getElementById('q-total').innerText = activeDeck.length;
       document.getElementById('question-text').innerText = q.question;
 
       const container = document.getElementById('options-container');
       container.innerHTML = '';
-      const isAnswered = userAnswers.hasOwnProperty(currentIndex);
+      const isAnswered = userAnswers.hasOwnProperty(originalIndex);
 
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = String.fromCharCode(65 + idx) + ". " + opt;
+
         if (isAnswered) {
           if (idx === q.correct) btn.classList.add('correct');
-          if (userAnswers[currentIndex] === idx && idx !== q.correct) btn.classList.add('wrong');
+          if (userAnswers[originalIndex] === idx && idx !== q.correct) btn.classList.add('wrong');
         } else {
-          btn.onclick = () => {
-            clearInterval(timer);
-            userAnswers[currentIndex] = idx;
-            loadQuestion();
-          };
+          btn.onclick = () => selectAnswer(originalIndex, idx);
         }
         container.appendChild(btn);
       });
     }
 
-    function nextQuestion() { if (currentIndex < activeDeck.length - 1) { currentIndex++; loadQuestion(); } }
-    function prevQuestion() { if (currentIndex > 0) { currentIndex--; loadQuestion(); } }
+    function selectAnswer(originalIndex, selectedIdx) {
+      clearInterval(timer);
+      userAnswers[originalIndex] = selectedIdx;
+      const q = allQuestions[originalIndex];
+      const isCorrect = selectedIdx === q.correct;
+
+      if (isCorrect) {
+        missedQuestions.delete(originalIndex);
+      } else {
+        missedQuestions.add(originalIndex);
+      }
+
+      // Log session history with date and exact time
+      const now = new Date();
+      const timestamp = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' at ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      
+      historyLogs.unshift({
+        time: timestamp,
+        question: `Q${originalIndex + 1}`,
+        status: isCorrect ? '✅ Correct' : '❌ Incorrect'
+      });
+
+      localStorage.setItem('mustafa_study_history', JSON.stringify(historyLogs));
+
+      document.getElementById('missed-count').innerText = missedQuestions.size;
+      loadQuestion();
+      updateMastery();
+    }
+
+    function renderHistory() {
+      const listContainer = document.getElementById('history-list');
+      if (historyLogs.length === 0) {
+        listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:14px;">No review sessions logged yet. Start answering questions!</div>';
+        return;
+      }
+      listContainer.innerHTML = historyLogs.map(item => `
+        <div class="history-item">
+          <span><strong>${item.question}</strong> — ${item.status}</span>
+          <span style="color:var(--text-muted); font-size:12px;">📅 ${item.time}</span>
+        </div>
+      `).join('');
+    }
+
+    function clearHistory() {
+      if (confirm("Clear all logged timestamps?")) {
+        historyLogs = [];
+        localStorage.removeItem('mustafa_study_history');
+        renderHistory();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIndex < activeDeck.length - 1) {
+        currentIndex++;
+        loadQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadQuestion();
+      }
+    }
+
+    function runFullDeck() {
+      activeDeck = [...allQuestions];
+      currentIndex = 0;
+      switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
+      loadQuestion();
+    }
+
+    function filterMissed() {
+      if (missedQuestions.size === 0) {
+        alert("No missed questions to review!");
+        return;
+      }
+      activeDeck = allQuestions.filter((_, idx) => missedQuestions.has(idx));
+      currentIndex = 0;
+      switchTab('quiz-tab', document.querySelectorAll('.tab-btn')[1]);
+      loadQuestion();
+    }
+
+    function resetProgress() {
+      if (confirm("Reset all test progress?")) {
+        userAnswers = {};
+        missedQuestions.clear();
+        document.getElementById('missed-count').innerText = '0';
+        updateMastery();
+        runFullDeck();
+      }
+    }
+
+    function updateMastery() {
+      if (allQuestions.length === 0) return;
+      let correctCount = 0;
+      Object.keys(userAnswers).forEach(idx => {
+        if (userAnswers[idx] === allQuestions[idx].correct) correctCount++;
+      });
+      const percent = Math.round((correctCount / allQuestions.length) * 100);
+      document.getElementById('mastery-percent').innerText = percent + "%";
+      document.getElementById('mastery-bar').style.width = percent + "%";
+    }
+
+    // Flashcards Data
+    const fcData = [
+      { front: "Anatomy", back: "Study of body structure, shape, size, and relationships." },
+      { front: "Physiology", back: "Study of how body parts function and work together." },
+      { front: "Histology", back: "Microscopic study of tissues." },
+      { front: "Sagittal Plane", back: "Divides the body into Left and Right parts." },
+      { front: "Transverse Plane", back: "Divides the body into Superior (upper) and Inferior (lower) parts." }
+    ];
+
+    let fcIdx = 0;
+    let isFlipped = false;
+
+    function flipFlashcard() {
+      isFlipped = !isFlipped;
+      document.getElementById('fc-content').innerText = isFlipped ? fcData[fcIdx].back : fcData[fcIdx].front;
+    }
+
+    function nextFlashcard() {
+      if (fcIdx < fcData.length - 1) {
+        fcIdx++;
+        isFlipped = false;
+        document.getElementById('fc-content').innerText = fcData[fcIdx].front;
+        document.getElementById('fc-num').innerText = fcIdx + 1;
+      }
+    }
+
+    function prevFlashcard() {
+      if (fcIdx > 0) {
+        fcIdx--;
+        isFlipped = false;
+        document.getElementById('fc-content').innerText = fcData[fcIdx].front;
+        document.getElementById('fc-num').innerText = fcIdx + 1;
+      }
+    }
   </script>
 </body>
 </html>
