@@ -1,587 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Learning Hub & Dashboard</title>
-  <style>
-    :root {
-      --bg-dark: #0f172a;
-      --card-bg: #1e293b;
-      --border-color: #334155;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* TOP NAVBAR */
-    navbar {
-      background: #1e293b;
-      border-bottom: 1px solid var(--border-color);
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 800;
-      background: linear-gradient(to right, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .nav-btn:hover {
-      background: var(--accent-hover);
-    }
-
-    /* MAIN LAYOUT */
-    .container {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
-
-    /* DASHBOARD VIEW */
-    #dashboardView {
-      display: block;
-    }
-
-    .grid-dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-    }
-
-    .dash-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    .dash-card h2 {
-      font-size: 1.2rem;
-      color: #38bdf8;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* CALENDAR WIDGET */
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .calendar-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-      text-align: center;
-    }
-
-    .day-cell {
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .day-cell.active {
-      background: var(--accent);
-      color: white;
-      font-weight: bold;
-    }
-
-    /* FLASHCARD MODULE SELECTOR */
-    .module-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .module-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s;
-    }
-
-    .module-item:hover {
-      border-color: var(--accent);
-      background: rgba(99, 102, 241, 0.1);
-    }
-
-    /* TODO WIDGET */
-    .todo-input {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .todo-input input {
-      flex: 1;
-      background: #0f172a;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 10px;
-      color: white;
-    }
-
-    .todo-list {
-      list-style: none;
-    }
-
-    .todo-item {
-      padding: 10px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-    }
-
-    /* FLASHCARD STUDY VIEW */
-    #studyView {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .top-bar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 25px;
-      width: 100%;
-      max-width: 650px;
-    }
-
-    select, .btn-action {
-      padding: 12px 20px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    select {
-      background: #1e293b;
-      color: #f8fafc;
-      border: 1px solid var(--border-color);
-      flex: 1;
-    }
-
-    .btn-action {
-      background: #1e293b;
-      color: #f8fafc;
-      border: 1px solid var(--border-color);
-    }
-
-    .btn-action:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .card-container {
-      width: 100%;
-      max-width: 650px;
-      height: 380px;
-      perspective: 1200px;
-      margin-bottom: 25px;
-    }
-
-    .card {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .card.flipped {
-      transform: rotateY(180deg);
-    }
-
-    .card-face {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 24px;
-      padding: 40px 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      transition: background 0.5s ease;
-    }
-
-    .card-front {
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .card-back {
-      transform: rotateY(180deg);
-      background: #0f172a !important;
-      color: #38bdf8;
-      border: 2px solid #38bdf8;
-    }
-
-    .card-badge {
-      font-size: 0.75rem;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 20px;
-      background: rgba(0, 0, 0, 0.25);
-    }
-
-    .card-text {
-      font-size: 1.35rem;
-      font-weight: 600;
-      line-height: 1.5;
-      margin: auto 0;
-    }
-
-    .card-hint {
-      font-size: 0.8rem;
-      opacity: 0.75;
-    }
-
-    .bottom-nav {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .progress-pill {
-      background: #1e293b;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAVBAR -->
-  <navbar>
-    <div class="logo">🎓 Student Learning Hub</div>
-    <button class="nav-btn" onclick="showDashboard()">🏠 Back To Dashboard</button>
-  </navbar>
-
-  <div class="container">
-
-    <!-- DASHBOARD VIEW -->
-    <div id="dashboardView">
-      <div class="grid-dashboard">
-        
-        <!-- CALENDAR WIDGET -->
-        <div class="dash-card">
-          <h2>📅 Study Calendar</h2>
-          <div class="calendar-header">
-            <strong id="calendarMonth">August 2026</strong>
-          </div>
-          <div class="calendar-days">
-            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-          </div>
-          <div class="calendar-grid" id="calendarGrid">
-            <!-- Calendar generated dynamically -->
-          </div>
-        </div>
-
-        <!-- FLASHCARDS MODULES WIDGET -->
-        <div class="dash-card">
-          <h2>🗂️ Flashcard Modules</h2>
-          <div class="module-list">
-            <div class="module-item" onclick="startStudy('all')">
-              <div>
-                <strong>All Chapters Review</strong>
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Comprehensive set</p>
-              </div>
-              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">450 Cards</span>
-            </div>
-            <div class="module-item" onclick="startStudy('ch1')">
-              <div>
-                <strong>Chapter 1: Intro to A&P</strong>
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Body organization & lab</p>
-              </div>
-              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
-            </div>
-            <div class="module-item" onclick="startStudy('ch2')">
-              <div>
-                <strong>Chapter 2: Chemistry</strong>
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Atoms, pH & bonds</p>
-              </div>
-              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
-            </div>
-            <div class="module-item" onclick="startStudy('ch3')">
-              <div>
-                <strong>Chapter 3: Cell Biology</strong>
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Organelles & mitosis</p>
-              </div>
-              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
-            </div>
-            <div class="module-item" onclick="startStudy('ch4')">
-              <div>
-                <strong>Chapter 4: Cell Transport</strong>
-                <p style="font-size: 0.8rem; color: var(--text-muted);">Osmosis & active transport</p>
-              </div>
-              <span style="font-size: 0.85rem; font-weight: bold; color: #38bdf8;">150 Cards</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TO-DO LIST WIDGET -->
-        <div class="dash-card">
-          <h2>✅ Study Tasks</h2>
-          <div class="todo-input">
-            <input type="text" id="todoTask" placeholder="Add new task...">
-            <button class="nav-btn" onclick="addTodo()">Add</button>
-          </div>
-          <ul class="todo-list" id="todoList">
-            <li class="todo-item"><input type="checkbox"> Review Chapter 1 Flashcards</li>
-            <li class="todo-item"><input type="checkbox"> Complete Chemistry Practice Lab</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- FLASHCARD STUDY VIEW -->
-    <div id="studyView">
-      <div class="top-bar">
-        <select id="chapterSelect" onchange="changeChapter()">
-          <option value="all">All Chapters (450 Cards)</option>
-          <option value="ch1">Chapter 1: Intro to A&P</option>
-          <option value="ch2">Chapter 2: Chemistry & Lab</option>
-          <option value="ch3">Chapter 3: Cell Biology</option>
-          <option value="ch4">Chapter 4: Cell Transport</option>
-        </select>
-        <button class="btn-action" onclick="shuffleCards()">🎲 Shuffle</button>
-      </div>
-
-      <div class="card-container" onclick="flipCard()">
-        <div class="card" id="flashcard">
-          <div class="card-face card-front" id="cardFront">
-            <span class="card-badge">QUESTION</span>
-            <div class="card-text" id="questionText">Loading...</div>
-            <span class="card-hint">Click or press Space to reveal answer 🔄</span>
-          </div>
-          <div class="card-face card-back">
-            <span class="card-badge" style="background: rgba(56, 189, 248, 0.15);">ANSWER</span>
-            <div class="card-text" id="answerText">Loading...</div>
-            <span class="card-hint">Click to flip back 🔄</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="btn-action" onclick="prevCard()">◀ Previous</button>
-        <div class="progress-pill" id="progressText">1 / 450</div>
-        <button class="btn-action" onclick="nextCard()">Next ▶</button>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    const cardGradients = [
-      "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
-      "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)",
-      "linear-gradient(135deg, #0d9488 0%, #0284c7 100%)",
-      "linear-gradient(135deg, #d97706 0%, #dc2626 100%)",
-      "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)"
-    ];
-
-    const rawData = [
-      // Chapter 1
-      { q: "What is anatomy?", a: "The study of the structure, shape, and position of the body and its parts.", ch: "ch1" },
-      { q: "What is physiology?", a: "The study of how the body and its parts function and work.", ch: "ch1" },
-      { q: "What is the relationship between structure and function?", a: "Structure determines function.", ch: "ch1" },
-      { q: "What is microscopic anatomy?", a: "The study of body structures that cannot be seen with the naked eye.", ch: "ch1" },
-      
-      // Chapter 2
-      { q: "What is the basic unit of all matter?", a: "An atom.", ch: "ch2" },
-      { q: "What are the three subatomic particles in an atom?", a: "Protons, neutrons, and electrons.", ch: "ch2" },
-
-      // Chapter 3
-      { q: "What are cells?", a: "The basic structural and functional units of all living organisms.", ch: "ch3" },
-      { q: "Where do cells fit in the levels of structural organisation of the body?", a: "Chemical → Organelle → Cell → Tissue → Organ → Organ System → Organism.", ch: "ch3" },
-
-      // Chapter 4
-      { q: "What is cell transport?", a: "The movement of substances into and out of a cell across its cell membrane.", ch: "ch4" },
-      { q: "What are the two major categories of cell transport mechanisms?", a: "Passive transport and Active transport.", ch: "ch4" }
-    ];
-
-    let currentCards = [...rawData];
-    let currentIndex = 0;
-
-    // View Switching
-    function showDashboard() {
-      document.getElementById("dashboardView").style.display = "block";
-      document.getElementById("studyView").style.display = "none";
-    }
-
-    function startStudy(chapterKey) {
-      document.getElementById("dashboardView").style.display = "none";
-      document.getElementById("studyView").style.display = "flex";
-      document.getElementById("chapterSelect").value = chapterKey;
-      changeChapter();
-    }
-
-    // Flashcard Render with dynamic gradient colors
-    function renderCard() {
-      const cardEl = document.getElementById("flashcard");
-      const cardFront = document.getElementById("cardFront");
-      
-      cardEl.classList.remove("flipped");
-      cardFront.style.background = cardGradients[currentIndex % cardGradients.length];
-
-      setTimeout(() => {
-        if (currentCards.length > 0) {
-          document.getElementById("questionText").innerText = currentCards[currentIndex].q;
-          document.getElementById("answerText").innerText = currentCards[currentIndex].a;
-          document.getElementById("progressText").innerText = `${currentIndex + 1} / ${currentCards.length}`;
-        }
-      }, 150);
-    }
-
-    function flipCard() {
-      document.getElementById("flashcard").classList.toggle("flipped");
-    }
-
-    function nextCard() {
-      if (currentCards.length === 0) return;
-      currentIndex = (currentIndex + 1) % currentCards.length;
-      renderCard();
-    }
-
-    function prevCard() {
-      if (currentCards.length === 0) return;
-      currentIndex = (currentIndex - 1 + currentCards.length) % currentCards.length;
-      renderCard();
-    }
-
-    function changeChapter() {
-      const selected = document.getElementById("chapterSelect").value;
-      if (selected === "all") {
-        currentCards = [...rawData];
-      } else {
-        currentCards = rawData.filter(card => card.ch === selected);
-      }
-      currentIndex = 0;
-      renderCard();
-    }
-
-    function shuffleCards() {
-      for (let i = currentCards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
-      }
-      currentIndex = 0;
-      renderCard();
-    }
-
-    // Dynamic Calendar Generation
-    function generateCalendar() {
-      const grid = document.getElementById("calendarGrid");
-      grid.innerHTML = "";
-      for (let i = 1; i <= 31; i++) {
-        const day = document.createElement("div");
-        day.className = "day-cell" + (i === 16 ? " active" : "");
-        day.innerText = i;
-        grid.appendChild(day);
-      }
-    }
-
-    // Simple To-Do Task System
-    function addTodo() {
-      const input = document.getElementById("todoTask");
-      if (!input.value.trim()) return;
-      const li = document.createElement("li");
-      li.className = "todo-item";
-      li.innerHTML = `<input type="checkbox"> ${input.value}`;
-      document.getElementById("todoList").appendChild(li);
-      input.value = "";
-    }
-
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', function(event) {
-      if (document.getElementById("studyView").style.display === "flex") {
-        if (event.code === 'ArrowRight') nextCard();
-        else if (event.code === 'ArrowLeft') prevCard();
-        else if (event.code === 'Space') {
-          flipCard();
-          event.preventDefault();
-        }
-      }
-    });
-
-    generateCalendar();
-  </script>
-</body>
-</html>
+const flashcardsData = [
+  // Chapter 1: Introduction to Anatomy & Physiology (1-150)
+  { id: 1, chapter: "ch1", q: "What is anatomy?", a: "The study of the structure, shape, and position of the body and its parts." },
+  { id: 2, chapter: "ch1", q: "What is physiology?", a: "The study of how the body and its parts function and work." },
+  { id: 3, chapter: "ch1", q: "What is the relationship between structure and function?", a: "Structure determines function." },
+  { id: 4, chapter: "ch1", q: "What is microscopic anatomy?", a: "The study of body structures that cannot be seen with the naked eye." },
+  { id: 5, chapter: "ch1", q: "What is gross (macroscopic) anatomy?", a: "The study of large, easily visible body structures without using a microscope." },
+  { id: 6, chapter: "ch1", q: "What is cytology?", a: "The scientific study of cells." },
+  { id: 7, chapter: "ch1", q: "What is histology?", a: "The scientific study of tissues." },
+  { id: 8, chapter: "ch1", q: "What is developmental anatomy?", a: "The study of structural changes that occur in an organism throughout its lifespan." },
+  { id: 9, chapter: "ch1", q: "What is embryology?", a: "The study of development before birth (from week 8 to 38 in utero)." },
+  { id: 10, chapter: "ch1", q: "What is the prefix 'micro-'?", a: "Small, requiring a microscope." },
+  { id: 11, chapter: "ch1", q: "What is the prefix 'macro-'?", a: "Large." },
+  { id: 12, chapter: "ch1", q: "What does the suffix '-ology' mean?", a: "Study of." },
+  { id: 13, chapter: "ch1", q: "Is observing heart tissue under a microscope anatomy or physiology?", a: "Anatomy (Microscopic Anatomy / Histology)." },
+  { id: 14, chapter: "ch1", q: "Is observing how the heart contracts to pump blood anatomy or physiology?", a: "Physiology." },
+  { id: 15, chapter: "ch1", q: "Is listening to heart sounds (auscultation) an investigation of anatomy or physiology?", a: "Physiology." },
+  { id: 16, chapter: "ch1", q: "Is palpating (feeling) a muscle an investigation of anatomy or physiology?", a: "Anatomy." },
+  { id: 17, chapter: "ch1", q: "Is measuring a joint's range of motion an assessment of anatomy or physiology?", a: "Physiology." },
+  { id: 18, chapter: "ch1", q: "Is noting that the stomach is in the upper left abdominal cavity anatomy or physiology?", a: "Anatomy." },
+  { id: 19, chapter: "ch1", q: "Is noting that the liver detoxifies drugs anatomy or physiology?", a: "Physiology." },
+  { id: 20, chapter: "ch1", q: "Is recording skin color an observation of anatomy or physiology?", a: "Anatomy." },
+  { id: 21, chapter: "ch1", q: "Is stating that the eye has a cornea, lens, and retina anatomy or physiology?", a: "Anatomy." },
+  { id: 22, chapter: "ch1", q: "Is stating that the iris controls light entering the eye anatomy or physiology?", a: "Physiology." },
+  { id: 23, chapter: "ch1", q: "What does 'structure' mean in A&P?", a: "The shape, location, and arrangement of body parts." },
+  { id: 24, chapter: "ch1", q: "What does 'function' mean in A&P?", a: "What a body part does / its specific job." },
+  { id: 25, chapter: "ch1", q: "Why do healthcare professionals learn scientific language?", a: "To communicate clearly about body structures, functions, and clinical decisions." },
+  { id: 26, chapter: "ch1", q: "What are the 6 levels of structural organization in order from simplest to most complex?", a: "Chemical level → Cellular level → Tissue level → Organ level → Organ system level → Organism level." },
+  { id: 27, chapter: "ch1", q: "What is the chemical level?", a: "The simplest level where atoms join to form molecules." },
+  { id: 28, chapter: "ch1", q: "What are atoms?", a: "The smallest units of matter that join together to form molecules." },
+  { id: 29, chapter: "ch1", q: "What is the most abundant molecule in the human body?", a: "Water." },
+  { id: 30, chapter: "ch1", q: "Give 3 examples of molecules in the human body.", a: "Water, carbon dioxide, and glucose." },
+  { id: 31, chapter: "ch1", q: "What is the cellular level?", a: "Molecules join to form organelles and cells, the basic structural and functional units of life." },
+  { id: 32, chapter: "ch1", q: "What are organelles?", a: "Specialized structures inside a cell that perform specific functions." },
+  { id: 33, chapter: "ch1", q: "Give 3 examples of cell types in the body.", a: "Red blood cells, smooth muscle cells, and nerve cells (neurons)." },
+  { id: 34, chapter: "ch1", q: "What is a cell?", a: "The smallest living functional unit in a living organism." },
+  { id: 35, chapter: "ch1", q: "How many different cell types are roughly in the human body?", a: "Around 250 different types." },
+  { id: 36, chapter: "ch1", q: "What is the tissue level?", a: "Groups of similar cells that work together to perform a common function." },
+  { id: 37, chapter: "ch1", q: "What are the 4 main types of tissues in the human body?", a: "Epithelial tissue, Connective tissue, Muscle tissue, and Nervous tissue." },
+  { id: 38, chapter: "ch1", q: "What is the primary function of epithelial tissue?", a: "Covers body surfaces and lines hollow organs and cavities." },
+  { id: 39, chapter: "ch1", q: "What is the primary function of connective tissue?", a: "Supports, protects, and binds body organs." },
+  { id: 40, chapter: "ch1", q: "What is the primary function of muscle tissue?", a: "Contracts to produce movement of the body or substances through the body." },
+  { id: 41, chapter: "ch1", q: "What is the primary function of nervous tissue?", a: "Generates and transmits electrical impulses for communication." },
+  { id: 42, chapter: "ch1", q: "What is the organ level?", a: "Two or more different tissue types joined together to perform specific, complex functions." },
+  { id: 43, chapter: "ch1", q: "Is the skin an organ?", a: "Yes, it is the largest organ of the body." },
+  { id: 44, chapter: "ch1", q: "What is the organ system level?", a: "A group of organs working closely together to perform a major body function." },
+  { id: 45, chapter: "ch1", q: "What is the organism level?", a: "The highest level; the sum total of all organ systems working together to maintain life." },
+  { id: 46, chapter: "ch1", q: "How many major organ systems make up the human body?", a: "11 major organ systems." },
+  { id: 47, chapter: "ch1", q: "What is the overall function of the Integumentary System?", a: "Forms the external body covering, protects deeper tissues, retains water, and regulates temperature." },
+  { id: 48, chapter: "ch1", q: "What organs make up the Integumentary System?", a: "Skin, hair, nails, and sweat/oil glands." },
+  { id: 49, chapter: "ch1", q: "What is the overall function of the Skeletal System?", a: "Protects and supports organs, provides a framework for muscle attachment, forms blood cells, and stores minerals." },
+  { id: 50, chapter: "ch1", q: "What are the main organs/structures of the Skeletal System?", a: "Bones, joints, cartilages, and ligaments." },
+  { id: 51, chapter: "ch1", q: "What is the overall function of the Muscular System?", a: "Produces movement, maintains posture, and generates body heat." },
+  { id: 52, chapter: "ch1", q: "What is the overall function of the Nervous System?", a: "Fast-acting control and communication system that responds to internal and external changes." },
+  { id: 53, chapter: "ch1", q: "What organs make up the Nervous System?", a: "Brain, spinal cord, nerves, and sensory receptors." },
+  { id: 54, chapter: "ch1", q: "What is the overall function of the Endocrine System?", a: "Controls body activities slowly by secreting hormones into the blood." },
+  { id: 55, chapter: "ch1", q: "What are some major glands of the Endocrine System?", a: "Pituitary, thyroid, pancreas, adrenal, ovaries, and testes." },
+  { id: 56, chapter: "ch1", q: "What is the overall function of the Cardiovascular System?", a: "Pumps and transports blood to deliver oxygen/nutrients and remove carbon dioxide/wastes." },
+  { id: 57, chapter: "ch1", q: "What organs make up the Cardiovascular System?", a: "Heart and blood vessels." },
+  { id: 58, chapter: "ch1", q: "What is the overall function of the Lymphatic / Immune System?", a: "Returns leaked fluid to blood vessels and houses white blood cells involved in immunity/defence." },
+  { id: 59, chapter: "ch1", q: "What are main organs/structures of the Lymphatic System?", a: "Lymph nodes, lymph vessels, spleen, tonsils, and thymus." },
+  { id: 60, chapter: "ch1", q: "What is the overall function of the Respiratory System?", a: "Keeps blood constantly supplied with oxygen and removes carbon dioxide." },
+  { id: 61, chapter: "ch1", q: "What organs make up the Respiratory System?", a: "Nose, pharynx, larynx, trachea, bronchi, and lungs." },
+  { id: 62, chapter: "ch1", q: "What is the overall function of the Digestive System?", a: "Breaks down food into absorbable nutrients and eliminates indigestible waste as feces." },
+  { id: 63, chapter: "ch1", q: "What organs make up the Digestive System?", a: "Mouth, esophagus, stomach, small intestine, large intestine, liver, and pancreas." },
+  { id: 64, chapter: "ch1", q: "What is the overall function of the Urinary System?", a: "Eliminates nitrogen-containing wastes; regulates water, electrolyte, and acid-base balance." },
+  { id: 65, chapter: "ch1", q: "What organs make up the Urinary System?", a: "Kidneys, ureters, urinary bladder, and urethra." },
+
+  // Chapter 2: Basic Chemistry & Chemistry Lab (151-300)
+  { id: 151, chapter: "ch2", q: "What is the basic unit of all matter?", a: "An atom." },
+  { id: 152, chapter: "ch2", q: "What are the three subatomic particles in an atom?", a: "Protons, neutrons, and electrons." },
+  { id: 153, chapter: "ch2", q: "Where are protons located in an atom?", a: "In the nucleus." },
+  { id: 154, chapter: "ch2", q: "What is the electrical charge of a proton?", a: "Positive (+)." },
+  { id: 155, chapter: "ch2", q: "Where are neutrons located in an atom?", a: "In the nucleus." },
+  { id: 156, chapter: "ch2", q: "What is the electrical charge of a neutron?", a: "Neutral / No charge (0)." },
+  { id: 157, chapter: "ch2", q: "Where are electrons located in an atom?", a: "In electron shells / orbitals around the nucleus." },
+  { id: 158, chapter: "ch2", q: "What is the electrical charge of an electron?", a: "Negative (-)." },
+  { id: 159, chapter: "ch2", q: "Why is a neutral atom electrically uncharged overall?", a: "Because the number of protons equals the number of electrons." },
+  { id: 160, chapter: "ch2", q: "What is an element?", a: "A pure substance made up of only one type of atom." },
+  { id: 161, chapter: "ch2", q: "Which four elements make up approximately 96% of the human body weight?", a: "Carbon (C), Oxygen (O), Hydrogen (H), and Nitrogen (N)." },
+  { id: 162, chapter: "ch2", q: "What does the atomic number of an element represent?", a: "The number of protons in the nucleus of its atom." },
+  { id: 163, chapter: "ch2", q: "What is the atomic symbol for Carbon?", a: "C." },
+  { id: 164, chapter: "ch2", q: "What is the atomic symbol for Oxygen?", a: "O." },
+  { id: 165, chapter: "ch2", q: "What is the atomic symbol for Nitrogen?", a: "N." },
+  { id: 166, chapter: "ch2", q: "What is the atomic symbol for Hydrogen?", a: "H." },
+  { id: 167, chapter: "ch2", q: "What is the atomic symbol for Calcium?", a: "Ca." },
+  { id: 168, chapter: "ch2", q: "What is the atomic symbol for Sodium?", a: "Na (from Latin natrium)." },
+  { id: 169, chapter: "ch2", q: "What is the atomic symbol for Chlorine?", a: "Cl." },
+  { id: 170, chapter: "ch2", q: "How many protons does a Carbon atom have?", a: "6." },
+  { id: 171, chapter: "ch2", q: "How many protons does an Oxygen atom have?", a: "8." },
+  { id: 172, chapter: "ch2", q: "How many protons does a Sodium atom have?", a: "11." },
+  { id: 173, chapter: "ch2", q: "How many protons does a Chlorine atom have?", a: "17." },
+  { id: 174, chapter: "ch2", q: "How many electrons can fit into the first (innermost) electron shell?", a: "Up to 2 electrons." },
+  { id: 175, chapter: "ch2", q: "How many electrons can fit into the second electron shell?", a: "Up to 8 electrons." },
+  { id: 176, chapter: "ch2", q: "What is the outer electron shell of an atom called?", a: "The valence shell." },
+  { id: 177, chapter: "ch2", q: "When is an atom considered chemical stable and unreactive?", a: "When its valence shell is completely full." },
+  { id: 178, chapter: "ch2", q: "Why do atoms form chemical bonds with each other?", a: "To fill or empty their outer valence shell and achieve stability." },
+  { id: 179, chapter: "ch2", q: "What is a molecule?", a: "A particle formed when two or more atoms are chemically bonded together." },
+  { id: 180, chapter: "ch2", q: "Which subatomic particles are directly involved in forming chemical bonds?", a: "Electrons." },
+
+  // Chapter 3: Cell Biology (301-450)
+  { id: 301, chapter: "ch3", q: "What are cells?", a: "The basic structural and functional units of all living organisms." },
+  { id: 302, chapter: "ch3", q: "Where do cells fit in the levels of structural organisation of the body?", a: "Chemical → Organelle → Cell → Tissue → Organ → Organ System → Organism." },
+  { id: 303, chapter: "ch3", q: "Approximately how many cells make up the human body?", a: "Around 37 trillion (37 × 10^12) cells." },
+  { id: 304, chapter: "ch3", q: "Approximately how many specialized cell types are in the human body?", a: "About 250 different cell types." },
+  { id: 305, chapter: "ch3", q: "What general physiological principle links cell shape to cell role?", a: "Structure determines function." },
+  { id: 306, chapter: "ch3", q: "What are the three primary generalized parts of a human cell?", a: "Cell membrane, Cytoplasm, and Nucleus." },
+  { id: 307, chapter: "ch3", q: "What is the Maori name for the cell membrane?", a: "Kiriuhi pūtau." },
+  { id: 308, chapter: "ch3", q: "What is the Maori name for the nucleus?", a: "Karihi." },
+  { id: 309, chapter: "ch3", q: "What is the Maori name for the cytoplasm?", a: "Waitepe." },
+  { id: 310, chapter: "ch3", q: "What is the location of the cell membrane?", a: "Surrounds the outermost boundary of the cell." },
+  { id: 311, chapter: "ch3", q: "List four main functions of the cell membrane.", a: "Physical barrier, cell communication, cell recognition, and selective permeability." },
+  { id: 312, chapter: "ch3", q: "What does 'selectively permeable' mean?", a: "Allows certain substances to cross while preventing others." },
+  { id: 313, chapter: "ch3", q: "What fluid is located inside the cell?", a: "Intracellular fluid (cytosol)." },
+  { id: 314, chapter: "ch3", q: "What fluid is located outside the cell?", a: "Extracellular fluid." },
+
+  // Chapter 4: Cell Transport (451-600)
+  { id: 451, chapter: "ch4", q: "What is cell transport?", a: "The movement of substances into and out of a cell across its cell membrane." },
+  { id: 452, chapter: "ch4", q: "What are the two major categories of cell transport mechanisms?", a: "Passive transport and Active transport." },
+  { id: 453, chapter: "ch4", q: "What defines passive transport?", a: "Movement of substances across a membrane without any cellular energy (ATP) expenditure." },
+  { id: 454, chapter: "ch4", q: "What defines active transport?", a: "Movement of substances across a membrane requiring cellular energy expenditure (ATP)." },
+  { id: 455, chapter: "ch4", q: "List three primary types of passive transport.", a: "Simple diffusion, Facilitated diffusion, and Osmosis." },
+  { id: 456, chapter: "ch4", q: "List three primary types of active transport.", a: "Active transport pumps (e.g., Na+/K+ pump), Endocytosis, and Exocytosis." },
+  { id: 457, chapter: "ch4", q: "What is simple diffusion?", a: "The unassisted net movement of small or lipid-soluble solute particles from high to low concentration directly through the phospholipid bilayer." }
+];
