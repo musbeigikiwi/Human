@@ -30,16 +30,15 @@
 
     .container { max-width: 950px; margin: 0 auto; }
 
-    /* Breaking News Ticker Bar */
+    /* Guaranteed Working Smooth News Ticker */
     .news-ticker-container {
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 12px;
-      padding: 10px 16px;
+      padding: 8px 14px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
-      overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
@@ -53,20 +52,21 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       white-space: nowrap;
-      margin-right: 14px;
+      margin-right: 12px;
+      flex-shrink: 0;
     }
 
-    .news-ticker-text {
-      white-space: nowrap;
-      animation: ticker 25s linear infinite;
+    .ticker-wrapper {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    marquee {
       font-size: 13.5px;
       font-weight: 600;
       color: var(--accent-glow);
-    }
-
-    @keyframes ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
 
     .header-card {
@@ -326,11 +326,13 @@
 
   <div class="container">
     
-    <!-- Breaking News Live Motivation Ticker -->
+    <!-- Smooth Live News Ticker -->
     <div class="news-ticker-container">
       <span class="news-badge">LIVE NEWS</span>
-      <div class="news-ticker-text">
-        🔴 Mastering Anatomy today to save lives tomorrow — Dedicated to excellence in healthcare and nursing! &nbsp;&nbsp;&nbsp; ⚡ Success is the sum of small efforts repeated daily. Keep pushing forward Stream C! &nbsp;&nbsp;&nbsp; 💡 Understanding the human body is the first step toward extraordinary healing.
+      <div class="ticker-wrapper">
+        <marquee behavior="scroll" direction="left" scrollamount="6">
+          🔴 Mastering Anatomy today to save lives tomorrow — Dedicated to excellence in healthcare and nursing! &nbsp;&nbsp;&nbsp;&nbsp; ⚡ Success is the sum of small efforts repeated daily. Keep pushing forward Stream C! &nbsp;&nbsp;&nbsp;&nbsp; 💡 Understanding the human body is the first step toward extraordinary healing.
+        </marquee>
       </div>
     </div>
 
