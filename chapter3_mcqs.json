@@ -1,0 +1,377 @@
+[
+  {
+    "question": "What is the basic structural and functional unit of the human body?",
+    "options": ["molecule", "tissue", "organ", "cell"],
+    "correct": 3
+  },
+  {
+    "question": "Which sequence goes from simplest to most complex?",
+    "options": ["chemical → tissue → cell → organ system → organ → organism", "cell → chemical → tissue → organ → organism → organ system", "chemical → organelle → cell → tissue → organ → organ system → organism", "organelle → chemical → tissue → cell → organ → organism → organ system"],
+    "correct": 2
+  },
+  {
+    "question": "The term intracellular means:",
+    "options": ["between organs", "outside the cell", "inside the nucleus only", "inside the cell"],
+    "correct": 3
+  },
+  {
+    "question": "Which structure separates the intracellular environment from the extracellular environment?",
+    "options": ["nucleus", "cell membrane", "ribosome", "centriole"],
+    "correct": 1
+  },
+  {
+    "question": "Where is the cytoplasm located?",
+    "options": ["inside the nuclear membrane only", "between the cell membrane and nucleus", "outside the cell membrane", "inside lysosomes only"],
+    "correct": 1
+  },
+  {
+    "question": "Cytosol is mainly:",
+    "options": ["a phospholipid bilayer", "DNA and chromosomes", "water with dissolved substances", "digestive enzymes only"],
+    "correct": 2
+  },
+  {
+    "question": "Which organelle contains DNA and acts as the control centre of the cell?",
+    "options": ["lysosome", "Golgi apparatus", "nucleus", "centriole"],
+    "correct": 2
+  },
+  {
+    "question": "What surrounds the nucleus and controls movement into and out of it?",
+    "options": ["nuclear membrane", "cell wall", "cytosol", "ribosome"],
+    "correct": 0
+  },
+  {
+    "question": "What is the main function of ribosomes?",
+    "options": ["ATP storage", "protein synthesis", "DNA digestion", "cell recognition"],
+    "correct": 1
+  },
+  {
+    "question": "Rough endoplasmic reticulum appears rough because it has:",
+    "options": ["ribosomes attached", "lysosomes attached", "chromosomes inside", "carbohydrates outside"],
+    "correct": 0
+  },
+  {
+    "question": "Which organelle produces lipids and helps detoxify chemicals?",
+    "options": ["centriole", "rough endoplasmic reticulum", "nucleus", "smooth endoplasmic reticulum"],
+    "correct": 3
+  },
+  {
+    "question": "Which organelle modifies, sorts, and packages proteins?",
+    "options": ["nuclear membrane", "mitochondrion", "lysosome", "Golgi apparatus"],
+    "correct": 3
+  },
+  {
+    "question": "Which organelles contain digestive enzymes?",
+    "options": ["lysosomes", "ribosomes", "centrioles", "mitochondria"],
+    "correct": 0
+  },
+  {
+    "question": "Which organelles produce most cellular ATP?",
+    "options": ["lysosomes", "Golgi apparatus", "mitochondria", "ribosomes"],
+    "correct": 2
+  },
+  {
+    "question": "Centrioles are especially important for:",
+    "options": ["chromosome separation during cell division", "protein synthesis", "cell recognition", "digesting bacteria"],
+    "correct": 0
+  },
+  {
+    "question": "The basic structure of the cell membrane is a:",
+    "options": ["protein monolayer", "phospholipid bilayer", "carbohydrate wall", "DNA double helix"],
+    "correct": 1
+  },
+  {
+    "question": "The phospholipid heads are:",
+    "options": ["hydrophilic", "hydrophobic", "made of DNA", "digestive enzymes"],
+    "correct": 0
+  },
+  {
+    "question": "The phospholipid tails are:",
+    "options": ["hydrophilic", "hydrophobic", "carbohydrate chains", "nuclear pores"],
+    "correct": 1
+  },
+  {
+    "question": "Membrane carbohydrates are found mainly on the:",
+    "options": ["hydrophobic core only", "inside of the nucleus", "extracellular surface", "surface of mitochondria only"],
+    "correct": 2
+  },
+  {
+    "question": "What is a major function of cholesterol in the cell membrane?",
+    "options": ["copying DNA", "maintaining membrane stability and flexibility", "making ribosomes", "digesting waste"],
+    "correct": 1
+  },
+  {
+    "question": "What is the main function of an erythrocyte (red blood cell)?",
+    "options": ["transmit nerve impulses", "store fat", "transport oxygen", "produce antibodies"],
+    "correct": 2
+  },
+  {
+    "question": "Which mature human cell normally has no nucleus?",
+    "options": ["erythrocyte", "neuron", "adipocyte", "skeletal muscle fibre"],
+    "correct": 0
+  },
+  {
+    "question": "Mitosis produces:",
+    "options": ["one cell with no chromosomes", "four genetically different cells", "two genetically identical daughter cells", "two cells with half the chromosomes"],
+    "correct": 2
+  },
+  {
+    "question": "Why do body cells undergo mitosis?",
+    "options": ["growth, repair, and replacement", "to make ATP only", "to digest bacteria", "to transport oxygen"],
+    "correct": 0
+  },
+  {
+    "question": "A microscope has a 10× eyepiece and a 4× objective. What is the total magnification?",
+    "options": ["40×", "14×", "4×", "400×"],
+    "correct": 0
+  },
+  {
+    "question": "Which description of cytoplasm is complete?",
+    "options": ["extracellular fluid plus proteins", "DNA plus the nuclear membrane only", "cytosol plus organelles and inclusions", "phospholipids plus cholesterol only"],
+    "correct": 2
+  },
+  {
+    "question": "A stored lipid droplet in the cytoplasm is best classified as a(n):",
+    "options": ["nuclear pore", "organelle", "chromosome", "inclusion"],
+    "correct": 3
+  },
+  {
+    "question": "Which sequence correctly shows the pathway of a protein exported from a cell?",
+    "options": ["lysosome → ribosome → mitochondrion → Golgi", "Golgi → nucleus → lysosome → cytosol", "smooth ER → centriole → nucleus → membrane", "ribosome/rough ER → Golgi → vesicle → cell membrane"],
+    "correct": 3
+  },
+  {
+    "question": "Which cell would be expected to contain many mitochondria?",
+    "options": ["mature erythrocyte", "skeletal muscle fibre", "inactive fat droplet", "bacterium"],
+    "correct": 1
+  },
+  {
+    "question": "A phagocyte that digests engulfed bacteria would contain many:",
+    "options": ["lysosomes", "ribosomes only", "centrioles only", "nuclear pores"],
+    "correct": 0
+  },
+  {
+    "question": "A liver cell specialised for drug detoxification would have abundant:",
+    "options": ["centrioles", "rough ER only", "smooth ER", "cell-surface carbohydrates"],
+    "correct": 2
+  },
+  {
+    "question": "A cell that secretes large amounts of protein would be rich in:",
+    "options": ["smooth ER and lipid droplets only", "centrioles and cholesterol only", "ribosomes, rough ER, and Golgi apparatus", "lysosomes and nuclear pores only"],
+    "correct": 2
+  },
+  {
+    "question": "Which membrane component can bind a chemical messenger and trigger a cell response?",
+    "options": ["DNA chromosome", "phospholipid tail", "cholesterol molecule", "receptor protein"],
+    "correct": 3
+  },
+  {
+    "question": "Which membrane component provides a selective pathway for some water-soluble substances?",
+    "options": ["cholesterol only", "carbohydrate recognition chain", "channel or transport protein", "hydrophobic tail only"],
+    "correct": 2
+  },
+  {
+    "question": "Cell-surface carbohydrates are especially important for:",
+    "options": ["ATP production", "cell recognition", "chromosome separation", "protein digestion"],
+    "correct": 1
+  },
+  {
+    "question": "Which substance can pass most directly through the phospholipid bilayer?",
+    "options": ["glucose", "a large protein", "a charged ion", "oxygen"],
+    "correct": 3
+  },
+  {
+    "question": "Why do phospholipid heads face the cytosol and extracellular fluid?",
+    "options": ["They are hydrophobic and avoid water.", "They are hydrophilic and interact with water.", "They contain DNA.", "They digest proteins."],
+    "correct": 1
+  },
+  {
+    "question": "Why do phospholipid tails point toward the centre of the membrane?",
+    "options": ["They are hydrophilic and attract water.", "They are hydrophobic and avoid water.", "They are carbohydrate markers.", "They contain nuclear pores."],
+    "correct": 1
+  },
+  {
+    "question": "How does the biconcave shape of an erythrocyte support its function?",
+    "options": ["It increases surface area for gas exchange.", "It stores a large fat droplet.", "It forms a mitotic spindle.", "It produces digestive enzymes."],
+    "correct": 0
+  },
+  {
+    "question": "Which feature best identifies an adipocyte?",
+    "options": ["many long axons", "a biconcave shape with no nucleus", "a large lipid droplet with the nucleus pushed to the edge", "striations and many nuclei"],
+    "correct": 2
+  },
+  {
+    "question": "Which combination best identifies a skeletal muscle fibre?",
+    "options": ["round, one fat droplet, nucleus at edge", "long, striated, multinucleated, many mitochondria", "biconcave, no nucleus, haemoglobin", "branched processes, one long axon"],
+    "correct": 1
+  },
+  {
+    "question": "Which structural feature helps a neuron transmit messages over long distances?",
+    "options": ["a biconcave surface", "a large lipid droplet", "a long axon", "absence of a cell membrane"],
+    "correct": 2
+  },
+  {
+    "question": "Which specialised cells form coverings and line body surfaces?",
+    "options": ["epithelial cells", "erythrocytes", "sperm cells", "adipocytes"],
+    "correct": 0
+  },
+  {
+    "question": "Which specialised cell carries the father's genetic information to an egg?",
+    "options": ["macrophage", "neuron", "sperm cell", "muscle fibre"],
+    "correct": 2
+  },
+  {
+    "question": "What must happen before mitosis so each daughter cell receives a complete chromosome set?",
+    "options": ["The nucleus must lose all DNA.", "All mitochondria must be destroyed.", "The cell membrane must disappear permanently.", "DNA/chromosomes must be copied."],
+    "correct": 3
+  },
+  {
+    "question": "A human body cell with 46 chromosomes completes mitosis. Each daughter cell normally has:",
+    "options": ["92 chromosomes", "23 chromosomes", "46 chromosomes", "no chromosomes"],
+    "correct": 2
+  },
+  {
+    "question": "A 10× eyepiece is used with a 40× objective. What is the total magnification?",
+    "options": ["4,000×", "50×", "40×", "400×"],
+    "correct": 3
+  },
+  {
+    "question": "When should the coarse-focus control be used?",
+    "options": ["at every objective", "at 40× objective only", "at 4× objective only", "only after removing the slide"],
+    "correct": 2
+  },
+  {
+    "question": "What should be used to clean microscope lenses?",
+    "options": ["lens tissue", "a paper towel", "a shirt sleeve", "a wet laboratory cloth"],
+    "correct": 0
+  },
+  {
+    "question": "How should a microscope be carried?",
+    "options": ["one hand on the arm/neck and one under the base", "by the eyepiece only", "by dragging it across the bench", "with one hand on the stage"],
+    "correct": 0
+  },
+  {
+    "question": "A secreted protein is encoded by DNA in the nucleus. Which route best links the instruction to release outside the cell?",
+    "options": ["nucleus → lysosome → centriole → smooth ER → cytosol", "nucleus → ribosome on rough ER → Golgi → secretory vesicle → cell membrane", "nucleus → mitochondrion → cholesterol → nuclear membrane", "nucleus → adipocyte → ribosome → chromosome"],
+    "correct": 1
+  },
+  {
+    "question": "A cell makes a protein correctly but cannot modify, sort, or package it for export. Which organelle is most likely damaged?",
+    "options": ["nuclear pore", "centriole", "lysosome", "Golgi apparatus"],
+    "correct": 3
+  },
+  {
+    "question": "A cell can engulf bacteria but cannot digest them. Which defect best explains this?",
+    "options": ["centrioles cannot form a spindle", "ribosomes cannot attach to rough ER", "cholesterol is absent from the membrane", "lysosomes lack functional digestive enzymes"],
+    "correct": 3
+  },
+  {
+    "question": "A muscle fibre has far fewer mitochondria than normal. Which function is most directly reduced?",
+    "options": ["cell-surface recognition", "ATP supply for contraction", "DNA storage", "lysosomal digestion"],
+    "correct": 1
+  },
+  {
+    "question": "If carbohydrate chains were removed from the extracellular surface of a cell, which function would be most affected?",
+    "options": ["recognition of self and foreign cells", "ATP production", "chromosome copying", "protein synthesis"],
+    "correct": 0
+  },
+  {
+    "question": "A membrane contains too little cholesterol. Which change is most likely?",
+    "options": ["reduced stability and altered flexibility", "loss of all DNA", "immediate production of more lysosomes", "conversion of tails into carbohydrates"],
+    "correct": 0
+  },
+  {
+    "question": "A large water-soluble molecule cannot cross the hydrophobic core directly. What would most likely help it cross selectively?",
+    "options": ["a lysosomal enzyme outside the cell", "a chromosome", "a centriole", "a specific membrane transport protein"],
+    "correct": 3
+  },
+  {
+    "question": "If the nucleus of a typical body cell is destroyed, which long-term problem is most direct?",
+    "options": ["loss of DNA instructions that control cell activities", "loss of the phospholipid bilayer immediately", "loss of all extracellular fluid", "conversion into an erythrocyte"],
+    "correct": 0
+  },
+  {
+    "question": "Why is the flexibility of an erythrocyte important?",
+    "options": ["It allows the cell to perform mitosis.", "It allows passage through narrow capillaries.", "It stores a large fat droplet.", "It forms long nerve processes."],
+    "correct": 1
+  },
+  {
+    "question": "In a stained blood smear, which observation best distinguishes a white blood cell from an erythrocyte?",
+    "options": ["The erythrocyte contains a fat droplet.", "The white blood cell has no membrane.", "The erythrocyte has a large nucleus.", "The white blood cell has a visible nucleus."],
+    "correct": 3
+  },
+  {
+    "question": "A microscope image shows a large round cell with a thin rim of cytoplasm and a flattened nucleus at the edge. Identify it.",
+    "options": ["neuron", "adipocyte", "erythrocyte", "skeletal muscle fibre"],
+    "correct": 1
+  },
+  {
+    "question": "A long cell is striated and contains several nuclei. Which structure–function conclusion is best?",
+    "options": ["It is skeletal muscle specialised for contraction.", "It is an erythrocyte specialised for oxygen transport.", "It is an adipocyte specialised for fat storage.", "It is a neuron specialised for messaging."],
+    "correct": 0
+  },
+  {
+    "question": "A cell has many branching processes and one especially long extension. What is the best interpretation?",
+    "options": ["It is an erythrocyte carrying oxygen.", "It is an adipocyte storing lipids.", "It is a neuron adapted to receive and transmit signals.", "It is an epithelial cell forming a flat covering only."],
+    "correct": 2
+  },
+  {
+    "question": "Why should a specimen first be located and centred using the 4× objective?",
+    "options": ["The wider field of view makes the specimen easier to find before increasing magnification.", "The 4× objective has the smallest field of view.", "Coarse focus is safest only at 40×.", "The 4× objective gives 400× total magnification."],
+    "correct": 0
+  },
+  {
+    "question": "What is the main risk of using coarse focus while the 40× objective is in position?",
+    "options": ["The cell membrane becomes hydrophobic.", "The eyepiece magnification becomes zero.", "The objective may strike and damage the slide or specimen.", "The light source produces chromosomes."],
+    "correct": 2
+  },
+  {
+    "question": "A specimen is viewed at 400× total magnification with a 10× eyepiece. Which objective is being used?",
+    "options": ["40×", "4×", "10×", "100×"],
+    "correct": 0
+  },
+  {
+    "question": "A specimen is viewed with a 10× eyepiece and 10× objective. What should be recorded as the total magnification?",
+    "options": ["20×", "100×", "10×", "1,000×"],
+    "correct": 1
+  },
+  {
+    "question": "A 100× oil-immersion objective with a 10× eyepiece would provide:",
+    "options": ["10,000× total magnification", "110× total magnification", "100× total magnification", "1,000× total magnification"],
+    "correct": 3
+  },
+  {
+    "question": "Immediately after DNA replication but before chromosome separation, a human body cell has:",
+    "options": ["46 chromosomes with no copied DNA", "92 unrelated chromosomes in each daughter cell", "23 chromosomes and no chromatids", "46 duplicated chromosomes made of 92 chromatids"],
+    "correct": 3
+  },
+  {
+    "question": "Which statement correctly summarises mitosis?",
+    "options": ["Two parent cells produce four different daughter cells.", "One parent body cell produces two genetically identical daughter cells.", "One body cell produces gametes with half the chromosomes.", "One parent cell permanently loses its DNA."],
+    "correct": 1
+  },
+  {
+    "question": "Which cells are described in this course as lacking centrioles and therefore not normally dividing?",
+    "options": ["white blood cells and macrophages", "epithelial cells and skin cells", "neurons and cardiac muscle cells", "adipocytes and sperm cells"],
+    "correct": 2
+  },
+  {
+    "question": "Where does a mitochondrion fit in the levels of organisation?",
+    "options": ["organism, above organ system", "tissue, between cell and organ", "organ, between tissue and organ system", "organelle, between chemical and cell"],
+    "correct": 3
+  },
+  {
+    "question": "Which statement correctly distinguishes cytosol, organelles, and inclusions?",
+    "options": ["Cytosol contains only DNA; organelles are extracellular; inclusions make ATP.", "Cytosol is fluid; organelles perform specific functions; inclusions are stored materials.", "Cytosol is the membrane; organelles are water; inclusions are chromosomes.", "All three terms mean the nucleus."],
+    "correct": 1
+  },
+  {
+    "question": "Which statement best explains selective permeability of the cell membrane?",
+    "options": ["Every substance crosses freely because the membrane is fully permeable.", "The lipid core allows some small lipid-soluble molecules through, while proteins regulate many other substances.", "Only carbohydrates form the membrane barrier.", "The membrane allows movement only from inside to outside."],
+    "correct": 1
+  },
+  {
+    "question": "An unknown cell contains numerous lysosomes and extends pseudopods around particles. What is the best identification?",
+    "options": ["skeletal muscle fibre", "erythrocyte", "adipocyte", "macrophage/phagocyte"],
+    "correct": 3
+  }
+]
