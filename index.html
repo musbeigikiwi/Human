@@ -57,12 +57,19 @@
     .sound-btn {
       background: #edf2f7;
       border: 1px solid var(--border-color);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .sound-btn.playing {
+      background: var(--accent-green);
+      color: white;
+      border-color: var(--accent-green);
     }
 
     h1 {
@@ -89,8 +96,8 @@
 
     .progress-bar-bg {
       background: #e2e8f0;
-      height: 8px;
-      border-radius: 4px;
+      height: 10px;
+      border-radius: 5px;
       overflow: hidden;
     }
 
@@ -98,7 +105,7 @@
       background: var(--accent-green);
       height: 100%;
       width: 0%;
-      transition: width 0.3s ease;
+      transition: width 0.4s ease;
     }
 
     .tab-navigation {
@@ -243,7 +250,6 @@
       margin-bottom: 16px;
     }
 
-    /* History Timeline Styling */
     .history-card {
       background: white;
       border-radius: 16px;
@@ -271,9 +277,10 @@
 </head>
 <body>
 
-  <!-- Audio File for Interstellar -->
+  <!-- فایل صوتی پشتیبان برای اجرا در iPad Safari -->
   <audio id="bg-audio" loop preload="auto">
-    <source src="https://ia801503.us.archive.org/15/items/InterstellarMainThemeHansZimmer/Interstellar%20Main%20Theme%20-%20Hans%20Zimmer.mp3" type="audio/mpeg">
+    <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=space-ambient-112195.mp3" type="audio/mpeg">
   </audio>
 
   <div class="container">
@@ -307,22 +314,22 @@
         <div class="topic-card" onclick="runFullDeck()">
           <div class="topic-tag">TOPIC 01</div>
           <div class="topic-name">Intro to A&P</div>
-          <div class="topic-stats"><span>0/10 mastered</span><span>0%</span></div>
+          <div class="topic-stats"><span id="t1-count">0/10 mastered</span><span id="t1-pct">0%</span></div>
         </div>
         <div class="topic-card" onclick="runFullDeck()">
           <div class="topic-tag">TOPIC 02</div>
           <div class="topic-name">Levels of Organisation</div>
-          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+          <div class="topic-stats"><span id="t2-count">0/14 mastered</span><span id="t2-pct">0%</span></div>
         </div>
         <div class="topic-card" onclick="runFullDeck()">
           <div class="topic-tag">TOPIC 03</div>
           <div class="topic-name">Body Position & Cavities</div>
-          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+          <div class="topic-stats"><span id="t3-count">0/14 mastered</span><span id="t3-pct">0%</span></div>
         </div>
         <div class="topic-card" onclick="runFullDeck()">
           <div class="topic-tag">TOPIC 04</div>
           <div class="topic-name">Units & Lab Skills</div>
-          <div class="topic-stats"><span>0/14 mastered</span><span>0%</span></div>
+          <div class="topic-stats"><span id="t4-count">0/14 mastered</span><span id="t4-pct">0%</span></div>
         </div>
       </div>
 
@@ -381,7 +388,7 @@
   </div>
 
   <script>
-    // Audio Player
+    // Audio Control for iOS/iPadOS Safari
     const audio = document.getElementById('bg-audio');
     let audioPlaying = false;
 
@@ -391,13 +398,16 @@
         audio.pause();
         audioPlaying = false;
         btn.innerText = "🎵 Interstellar: OFF";
+        btn.classList.remove('playing');
       } else {
-        audio.volume = 0.4;
+        audio.volume = 0.5;
         audio.play().then(() => {
           audioPlaying = true;
           btn.innerText = "🔊 Interstellar: ON";
-        }).catch(() => {
-          alert("Click anywhere on the screen first, then press Play!");
+          btn.classList.add('playing');
+        }).catch(err => {
+          console.log("Audio play error:", err);
+          alert("Click anywhere on the screen first, then tap Music ON!");
         });
       }
     }
@@ -411,12 +421,12 @@
       if (tabId === 'history-tab') renderHistory();
     }
 
-    // MCQ Engine
+    // Quiz State Management & LocalStorage Persistence
     let allQuestions = [];
     let activeDeck = [];
     let currentIndex = 0;
-    let userAnswers = {};
-    let missedQuestions = new Set();
+    let userAnswers = JSON.parse(localStorage.getItem('mustafa_user_answers') || '{}');
+    let missedQuestions = new Set(JSON.parse(localStorage.getItem('mustafa_missed_questions') || '[]'));
     let historyLogs = JSON.parse(localStorage.getItem('mustafa_study_history') || '[]');
     let timer;
     let timeLeft = 60;
@@ -427,6 +437,7 @@
         allQuestions = data;
         activeDeck = [...allQuestions];
         loadQuestion();
+        updateMastery();
       });
 
     function startTimer() {
@@ -440,7 +451,6 @@
           `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
         if (timeLeft <= 0) {
           clearInterval(timer);
-          alert("Time's up!");
         }
       }, 1000);
     }
@@ -485,6 +495,10 @@
       } else {
         missedQuestions.add(originalIndex);
       }
+
+      // Save progress to LocalStorage
+      localStorage.setItem('mustafa_user_answers', JSON.stringify(userAnswers));
+      localStorage.setItem('mustafa_missed_questions', JSON.stringify(Array.from(missedQuestions)));
 
       // Log session history with date and exact time
       const now = new Date();
@@ -558,9 +572,11 @@
     }
 
     function resetProgress() {
-      if (confirm("Reset all test progress?")) {
+      if (confirm("Reset all test progress and overall mastery?")) {
         userAnswers = {};
         missedQuestions.clear();
+        localStorage.removeItem('mustafa_user_answers');
+        localStorage.removeItem('mustafa_missed_questions');
         document.getElementById('missed-count').innerText = '0';
         updateMastery();
         runFullDeck();
@@ -568,7 +584,7 @@
     }
 
     function updateMastery() {
-      if (allQuestions.length === 0) return;
+      if (!allQuestions || allQuestions.length === 0) return;
       let correctCount = 0;
       Object.keys(userAnswers).forEach(idx => {
         if (userAnswers[idx] === allQuestions[idx].correct) correctCount++;
@@ -576,6 +592,7 @@
       const percent = Math.round((correctCount / allQuestions.length) * 100);
       document.getElementById('mastery-percent').innerText = percent + "%";
       document.getElementById('mastery-bar').style.width = percent + "%";
+      document.getElementById('missed-count').innerText = missedQuestions.size;
     }
 
     // Flashcards Data
