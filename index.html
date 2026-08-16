@@ -6,15 +6,14 @@
   <title>Mustafa Beigi Mastery Deck — A&P Studio</title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #eef2f7 0%, #e0e7ff 50%, #dbeafe 100%);
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(255, 255, 255, 0.9);
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --accent-teal: #0d9488;
-      --accent-blue: #2563eb;
-      --accent-orange: #ea580c;
-      --shadow-soft: 0 10px 30px rgba(148, 163, 184, 0.25);
+      --bg-gradient: linear-gradient(135deg, #0b131f 0%, #111c2e 50%, #0d2826 100%);
+      --card-bg: rgba(22, 34, 50, 0.75);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-teal: #10b981;
+      --accent-glow: #34d399;
+      --accent-orange: #f97316;
     }
 
     * { box-sizing: border-box; }
@@ -31,16 +30,16 @@
 
     .container { max-width: 950px; margin: 0 auto; }
 
-    /* Header Container */
+    /* Glass Header */
     .header-card {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-radius: 24px;
       padding: 24px 30px;
       border: 1px solid var(--card-border);
       margin-bottom: 24px;
-      box-shadow: var(--shadow-soft);
-      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
     .header-layout {
@@ -50,10 +49,7 @@
       gap: 15px;
     }
 
-    .header-center-text {
-      text-align: center;
-      flex: 1;
-    }
+    .header-center-text { text-align: center; flex: 1; }
 
     .header-top-bar {
       display: flex;
@@ -65,18 +61,19 @@
 
     .badge-tag {
       font-size: 11px;
-      letter-spacing: 1.2px;
-      color: var(--accent-blue);
+      letter-spacing: 1.5px;
+      color: var(--accent-glow);
       text-transform: uppercase;
       font-weight: 800;
-      background: #dbeafe;
+      background: rgba(16, 185, 129, 0.12);
       padding: 5px 12px;
       border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .sound-btn {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
       padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
@@ -86,40 +83,46 @@
       transition: all 0.3s ease;
     }
 
-    .sound-btn.playing { background: var(--accent-teal); color: white; border-color: var(--accent-teal); }
+    .sound-btn.playing { background: var(--accent-teal); color: white; border-color: var(--accent-glow); }
 
     h1 {
-      font-size: 30px;
+      font-size: 32px;
       margin: 4px 0;
       font-weight: 800;
-      color: #0f172a;
+      color: #ffffff;
     }
 
-    .stream-tag {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent-blue);
-      margin-bottom: 4px;
-    }
-
+    .stream-tag { font-size: 15px; font-weight: 700; color: var(--accent-glow); margin-bottom: 4px; }
     .course-title { color: var(--text-muted); font-size: 13.5px; }
 
-    /* Round Analog Clock Design */
-    .clock-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    /* Real Wall Clock Design (New Zealand Time) */
+    .clock-wrapper { display: flex; flex-direction: column; align-items: center; }
 
     .clock {
-      width: 65px;
-      height: 65px;
+      width: 75px;
+      height: 75px;
       background: #ffffff;
       border-radius: 50%;
-      border: 3px solid var(--accent-blue);
+      border: 4px solid #334155;
       position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
+
+    .clock-number {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 8px;
+      font-weight: 800;
+      color: #0f172a;
+      padding: 3px;
+    }
+
+    .num-12 { top: 2px; }
+    .num-3 { right: 4px; top: 30px; text-align: right; }
+    .num-6 { bottom: 2px; }
+    .num-9 { left: 4px; top: 30px; text-align: left; }
 
     .clock-center {
       position: absolute;
@@ -138,22 +141,16 @@
       border-radius: 4px;
     }
 
-    .hand.hour { width: 3px; height: 18px; background: #0f172a; }
-    .hand.minute { width: 2px; height: 24px; background: var(--accent-blue); }
-    .hand.second { width: 1.5px; height: 27px; background: var(--accent-orange); }
+    .hand.hour { width: 3px; height: 20px; background: #0f172a; }
+    .hand.minute { width: 2px; height: 26px; background: #2563eb; }
+    .hand.second { width: 1.5px; height: 30px; background: #dc2626; }
 
-    .clock-label {
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--text-muted);
-      margin-top: 5px;
-      text-transform: uppercase;
-    }
+    .clock-label { font-size: 10px; font-weight: 800; color: var(--accent-glow); margin-top: 6px; text-transform: uppercase; }
 
     /* Progress Bar */
     .mastery-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
-    .progress-bar-bg { background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden; }
-    .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue)); height: 100%; width: 0%; transition: width 0.6s ease; }
+    .progress-bar-bg { background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; overflow: hidden; }
+    .progress-bar-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-glow)); height: 100%; width: 0%; transition: width 0.6s ease; }
 
     /* Nav Hub Buttons */
     .tab-navigation {
@@ -169,7 +166,7 @@
     }
 
     .nav-card-btn {
-      padding: 14px;
+      padding: 16px 14px;
       font-weight: 700;
       border-radius: 16px;
       border: 1px solid var(--card-border);
@@ -182,45 +179,45 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       font-size: 13.5px;
-      box-shadow: 0 4px 12px rgba(148, 163, 184, 0.12);
     }
 
-    .nav-card-btn:hover { background: #ffffff; color: var(--accent-blue); transform: translateY(-2px); }
-    .nav-card-btn.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3); }
+    .nav-card-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; transform: translateY(-2px); }
+    .nav-card-btn.active { background: var(--accent-teal); color: white; border-color: var(--accent-glow); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Topic Grid */
+    /* Dashboard Cards */
     .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
     .topic-card {
       background: var(--card-bg);
       border-radius: 18px;
-      padding: 20px;
+      padding: 22px;
       border: 1px solid var(--card-border);
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: var(--shadow-soft);
     }
 
-    .topic-card:hover { background: #ffffff; border-color: var(--accent-blue); transform: translateY(-3px); }
+    .topic-card:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent-glow); transform: translateY(-3px); }
 
     .topic-tag { font-size: 11px; color: var(--accent-orange); text-transform: uppercase; font-weight: 800; }
-    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 12px 0; color: #0f172a; }
+    .topic-name { font-size: 18px; font-weight: 700; margin: 6px 0 12px 0; color: #ffffff; }
     .topic-stats { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); font-weight: 600; }
 
-    /* Quiz Container */
+    /* Dynamic Quiz Card (Colors Change per Question) */
     .quiz-card {
       background: var(--card-bg);
+      backdrop-filter: blur(16px);
       border-radius: 20px;
       padding: 30px;
       border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       margin-bottom: 24px;
+      transition: background 0.5s ease, border-color 0.5s ease;
     }
 
     .quiz-meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 14px; margin-bottom: 20px; font-weight: 700; }
@@ -230,9 +227,9 @@
       text-align: left;
       padding: 16px 18px;
       margin-top: 12px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text-main);
       cursor: pointer;
       font-size: 15px;
@@ -240,17 +237,17 @@
       transition: all 0.2s ease;
     }
 
-    .option-btn:hover { background: #f8fafc; border-color: var(--accent-blue); }
-    .option-btn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; font-weight: 700; }
-    .option-btn.wrong { background: #fee2e2 !important; border-color: #dc2626 !important; color: #7f1d1d !important; font-weight: 700; }
+    .option-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); }
+    .option-btn.correct { background: rgba(16, 185, 129, 0.25) !important; border-color: #10b981 !important; color: #a7f3d0 !important; font-weight: 700; }
+    .option-btn.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: #ef4444 !important; color: #fecaca !important; font-weight: 700; }
 
     .nav-controls { display: flex; gap: 12px; margin-top: 24px; }
 
     .btn {
       padding: 14px 20px;
       border-radius: 12px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.08);
       color: var(--text-main);
       font-weight: 700;
       cursor: pointer;
@@ -258,23 +255,21 @@
       text-align: center;
     }
 
-    .btn-primary { background: var(--accent-blue); color: white; border: none; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-    .btn-primary:hover { background: #1d4ed8; }
+    .btn-primary { background: var(--accent-teal); color: white; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
-    /* Footer Contact */
+    /* Bilingual Footer */
     .contact-footer {
       background: var(--card-bg);
       border-radius: 18px;
-      padding: 20px;
+      padding: 22px;
       border: 1px solid var(--card-border);
       margin-top: 30px;
       text-align: center;
-      box-shadow: var(--shadow-soft);
     }
 
-    .contact-footer h3 { margin: 0 0 8px 0; color: #0f172a; font-size: 17px; }
+    .contact-footer h3 { margin: 0 0 8px 0; color: #ffffff; font-size: 17px; }
     .lang-fa { direction: rtl; color: var(--text-muted); font-size: 13.5px; margin-bottom: 4px; }
-    .lang-en { direction: ltr; color: var(--accent-blue); font-size: 13px; margin-bottom: 14px; font-weight: 600; }
+    .lang-en { direction: ltr; color: var(--accent-glow); font-size: 13px; margin-bottom: 14px; font-weight: 600; }
 
     .whatsapp-btn {
       display: inline-flex;
@@ -287,7 +282,7 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 13.5px;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
     }
   </style>
 </head>
@@ -299,22 +294,26 @@
 
   <div class="container">
     
-    <!-- Light Header with Round Clocks -->
+    <!-- Dark Glass Header with New Zealand Round Clocks -->
     <div class="header-card">
       <div class="header-layout">
         
         <!-- Left Clock -->
         <div class="clock-wrapper">
           <div class="clock">
+            <div class="clock-number num-12">12</div>
+            <div class="clock-number num-3">3</div>
+            <div class="clock-number num-6">6</div>
+            <div class="clock-number num-9">9</div>
             <div class="clock-center"></div>
             <div class="hand hour" id="l-hour"></div>
             <div class="hand minute" id="l-min"></div>
             <div class="hand second" id="l-sec"></div>
           </div>
-          <div class="clock-label">Local Time</div>
+          <div class="clock-label">NZ Time</div>
         </div>
 
-        <!-- Center Details -->
+        <!-- Center Text -->
         <div class="header-center-text">
           <div class="header-top-bar">
             <span class="badge-tag">🎓 WINTEC A&P REVISION</span>
@@ -328,12 +327,16 @@
         <!-- Right Clock -->
         <div class="clock-wrapper">
           <div class="clock">
+            <div class="clock-number num-12">12</div>
+            <div class="clock-number num-3">3</div>
+            <div class="clock-number num-6">6</div>
+            <div class="clock-number num-9">9</div>
             <div class="clock-center"></div>
             <div class="hand hour" id="r-hour"></div>
             <div class="hand minute" id="r-min"></div>
             <div class="hand second" id="r-sec"></div>
           </div>
-          <div class="clock-label">Active Study</div>
+          <div class="clock-label">NZ Time</div>
         </div>
 
       </div>
@@ -347,7 +350,7 @@
       </div>
     </div>
 
-    <!-- Nav Hub -->
+    <!-- Navigation Hub -->
     <div class="tab-navigation">
       <button class="nav-card-btn active" onclick="switchTab('topics-tab', this)">
         <span style="font-size: 18px;">🚀</span>
@@ -394,19 +397,19 @@
 
       <div style="display:flex; flex-direction:column; gap:12px;">
         <button class="btn btn-primary" onclick="loadChapter('chapter1_mcqs.json')">▶ Quick Start Chapter 1 Test</button>
-        <button class="btn" onclick="resetProgress()" style="color: #dc2626; border-color: #fca5a5;">🔄 Reset MCQ Progress</button>
+        <button class="btn" onclick="resetProgress()" style="color: #f87171; border-color: rgba(239, 68, 68, 0.3);">🔄 Reset MCQ Progress</button>
       </div>
     </div>
 
-    <!-- Quiz Tab -->
+    <!-- Dynamic Quiz Tab -->
     <div id="quiz-tab" class="tab-content">
-      <div class="quiz-card">
+      <div class="quiz-card" id="dynamic-quiz-card">
         <div class="quiz-meta">
           <span style="color: var(--accent-orange);">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
           <span>⏱️ <span id="timer-display">01:00</span></span>
         </div>
 
-        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px; color: #0f172a; line-height: 1.4;">Select a chapter from Dashboard to start...</h2>
+        <h2 id="question-text" style="font-size: 20px; margin-bottom: 24px; color: #ffffff; line-height: 1.4;">Select a chapter from Dashboard to start...</h2>
 
         <div id="options-container"></div>
 
@@ -430,7 +433,7 @@
   </div>
 
   <script>
-    // Audio Player Toggle
+    // Audio Toggle
     const audio = document.getElementById('bg-audio');
     let audioPlaying = false;
 
@@ -451,30 +454,34 @@
       }
     }
 
-    // Real-Time Round Clocks Script
-    function updateClocks() {
+    // New Zealand Local Time Real Clocks (Analog)
+    function updateNZClocks() {
       const now = new Date();
-      const sec = now.getSeconds();
-      const min = now.getMinutes();
-      const hr = now.getHours();
+      // Format to New Zealand Time zone
+      const nzString = now.toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
+      const nzDate = new Date(nzString);
+
+      const sec = nzDate.getSeconds();
+      const min = nzDate.getMinutes();
+      const hr = nzDate.getHours();
 
       const secDeg = (sec / 60) * 360;
       const minDeg = ((min + sec / 60) / 60) * 360;
       const hrDeg = ((hr % 12 + min / 60) / 12) * 360;
 
-      // Update Left Clock
+      // Left Clock
       document.getElementById('l-sec').style.transform = `rotate(${secDeg}deg)`;
       document.getElementById('l-min').style.transform = `rotate(${minDeg}deg)`;
       document.getElementById('l-hour').style.transform = `rotate(${hrDeg}deg)`;
 
-      // Update Right Clock
+      // Right Clock
       document.getElementById('r-sec').style.transform = `rotate(${secDeg}deg)`;
       document.getElementById('r-min').style.transform = `rotate(${minDeg}deg)`;
       document.getElementById('r-hour').style.transform = `rotate(${hrDeg}deg)`;
     }
 
-    setInterval(updateClocks, 1000);
-    updateClocks();
+    setInterval(updateNZClocks, 1000);
+    updateNZClocks();
 
     // Tab Navigation
     function switchTab(tabId, btn) {
@@ -484,13 +491,29 @@
       if (btn) btn.classList.add('active');
     }
 
-    // MCQ Engine
+    // MCQ Engine & Color Changing Mechanics per Question
     let activeDeck = [];
     let currentIndex = 0;
     let currentChapterFile = '';
     let userAnswers = JSON.parse(localStorage.getItem('mustafa_user_answers') || '{}');
     let timer;
     let timeLeft = 60;
+
+    // Array of subtle glass theme colors for question transitions
+    const questionColors = [
+      { bg: "rgba(16, 185, 129, 0.12)", border: "rgba(16, 185, 129, 0.3)" },
+      { bg: "rgba(37, 99, 235, 0.12)", border: "rgba(37, 99, 235, 0.3)" },
+      { bg: "rgba(168, 85, 247, 0.12)", border: "rgba(168, 85, 247, 0.3)" },
+      { bg: "rgba(249, 115, 22, 0.12)", border: "rgba(249, 115, 22, 0.3)" },
+      { bg: "rgba(14, 165, 233, 0.12)", border: "rgba(14, 165, 233, 0.3)" }
+    ];
+
+    function applyQuestionTheme() {
+      const card = document.getElementById('dynamic-quiz-card');
+      const theme = questionColors[currentIndex % questionColors.length];
+      card.style.backgroundColor = theme.bg;
+      card.style.borderColor = theme.border;
+    }
 
     function loadChapter(fileName) {
       currentChapterFile = fileName;
@@ -520,6 +543,7 @@
 
     function loadQuestion() {
       if (activeDeck.length === 0) return;
+      applyQuestionTheme();
       startTimer();
       const q = activeDeck[currentIndex];
       const qKey = currentChapterFile + "_" + currentIndex;
