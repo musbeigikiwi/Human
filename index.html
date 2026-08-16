@@ -25,11 +25,9 @@
       background-color: var(--bg-color);
       color: var(--text-main);
       margin: 0;
-      padding: 0;
       padding-bottom: 40px;
     }
 
-    /* نوار متحرک انگیزشی (News Ticker) */
     .ticker-wrap {
       width: 100%;
       background-color: var(--news-bg);
@@ -125,7 +123,6 @@
       border: 1px solid var(--border-color);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
       margin-bottom: 24px;
-      position: relative;
     }
 
     .quiz-meta {
@@ -217,9 +214,9 @@
     }
   </style>
 </head>
-<body>
+<body onclick="initAudio()">
 
-  <!-- نوار متحرک انگیزشی (Marquee) -->
+  <!-- نوار متحرک انگیزشی -->
   <div class="ticker-wrap">
     <div class="ticker-move">
       🔥 EVERY SINGLE CARD IS A STEP CLOSER TO MASTERING ANATOMY! KEEP PUSHING FORWARD, MUSTAFA! GO FOR A++ 🎯 — LEARN, REVISE, AND SUCCEED! 💪
@@ -248,7 +245,7 @@
       <div class="quiz-meta">
         <span style="color: var(--accent-primary); font-weight:700;">◆ Question <span id="q-num">1</span> of <span id="q-total">75</span></span>
         <div class="timer-badge">
-          ⏱️ <span id="timer-display">02:00</span>
+          ⏱️ <span id="timer-display">01:00</span>
         </div>
       </div>
 
@@ -276,21 +273,30 @@
     let userAnswers = {};
     let missedQuestions = new Set();
     
-    // تایمر و صدا
+    // تنظیم زمان روی ۶۰ ثانیه (۱ دقیقه)
     let timer;
-    let timeLeft = 120; // 2 minutes per question
+    let timeLeft = 60; 
     let soundEnabled = true;
     
-    // Audio Context برای ایجاد صداهای تیک‌تیک بدون نیاز به فایل خارجی
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // فعال‌سازی موتور صوت وب
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
 
     function playSound(freq, type, duration) {
-      if (!soundEnabled) return;
+      if (!soundEnabled || !audioCtx) return;
       try {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = type;
-        osc.frequency.value = freq;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
@@ -299,8 +305,8 @@
       } catch(e) {}
     }
 
-    function playTick() { playSound(800, 'sine', 0.05); }
-    function playCorrect() { playSound(600, 'triangle', 0.3); }
+    function playTick() { playSound(800, 'sine', 0.08); }
+    function playCorrect() { playSound(587.33, 'triangle', 0.3); } // نت Re
     function playWrong() { playSound(150, 'sawtooth', 0.4); }
 
     function toggleSound() {
@@ -310,19 +316,20 @@
 
     function startTimer() {
       clearInterval(timer);
-      timeLeft = 120; // بازنشانی زمان برای هر سوال
+      timeLeft = 60; // ۱ دقیقه برای هر سوال
       updateTimerDisplay();
 
       timer = setInterval(() => {
         timeLeft--;
         updateTimerDisplay();
-        if (timeLeft <= 10 && timeLeft > 0) {
-          playTick(); // افکت تیک‌تیک ۱۰ ثانیه آخر
-        }
+        
+        // پخش صدای تیک‌تیک در تمام طول تایمر
+        playTick();
+
         if (timeLeft <= 0) {
           clearInterval(timer);
           playWrong();
-          alert("Time is up for this question!");
+          alert("Time's up for this question!");
         }
       }, 1000);
     }
